@@ -1,13 +1,12 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
-import { lightGreen } from "@material-ui/core/colors";
 
 let theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#0BD67E",
+      main: "#71c5f3",
     },
     secondary: {
-      main: "#D50BA6",
+      main: "#4e90b5",
     },
     contrastThreshold: 1,
     tonalOffset: 0.2,

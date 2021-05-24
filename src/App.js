@@ -1,15 +1,22 @@
-import { Button, Typography } from "@material-ui/core";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
+import LandingPage from "./Containers/Landing page/LandingPage";
 
 function App() {
   return (
-    <div className="App">
-      <Button variant="outlined" color="primary">Test</Button>
-      <Button variant="outlined" color="secondary">Test</Button>
-      <Typography variant="h2">
-        Hello World
-      </Typography>
-
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
