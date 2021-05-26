@@ -5,18 +5,16 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { Box, Button, Grid } from "@material-ui/core";
-import RoundedButton from "./RoundedButton";
+import RoundedButton from "./CustomButton";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  // navbarRoot: {
-  //   width: "100%",
-  // },
   appbar: {
     background: theme.palette.common.white,
     color: theme.palette.secondary.main,
     width: "100%",
-    paddingLeft: `${theme.spacing(1)}%`,
-    paddingRight: `${theme.spacing(1)}%`,
+    paddingLeft: `${theme.spacing(1) - 2}%`,
+    paddingRight: `${theme.spacing(1) - 2}%`,
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "1%",
       paddingRight: "1%",
@@ -67,11 +65,11 @@ export default function Navbar(props) {
           aria-label="menu"
           onClick={props.toggleDrawer(true)}
         >
-          <i class="fas fa-bars"></i>
+          <i className="fas fa-bars"></i>
         </IconButton>
         <Box className={classes.brandSpace}>
           <IconButton edge="start" color="inherit" aria-label="logo">
-            <i class="fas fa-book-open" style={{ color: "#1F75FE" }}></i>
+            <i className="fas fa-book-open" style={{ color: "#1F75FE" }}></i>
           </IconButton>
           <Typography variant="h5" display="inline" className={classes.title}>
             Tomojo
@@ -80,18 +78,20 @@ export default function Navbar(props) {
         <Box flex="2">
           {props.links.map((each, i) => {
             return (
-              <Typography
-                key={i}
-                variant="caption"
-                className={classes.nav}
-                color="textPrimary"
-              >
-                {each.name}
-              </Typography>
+              <Link to={each.link} key={i}>
+                <Typography
+                  key={i}
+                  variant="caption"
+                  className={classes.nav}
+                  color="textPrimary"
+                >
+                  {each.name}
+                </Typography>
+              </Link>
             );
           })}
         </Box>
-        <RoundedButton>Login</RoundedButton>
+        <RoundedButton color="primary">Login</RoundedButton>
       </Toolbar>
     </AppBar>
   );

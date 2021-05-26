@@ -35,7 +35,7 @@ export default function OfferedServices(props) {
       <Box display="flex" justifyContent="center" p={1}>
         {props.service.logo}
       </Box>
-      <Typography variant="subtitle1" align="center" className={classes.bold}>
+      <Typography variant="subtitle1" align="center" className={classes.bold} color="secondary">
         {props.service.title}
       </Typography>
       <Typography variant="body2" align="center">
