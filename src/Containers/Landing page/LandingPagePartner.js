@@ -1,13 +1,16 @@
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import CustomButton from "../../Components/Landing page/CustomButton";
 import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
 import clsx from "clsx";
-import AboutUsSVG from "../../Assets/About_us.svg";
-// import AboutUsSVG from "../../Assets/Nerd-amico.svg";
-
+import CollaborateSVG from "../../Assets/Collaborate.svg";
 import { useEffect, useState } from "react";
 import { getAboutUs } from "../../Services/Landing Page API/LandingPageService";
-import OfferedServices from "../../Components/Landing page/OfferedServices";
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -48,10 +51,13 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
+  svg: {
+    width: "75%",
+  },
   ...AnimationClasses,
 }));
 
-export default function LandingPageAbout(props) {
+export default function LandingPagePartner(props) {
   const classes = useStyles();
   const [aboutUs, setAboutUs] = useState("");
 
@@ -92,7 +98,7 @@ export default function LandingPageAbout(props) {
             gutterBottom
             color="textPrimary"
           >
-            About us
+            Want to be a Partner ?
           </Typography>
           <Typography
             variant="body1"
@@ -105,12 +111,12 @@ export default function LandingPageAbout(props) {
               classes.fadeInLeft
             )}
           >
-            {aboutUs ||
-              `We are the marketplace for those professionals, teachers, scholars, parents and many more who want to share their valuable knowledge to the masses. We provide students a platform where they have access to millions of opportunities in terms of learning and exploring new ways of learning and understanding their curriculum through e-learning. We provide the biggest platform for conducting various online examinations based assessments tools followed by effective analyses to gauge the performance and scope of improvement of students. Now it is possible for a parent to conduct an assessment for his/her children to add more values and understanding to their curriculum through online assessments. It is possible for a teacher to create online assessment tests for his students to impart maximum possible understanding, it is possible for scholars to spread their knowledge and understanding to the masses.`}
+            {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`}
           </Typography>
-          <Box pt={3}>
-            <CustomButton size="large" color="primary">
-              Get started
+          <Box pt={3} display="flex">
+            <TextField variant="outlined" size="small" label="Your Email" /> &nbsp;
+            <CustomButton size="small" color="primary">
+              Send Interest
             </CustomButton>
           </Box>
         </Grid>
@@ -123,10 +129,10 @@ export default function LandingPageAbout(props) {
           className={classes.contentContainer}
         >
           <img
-            src={AboutUsSVG}
+            src={CollaborateSVG}
             alt="image1"
             className={clsx(
-              classes.illustration1,
+              classes.svg,
               classes.animated,
               classes.animatedFade,
               classes.fadeInLeft

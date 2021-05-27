@@ -1,20 +1,10 @@
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
 import clsx from "clsx";
 import ContactUsForm from "../../Components/Landing page/ContactUsForm";
 import ContactInfo from "../../Components/Landing page/ContactInfo";
 
 const useStyles = makeStyles((theme) => ({
-  initialContainer: {
-    padding: "6%",
-    height: "100%",
-    display: 'flex',
-    justifyContent: "center",
-    alignItems: 'center',
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: "10%",
-    },
-  },
   contentContainer: {
     width: "100%",
     display: "flex",
@@ -66,65 +56,76 @@ export default function LandingPageContact(props) {
 
   return (
     <>
-      <Grid container className={classes.initialContainer}>
+      <Grid
+        container
+        item
+        lg={12}
+        md={12}
+        sm={12}
+        xs={12}
+        className={classes.contentContainer}
+      >
         <Grid
-          container
           item
-          lg={12}
-          md={12}
+          lg={6}
+          md={6}
           sm={12}
           xs={12}
-          className={classes.contentContainer}
+          className={classes.textContainer}
         >
-          <Grid
-            item
-            lg={6}
-            md={6}
-            sm={12}
-            xs={12}
-            className={classes.textContainer}
+          <Typography
+            variant="h3"
+            className={clsx(
+              classes.bold,
+              classes.animated,
+              classes.animatedFade,
+              classes.fadeInUp
+            )}
+            gutterBottom
+            color="textPrimary"
           >
-            <Typography
-              variant="h3"
-              className={clsx(
-                classes.bold,
-                classes.animated,
-                classes.animatedFade,
-                classes.fadeInUp
-              )}
-              gutterBottom
-              color="textPrimary"
-            >
-              Get in touch with us
-            </Typography>
-            <Typography
-              variant="body1"
-              align="justify"
-              gutterBottom
-              color="textPrimary"
-              className={clsx(
-                classes.bold,
-                classes.animated,
-                classes.animatedFade,
-                classes.fadeInUp
-              )}
-            >
-              {
-                "Fill up the form and our Team will get back to you within 24 hours"
-              }
-            </Typography>
+            Get in touch with us
+          </Typography>
+          <Typography
+            variant="body1"
+            align="justify"
+            gutterBottom
+            color="textPrimary"
+            className={clsx(
+              classes.bold,
+              classes.animated,
+              classes.animatedFade,
+              classes.fadeInUp
+            )}
+          >
+            {
+              "Fill up the form and our Team will get back to you within 24 hours"
+            }
+          </Typography>
+          <Box
+            className={clsx(
+              classes.animated,
+              classes.animatedFade,
+              classes.fadeInLeft
+            )}
+          >
             <ContactInfo />
-          </Grid>
-          <Grid
-            item
-            lg={6}
-            md={6}
-            sm={12}
-            xs={12}
-            className={classes.contentContainer}
-          >
-            <ContactUsForm />
-          </Grid>
+          </Box>
+        </Grid>
+        <Grid
+          item
+          lg={6}
+          md={6}
+          sm={12}
+          xs={12}
+          className={clsx(
+            classes.contentContainer,
+            classes.animated,
+            classes.animatedFade,
+            classes.fadeInDown
+          )}
+        >
+          <ContactUsForm />
         </Grid>
       </Grid>
     </>

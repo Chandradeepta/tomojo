@@ -13,17 +13,24 @@ import {
   Container,
   Grid,
   Toolbar,
+  Box,
 } from "@material-ui/core";
 import LandingPageAbout from "./LandingPageAbout";
 import LandingPageHome from "./LandingPageHome";
 import React from "react";
 import Navbar from "../../Components/Landing page/Navbar";
 import LandingPageContact from "./LandingPageContact";
+import LandingPageReferral from "./LandingPageReferral";
+import LandingPagePartner from "./LandingPagePartner";
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
     width: "100%",
     minHeight: "100vh",
+  },
+  initialContainer: {
+    padding: "6%",
+    paddingBottom: "1%",
   },
   list: {
     width: 250,
@@ -61,10 +68,10 @@ export default function LandingPage(props) {
     >
       <List>
         <ListItem className={classes.logoSpace}></ListItem>
-        {["Home", "Movies", "About", "Contact", "Login"].map((text, index) => (
-          <ListItem button key={text}>
+        {links.map((link, index) => (
+          <ListItem button key={link}>
             <ListItemText
-              primary={text}
+              primary={link.name}
               primaryTypographyProps={{ variant: "h5" }}
             />
           </ListItem>
@@ -78,7 +85,6 @@ export default function LandingPage(props) {
       <Router>
         <Container maxWidth="lg" className={classes.landingPageRoot}>
           <Navbar toggleDrawer={toggleDrawer} links={links} />
-          <Toolbar />
           <Drawer
             open={open}
             onClose={toggleDrawer(false)}
@@ -86,21 +92,26 @@ export default function LandingPage(props) {
           >
             {list()}
           </Drawer>
+          <Toolbar />
 
-          <Grid Container >
-            <Grid item lg={12} style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <Switch>
-                <Route exact path={`/home`}>
-                  <LandingPageHome />
-                </Route>
-                <Route exact path={`/about`}>
-                  <LandingPageAbout />
-                </Route>
-                <Route exact path={`/contact`}>
-                  <LandingPageContact />
-                </Route>
-              </Switch>
-            </Grid>
+          <Grid container className={classes.initialContainer}>
+            <Switch>
+              <Route exact path={`/home`}>
+                <LandingPageHome />
+              </Route>
+              <Route exact path={`/about`}>
+                <LandingPageAbout />
+              </Route>
+              <Route exact path={`/contact`}>
+                <LandingPageContact />
+              </Route>
+              <Route exact path={`/refer`}>
+                <LandingPageReferral />
+              </Route>
+              <Route exact path={`/partner-with-us`}>
+                <LandingPagePartner />
+              </Route>
+            </Switch>
           </Grid>
         </Container>
       </Router>
@@ -127,10 +138,10 @@ const links = [
   },
   {
     name: "Partner with us",
-    link: "/",
+    link: "/partner-with-us",
   },
   {
     name: "Refer and earn",
-    link: "",
+    link: "/refer",
   },
 ];

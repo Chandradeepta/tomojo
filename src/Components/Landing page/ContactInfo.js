@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   social: {
-    paddingLeft: theme.spacing(2),
+    marginLeft: theme.spacing(0.7),
+    color: theme.palette.primary.main
   },
 }));
 export default function ContactInfo(props) {
