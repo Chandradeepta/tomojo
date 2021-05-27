@@ -11,21 +11,19 @@ import {
   ListItemText,
   makeStyles,
   Container,
+  Grid,
+  Toolbar,
 } from "@material-ui/core";
 import LandingPageAbout from "./LandingPageAbout";
 import LandingPageHome from "./LandingPageHome";
 import React from "react";
 import Navbar from "../../Components/Landing page/Navbar";
+import LandingPageContact from "./LandingPageContact";
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
     width: "100%",
-    padding: "8%",
-  },
-  initialContainer: {
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "10%",
-    },
+    minHeight: "100vh",
   },
   list: {
     width: 250,
@@ -77,10 +75,10 @@ export default function LandingPage(props) {
 
   return (
     <>
-      {console.log(path, url)}
       <Router>
         <Container maxWidth="lg" className={classes.landingPageRoot}>
           <Navbar toggleDrawer={toggleDrawer} links={links} />
+          <Toolbar />
           <Drawer
             open={open}
             onClose={toggleDrawer(false)}
@@ -89,14 +87,21 @@ export default function LandingPage(props) {
             {list()}
           </Drawer>
 
-          <Switch>
-            <Route exact path={`/home`}>
-              <LandingPageHome />
-            </Route>
-            <Route exact path={`/about`}>
-              <LandingPageAbout />
-            </Route>
-          </Switch>
+          <Grid Container >
+            <Grid item lg={12} style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <Switch>
+                <Route exact path={`/home`}>
+                  <LandingPageHome />
+                </Route>
+                <Route exact path={`/about`}>
+                  <LandingPageAbout />
+                </Route>
+                <Route exact path={`/contact`}>
+                  <LandingPageContact />
+                </Route>
+              </Switch>
+            </Grid>
+          </Grid>
         </Container>
       </Router>
     </>
@@ -118,7 +123,7 @@ const links = [
   },
   {
     name: "Contact",
-    link: "/",
+    link: "/contact",
   },
   {
     name: "Partner with us",

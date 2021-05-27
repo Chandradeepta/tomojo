@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { Box, Button, Grid } from "@material-ui/core";
 import RoundedButton from "./CustomButton";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation, useRouteMatch } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -50,10 +50,14 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1.05rem",
     },
   },
+  activeLink: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 export default function Navbar(props) {
   const classes = useStyles();
+  const location = useLocation();
 
   return (
     <AppBar position="fixed" className={classes.appbar}>
@@ -78,7 +82,7 @@ export default function Navbar(props) {
         <Box flex="2">
           {props.links.map((each, i) => {
             return (
-              <Link to={each.link} key={i}>
+              <NavLink to={each.link} key={i}>
                 <Typography
                   key={i}
                   variant="caption"
@@ -87,7 +91,7 @@ export default function Navbar(props) {
                 >
                   {each.name}
                 </Typography>
-              </Link>
+              </NavLink>
             );
           })}
         </Box>

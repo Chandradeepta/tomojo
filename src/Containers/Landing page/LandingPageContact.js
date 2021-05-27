@@ -1,22 +1,18 @@
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
-import CustomButton from "../../Components/Landing page/CustomButton";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
 import clsx from "clsx";
-import AboutUsSVG from "../../Assets/About_us.svg";
-import { useEffect, useState } from "react";
-import { getAboutUs } from "../../Services/Landing Page API/LandingPageService";
+import ContactUsForm from "../../Components/Landing page/ContactUsForm";
+import ContactInfo from "../../Components/Landing page/ContactInfo";
 
 const useStyles = makeStyles((theme) => ({
   initialContainer: {
     padding: "6%",
-    paddingBottom: 0,
     height: "100%",
-    display: "flex",
+    display: 'flex',
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: 'center',
     [theme.breakpoints.down("sm")]: {
-      marginTop: "10%",
-      paddingBottom: '5%'
+      paddingTop: "10%",
     },
   },
   contentContainer: {
@@ -26,7 +22,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "row",
     [theme.breakpoints.down("sm")]: {
-      flexDirection: "column-reverse",
+      flexDirection: "column",
+    },
+  },
+  contentContainer_alt: {
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
     },
   },
   textContainer: {
@@ -60,17 +61,9 @@ const useStyles = makeStyles((theme) => ({
   ...AnimationClasses,
 }));
 
-export default function LandingPageAbout(props) {
+export default function LandingPageContact(props) {
   const classes = useStyles();
-  const [aboutUs, setAboutUs] = useState("");
 
-  useEffect(() => {
-    getAboutUs().then((response) => {
-      console.log(response);
-      setAboutUs(response.data.results.Content);
-    });
-  }, []);
-  
   return (
     <>
       <Grid container className={classes.initialContainer}>
@@ -102,7 +95,7 @@ export default function LandingPageAbout(props) {
               gutterBottom
               color="textPrimary"
             >
-              About us
+              Get in touch with us
             </Typography>
             <Typography
               variant="body1"
@@ -110,18 +103,17 @@ export default function LandingPageAbout(props) {
               gutterBottom
               color="textPrimary"
               className={clsx(
+                classes.bold,
                 classes.animated,
                 classes.animatedFade,
                 classes.fadeInUp
               )}
             >
-              {aboutUs}
+              {
+                "Fill up the form and our Team will get back to you within 24 hours"
+              }
             </Typography>
-            <Box pt={3}>
-              <CustomButton size="large" color="primary">
-                Get started
-              </CustomButton>
-            </Box>
+            <ContactInfo />
           </Grid>
           <Grid
             item
@@ -131,16 +123,7 @@ export default function LandingPageAbout(props) {
             xs={12}
             className={classes.contentContainer}
           >
-            <img
-              src={AboutUsSVG}
-              alt="image1"
-              className={clsx(
-                classes.illustration1,
-                classes.animated,
-                classes.animatedFade,
-                classes.fadeInLeft
-              )}
-            />
+            <ContactUsForm />
           </Grid>
         </Grid>
       </Grid>

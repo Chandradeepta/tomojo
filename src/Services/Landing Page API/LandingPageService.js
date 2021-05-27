@@ -10,3 +10,14 @@ export const getStatistics = () => {
       return error;
     });
 };
+
+export const getAboutUs = () => {
+  return http
+    .get("about_Us")
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

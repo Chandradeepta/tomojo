@@ -30,9 +30,8 @@ import DownloadButton from "../../Components/Landing page/DownloadButton";
 
 const mainContainerStyles = makeStyles((theme) => ({
   initialContainer: {
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "10%",
-    },
+    padding: "6%",
+    paddingTop: 0,
   },
   contentContainer: {
     width: "100%",
@@ -174,8 +173,8 @@ export default function LandingPageHome(props) {
               >
                 Download our app from
               </Typography>
-              {DOWNLOAD_LINKS.map((each) => {
-                return <DownloadButton>{each}</DownloadButton>;
+              {DOWNLOAD_LINKS.map((each, i) => {
+                return <DownloadButton key={i}>{each}</DownloadButton>;
               })}
             </Box>
           </Grid>
@@ -203,148 +202,162 @@ export default function LandingPageHome(props) {
             />
           </Grid>
         </Grid>
-      </Grid>
 
-      {/* // Services */}
-      <Grid container>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box pt={5}>
-            <Typography
-              variant="h4"
-              className={classes.bold}
-              align="center"
-              color="secondary"
-              gutterBottom
-            >
-              What we offer
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
-          <OfferedServices />
-        </Grid>
-      </Grid>
-
-      {/* // Illustration 2 */}
-      <Grid container>
-        <Grid
-          container
-          item
-          lg={12}
-          md={12}
-          sm={12}
-          xs={12}
-          className={classes.contentContainer}
-          ref={gridRef2}
-        >
+        {/* // Services */}
+        <Grid container>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Box pt={5}>
+              <Typography
+                variant="h4"
+                className={classes.bold}
+                align="center"
+                color="secondary"
+                gutterBottom
+              >
+                What we offer
+              </Typography>
+            </Box>
+          </Grid>
           <Grid
             item
-            lg={6}
-            md={6}
+            lg={12}
+            md={12}
+            sm={12}
+            xs={12}
+            className={classes.services}
+          >
+            <OfferedServices />
+          </Grid>
+        </Grid>
+
+        {/* // Illustration 2 */}
+        <Grid container>
+          <Grid
+            container
+            item
+            lg={12}
+            md={12}
             sm={12}
             xs={12}
             className={classes.contentContainer}
+            ref={gridRef2}
           >
-            <img
-              src={Illustraion2}
-              alt="image2"
-              className={
-                isVisibleSection2
-                  ? clsx(
-                      classes.illustration1,
-                      classes.animated,
-                      classes.animatedFade,
-                      classes.fadeInLeft
-                    )
-                  : clsx(classes.fadeOutRight)
-              }
-              width="90%"
-            />
-          </Grid>
-          <Grid
-            item
-            lg={6}
-            md={6}
-            sm={12}
-            xs={12}
-            className={clsx(classes.textContainer, classes.textContainer_alt)}
-          >
-            <Box display="flex">
+            <Grid
+              item
+              lg={6}
+              md={6}
+              sm={12}
+              xs={12}
+              className={classes.contentContainer}
+            >
+              <img
+                src={Illustraion2}
+                alt="image2"
+                className={
+                  isVisibleSection2
+                    ? clsx(
+                        classes.illustration1,
+                        classes.animated,
+                        classes.animatedFade,
+                        classes.fadeInLeft
+                      )
+                    : clsx(classes.fadeOutRight)
+                }
+                width="90%"
+              />
+            </Grid>
+            <Grid
+              item
+              lg={6}
+              md={6}
+              sm={12}
+              xs={12}
+              className={clsx(classes.textContainer, classes.textContainer_alt)}
+            >
+              <Box display="flex">
+                <Typography
+                  variant="h3"
+                  className={classes.bold}
+                  gutterBottom
+                  align="right"
+                  color="textPrimary"
+                  display="inline"
+                >
+                  Practice &nbsp;
+                </Typography>
+                <TextTransitions textArray={[" Anywhere.", " Anytime."]} />
+              </Box>
               <Typography
-                variant="h3"
-                className={classes.bold}
+                variant="body1"
+                align="justify"
                 gutterBottom
                 align="right"
                 color="textPrimary"
-                display="inline"
+                className={
+                  isVisibleSection2
+                    ? clsx(
+                        classes.animated,
+                        classes.animatedFade,
+                        classes.fadeInUp,
+                        classes.centerAlign
+                      )
+                    : undefined
+                }
               >
-                Practice &nbsp;
+                Access the best questions right from home
               </Typography>
-              <TextTransitions textArray={[" Anywhere.", " Anytime."]} />
-            </Box>
-            <Typography
-              variant="body1"
-              align="justify"
-              gutterBottom
-              align="right"
-              color="textPrimary"
-              className={
-                isVisibleSection2
-                  ? clsx(
-                      classes.animated,
-                      classes.animatedFade,
-                      classes.fadeInUp,
-                      classes.centerAlign
-                    )
-                  : undefined
-              }
-            >
-              Access the best questions right from home
-            </Typography>
-            <Box pt={3} textAlign="right">
-              <CustomButton size="large" color="primary">
-                Get started
-              </CustomButton>
-            </Box>
+              <Box pt={3} textAlign="right">
+                <CustomButton size="large" color="primary">
+                  Get started
+                </CustomButton>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
 
-      <Grid container>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box pt={5}>
-            <Typography
-              variant="h4"
-              className={classes.bold}
-              align="center"
-              color="secondary"
-              gutterBottom
-            >
-              Data that matters
-            </Typography>
-          </Box>
+        <Grid container>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Box pt={5}>
+              <Typography
+                variant="h4"
+                className={classes.bold}
+                align="center"
+                color="secondary"
+                gutterBottom
+              >
+                Data that matters
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            lg={12}
+            md={12}
+            sm={12}
+            xs={12}
+            className={classes.services}
+          >
+            <NumberCounts />
+          </Grid>
         </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
-          <NumberCounts />
-        </Grid>
-      </Grid>
 
-      <Grid container>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box pt={8} pb={4}>
-            <Typography
-              variant="h4"
-              className={classes.bold}
-              align="center"
-              color="secondary"
-              gutterBottom
-            >
-              Testimonials
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Testimonials />
+        <Grid container>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Box pt={8} pb={4}>
+              <Typography
+                variant="h4"
+                className={classes.bold}
+                align="center"
+                color="secondary"
+                gutterBottom
+              >
+                Testimonials
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Testimonials />
+          </Grid>
         </Grid>
       </Grid>
     </>
