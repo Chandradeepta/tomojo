@@ -157,7 +157,6 @@ export default function LandingPageHome(props) {
                 <img src={GPlay} width="200" />
               </a>
             </Box>
-            {/* <DownloadButton>{}</DownloadButton>; */}
           </Box>
         </Grid>
         <Grid
@@ -320,9 +319,3 @@ export default function LandingPageHome(props) {
   );
 }
 
-const DOWNLOAD_LINKS = [
-  {
-    platform: "Play Store",
-    logo: <i className="fab fa-google-play fa-2x" />,
-  },
-];

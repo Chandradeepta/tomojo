@@ -28,7 +28,16 @@ export default function ContactUsForm(props) {
       <Paper className={classes.paper} elevation={0}>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField
-            label="Your name"
+            label="Your Mobile number"
+            id="mobile"
+            variant="outlined"
+            className={classes.textField}
+            margin="dense"
+            fullWidth
+            required
+          />
+          <TextField
+            label="Full name"
             id="name"
             variant="outlined"
             className={classes.textField}
@@ -44,6 +53,23 @@ export default function ContactUsForm(props) {
             fullWidth
           />
           <TextField
+            label="Class"
+            id="class"
+            variant="outlined"
+            className={classes.textField}
+            margin="dense"
+            fullWidth
+          />
+          <TextField
+            label="City"
+            id="city"
+            variant="outlined"
+            className={classes.textField}
+            margin="dense"
+            fullWidth
+          />
+
+          <TextField
             id="message"
             label="Message"
             variant="outlined"
@@ -52,7 +78,7 @@ export default function ContactUsForm(props) {
             fullWidth
             margin="normal"
             multiline
-            rows={6}
+            rows={3}
             InputLabelProps={{
               shrink: true,
             }}
