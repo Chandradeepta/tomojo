@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     minHeight: 200,
     backgroundColor: theme.palette.background.default,
+    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+    "&:hover": {
+      boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+      transition: "box-shadow 0.3s ease-in-out",
+    },
   },
   bold: {
     fontWeight: theme.typography.fontWeightBold,

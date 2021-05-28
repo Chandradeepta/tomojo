@@ -15,13 +15,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     margin: theme.spacing(2),
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
     textAlign: "justify",
     maxWidth: 200,
+    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+    transition: "all 0.3s ease-in-out",
     "&:hover": {
-      boxShadow: "1px 6px 15px 0px rgba(0,0,0,0.75)",
+      boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+      transform: "scale(1.04)",
     },
   },
   bold: {
@@ -32,13 +35,23 @@ export default function OfferedServices(props) {
   const classes = useStyles();
   const ServicesCard = (props) => (
     <Paper className={classes.Paper} elevation={0}>
-      <Box display="flex" justifyContent="center" p={1}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        p={1}
+        className={classes.logo}
+      >
         {props.service.logo}
       </Box>
-      <Typography variant="subtitle1" align="center" className={classes.bold} color="secondary">
+      <Typography
+        variant="subtitle1"
+        align="center"
+        className={classes.bold}
+        color="secondary"
+      >
         {props.service.title}
       </Typography>
-      <Typography variant="body2" align="center">
+      <Typography variant="body2" align="center" className={classes.subtitle}>
         {props.service.subtitle}
       </Typography>
     </Paper>

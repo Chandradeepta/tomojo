@@ -105,8 +105,7 @@ export default function LandingPageAbout(props) {
               classes.fadeInLeft
             )}
           >
-            {aboutUs ||
-              `We are the marketplace for those professionals, teachers, scholars, parents and many more who want to share their valuable knowledge to the masses. We provide students a platform where they have access to millions of opportunities in terms of learning and exploring new ways of learning and understanding their curriculum through e-learning. We provide the biggest platform for conducting various online examinations based assessments tools followed by effective analyses to gauge the performance and scope of improvement of students. Now it is possible for a parent to conduct an assessment for his/her children to add more values and understanding to their curriculum through online assessments. It is possible for a teacher to create online assessment tests for his students to impart maximum possible understanding, it is possible for scholars to spread their knowledge and understanding to the masses.`}
+            {aboutUs }
           </Typography>
           <Box pt={3}>
             <CustomButton size="large" color="primary">

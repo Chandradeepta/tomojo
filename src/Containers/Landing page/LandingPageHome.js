@@ -1,13 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import {
-  Grid,
-  makeStyles,
-  Typography,
-  Box,
-} from "@material-ui/core";
+import { Grid, makeStyles, Typography, Box } from "@material-ui/core";
 import clsx from "clsx";
 import Illustraion1 from "../../Assets/Nerd-amico.svg";
 import Illustraion2 from "../../Assets/Studying.svg";
+import GPlay from "../../Assets/gplayImage.png";
 
 import CustomButton from "../../Components/Landing page/CustomButton";
 import OfferedServices from "../../Components/Landing page/OfferedServices";
@@ -151,11 +147,17 @@ export default function LandingPageHome(props) {
                 classes.fadeInUp
               )}
             >
-              Download our app from
+              Our app is now available on Google Play.
             </Typography>
-            {DOWNLOAD_LINKS.map((each, i) => {
-              return <DownloadButton key={i}>{each}</DownloadButton>;
-            })}
+            <Box ml={"-12px"}>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.tomojo.application&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+                target="_blank"
+              >
+                <img src={GPlay} width="200" />
+              </a>
+            </Box>
+            {/* <DownloadButton>{}</DownloadButton>; */}
           </Box>
         </Grid>
         <Grid
@@ -191,7 +193,7 @@ export default function LandingPageHome(props) {
             color="secondary"
             gutterBottom
           >
-            What we offer
+            What you can get
           </Typography>
         </Box>
       </Grid>
@@ -322,9 +324,5 @@ const DOWNLOAD_LINKS = [
   {
     platform: "Play Store",
     logo: <i className="fab fa-google-play fa-2x" />,
-  },
-  {
-    platform: "App Store",
-    logo: <i className="fab fa-apple fa-2x" />,
   },
 ];

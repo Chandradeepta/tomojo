@@ -20,8 +20,11 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(4),
     textAlign: "justify",
     maxWidth: 200,
+    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+    transition: "all 0.3s ease-in-out",
     "&:hover": {
-      boxShadow: "1px 6px 15px 0px rgba(0,0,0,0.75)",
+      boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+      transform: "scale(1.04)"
     },
   },
   bold: {
@@ -38,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function NumberCounts(props) {
   const classes = useStyles();
+  const counterRef = useRef();
+  const isVisible = useOnScreen(counterRef);
   const [statData, setStatData] = React.useState({
     questionCount: {
       logo: <img src={questionsLogo} width="40%" />,
@@ -79,6 +84,12 @@ export default function NumberCounts(props) {
         flexWrap="wrap"
         justifyContent="center"
         alignItems="center"
+        ref={counterRef}
+        className={
+          isVisible
+            ? clsx(classes.animated, classes.animatedFade, classes.fadeInLeft)
+            : clsx(classes.fadeOutLeft)
+        }
       >
         {Object.values(statData).map((data, index) => {
           return <CounterCard countData={data} key={index} classes={classes} />;
@@ -90,26 +101,10 @@ export default function NumberCounts(props) {
 
 const CounterCard = (props) => {
   const { classes } = props;
-  const counterRef = useRef();
   const { countData } = props;
 
-  const isVisible = useOnScreen(counterRef);
-
   return (
-    <Paper
-      className={
-        isVisible
-          ? clsx(
-              classes.Paper,
-              classes.animated,
-              classes.animatedFade,
-              classes.fadeInUp
-            )
-          : clsx(classes.fadeOutDown)
-      }
-      elevation={0}
-      ref={counterRef}
-    >
+    <Paper elevation={0} className={classes.Paper}>
       <Box display="flex" justifyContent="center" p={1} pb={2}>
         {countData.logo}
       </Box>

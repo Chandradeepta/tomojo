@@ -5,8 +5,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: "70%",
     borderRadius: 20,
-    border: `2px solid`,
-    borderColor: theme.palette.primary.light,
+    boxShadow: "1px 6px 15px 0px rgba(0,0,0,0.75)",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
@@ -26,7 +25,7 @@ export default function ContactUsForm(props) {
 
   return (
     <>
-      <Paper className={classes.paper} elevation={3}>
+      <Paper className={classes.paper} elevation={0}>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField
             label="Your name"

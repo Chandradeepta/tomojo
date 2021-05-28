@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
   useRouteMatch,
+  useLocation,
 } from "react-router-dom";
 import {
   Drawer,
@@ -14,19 +15,26 @@ import {
   Grid,
   Toolbar,
   Box,
+  Fab,
+  useScrollTrigger,
+  Zoom,
 } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { KeyboardArrowUp } from "@material-ui/icons";
 import LandingPageAbout from "./LandingPageAbout";
 import LandingPageHome from "./LandingPageHome";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../../Components/Landing page/Navbar";
 import LandingPageContact from "./LandingPageContact";
 import LandingPageReferral from "./LandingPageReferral";
 import LandingPagePartner from "./LandingPagePartner";
+import { Footer } from "../../Components/Common/Footer";
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
     width: "100%",
     minHeight: "100vh",
+    // background: theme.palette.background.default,
   },
   initialContainer: {
     padding: "6%",
@@ -44,9 +52,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LandingPage(props) {
-  let { path, url } = useRouteMatch();
+  const location = useLocation();
   const classes = useStyles();
+  const scrollUpIconRef = useRef();
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    const anchor = document.querySelector("#back-to-top-anchor");
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [location]);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -85,6 +101,7 @@ export default function LandingPage(props) {
       <Router>
         <Container maxWidth="lg" className={classes.landingPageRoot}>
           <Navbar toggleDrawer={toggleDrawer} links={links} />
+          <Toolbar id="back-to-top-anchor" />
           <Drawer
             open={open}
             onClose={toggleDrawer(false)}
@@ -92,7 +109,6 @@ export default function LandingPage(props) {
           >
             {list()}
           </Drawer>
-          <Toolbar />
 
           <Grid container className={classes.initialContainer}>
             <Switch>
@@ -113,6 +129,13 @@ export default function LandingPage(props) {
               </Route>
             </Switch>
           </Grid>
+          <ScrollTop {...props}>
+            <Fab color="primary" size="small" aria-label="scroll back to top">
+              <KeyboardArrowUp color="textSecondary" />
+            </Fab>
+          </ScrollTop>
+          <br />
+          <Footer links={links} />
         </Container>
       </Router>
     </>
@@ -145,3 +168,44 @@ const links = [
     link: "/refer",
   },
 ];
+
+const scrollTopStyles = makeStyles((theme) => ({
+  root: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
+
+function ScrollTop(props) {
+  const classes = scrollTopStyles();
+  const { children, window } = props;
+
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.root}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};

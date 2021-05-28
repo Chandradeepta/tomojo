@@ -6,6 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { Box, Button, Grid } from "@material-ui/core";
 import RoundedButton from "./CustomButton";
+import Widgets from "@material-ui/icons/Widgets";
+import { Item } from "@mui-treasury/components/flex";
+
 import { Link, NavLink, useLocation, useRouteMatch } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -73,10 +76,11 @@ export default function Navbar(props) {
         </IconButton>
         <Box className={classes.brandSpace}>
           <IconButton edge="start" color="inherit" aria-label="logo">
-            <i className="fas fa-book-open" style={{ color: "#1F75FE" }}></i>
+            {/* <i className="fas fa-book-open" style={{ color: "#1F75FE" }}></i> */}
+            <Widgets fontSize={'large'}/>
           </IconButton>
-          <Typography variant="h5" display="inline" className={classes.title}>
-            Tomojo
+          <Typography variant="h6" className={classes.title}>
+            TOMOJO
           </Typography>
         </Box>
         <Box flex="2">
