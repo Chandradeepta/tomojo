@@ -12,7 +12,7 @@ let theme = createMuiTheme({
       default: '#f1faff'
     },
     text: {
-      primary: "#194e6c",
+      primary: "#171959",
       secondary: "#a7bbc7"
     },
     contrastThreshold: 3,
@@ -20,7 +20,7 @@ let theme = createMuiTheme({
   },
   typography: {
     fontSize: 14,
-    fontFamily: `'Nunito', sans-serif`,
+    fontFamily: `'Sarabun', sans-serif`,
     
   },
 });

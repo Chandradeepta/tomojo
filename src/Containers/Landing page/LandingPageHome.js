@@ -5,7 +5,7 @@ import Illustraion1 from "../../Assets/Nerd-amico.svg";
 import Illustraion2 from "../../Assets/Studying.svg";
 import GPlay from "../../Assets/gplayImage.png";
 
-import CustomButton from "../../Components/Landing page/CustomButton";
+import CustomButton from "../../Components/Common/CustomButton";
 import OfferedServices from "../../Components/Landing page/OfferedServices";
 import TextTransitions from "../../Components/Common/TextTransitions";
 import Testimonials from "../../Components/Landing page/Testimonials";

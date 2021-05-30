@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { Box, Button, Grid } from "@material-ui/core";
-import RoundedButton from "./CustomButton";
+import CustomButton from "../Common/CustomButton";
 import Widgets from "@material-ui/icons/Widgets";
 import { Item } from "@mui-treasury/components/flex";
 
@@ -99,7 +99,7 @@ export default function Navbar(props) {
             );
           })}
         </Box>
-        <RoundedButton color="primary">Login</RoundedButton>
+        <CustomButton color="primary">Login</CustomButton>
       </Toolbar>
     </AppBar>
   );

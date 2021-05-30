@@ -5,7 +5,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import CustomButton from "../../Components/Landing page/CustomButton";
+import CustomButton from "../../Components/Common/CustomButton";
 import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
 import clsx from "clsx";
 import CollaborateSVG from "../../Assets/Collaborate.svg";

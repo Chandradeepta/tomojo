@@ -94,6 +94,9 @@ export const Footer = React.memo(function AppFooter(props) {
                     </Link>
                   );
                 })}
+                <Link to={'/blogs'}>
+                  <NavItem>Blogs</NavItem>
+                </Link>
               </NavMenu>
             </Item>
             <Item grow maxWidth={500} mx={"auto"}>

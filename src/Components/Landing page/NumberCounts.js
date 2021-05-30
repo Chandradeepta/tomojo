@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(4),
     textAlign: "justify",
     maxWidth: 200,
-    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
     transition: "all 0.3s ease-in-out",
+    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
     "&:hover": {
-      boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-      transform: "scale(1.04)"
+      boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+      transform: "scale(1.04)",
     },
   },
   bold: {

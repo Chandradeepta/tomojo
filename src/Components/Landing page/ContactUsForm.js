@@ -1,11 +1,11 @@
 import { Box, makeStyles, Paper, TextField } from "@material-ui/core";
-import CustomButton from "./CustomButton";
+import CustomButton from "../Common/CustomButton";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "70%",
     borderRadius: 20,
-    boxShadow: "1px 6px 15px 0px rgba(0,0,0,0.75)",
+    boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },

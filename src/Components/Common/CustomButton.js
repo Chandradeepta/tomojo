@@ -16,8 +16,9 @@ export default function CustomButton(props) {
       <Button
         variant="contained"
         size="small"
+        {...(props.fullWidth && { fullWidth: true })}
         color={color}
-        style={buttonStyle}
+        style={{ ...buttonStyle, borderRadius: props.borderRadius }}
       >
         {props.children}
       </Button>

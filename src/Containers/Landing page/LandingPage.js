@@ -29,16 +29,21 @@ import LandingPageContact from "./LandingPageContact";
 import LandingPageReferral from "./LandingPageReferral";
 import LandingPagePartner from "./LandingPagePartner";
 import { Footer } from "../../Components/Common/Footer";
+import LandingPageBlogs from "./LandingPageBlogs";
+import LandingPagePricing from "./LandingPagePricing";
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
     width: "100%",
     minHeight: "100vh",
-    // background: theme.palette.background.default,
   },
   initialContainer: {
     padding: "6%",
     paddingBottom: "1%",
+    minHeight: "70vh",
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   list: {
     width: 250,
@@ -98,46 +103,50 @@ export default function LandingPage(props) {
 
   return (
     <>
-      <Router>
-        <Container maxWidth="lg" className={classes.landingPageRoot}>
-          <Navbar toggleDrawer={toggleDrawer} links={links} />
-          <Toolbar id="back-to-top-anchor" />
-          <Drawer
-            open={open}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-          >
-            {list()}
-          </Drawer>
+      <Container maxWidth="lg" className={classes.landingPageRoot}>
+        <Navbar toggleDrawer={toggleDrawer} links={links} />
+        <Toolbar id="back-to-top-anchor" />
+        <Drawer
+          open={open}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+        >
+          {list()}
+        </Drawer>
 
-          <Grid container className={classes.initialContainer}>
-            <Switch>
-              <Route exact path={`/home`}>
-                <LandingPageHome />
-              </Route>
-              <Route exact path={`/about`}>
-                <LandingPageAbout />
-              </Route>
-              <Route exact path={`/contact`}>
-                <LandingPageContact />
-              </Route>
-              <Route exact path={`/refer`}>
-                <LandingPageReferral />
-              </Route>
-              <Route exact path={`/partner-with-us`}>
-                <LandingPagePartner />
-              </Route>
-            </Switch>
-          </Grid>
-          <ScrollTop {...props}>
-            <Fab color="primary" size="small" aria-label="scroll back to top">
-              <KeyboardArrowUp color="textSecondary" />
-            </Fab>
-          </ScrollTop>
-          <br />
-          <Footer links={links} />
-        </Container>
-      </Router>
+        <Grid container className={classes.initialContainer}>
+          <Switch>
+            <Route exact path={`/home`}>
+              <LandingPageHome />
+            </Route>
+            <Route exact path={`/about`}>
+              <LandingPageAbout />
+            </Route>
+            <Route exact path={`/contact`}>
+              <LandingPageContact />
+            </Route>
+            <Route exact path={`/refer`}>
+              <LandingPageReferral />
+            </Route>
+            <Route exact path={`/partner-with-us`}>
+              <LandingPagePartner />
+            </Route>
+            <Route exact path={`/pricing`}>
+              <LandingPagePricing />
+            </Route>
+            <Route exact path={`/blogs`}>
+              <LandingPageBlogs />
+            </Route>
+          </Switch>
+        </Grid>
+        <ScrollTop {...props}>
+          <Fab color="primary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUp color="textSecondary" />
+          </Fab>
+        </ScrollTop>
+        <br />
+        <Footer links={links} />
+      </Container>
     </>
   );
 }
@@ -153,7 +162,7 @@ const links = [
   },
   {
     name: "Pricing",
-    link: "/",
+    link: "/pricing",
   },
   {
     name: "Contact",
