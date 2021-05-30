@@ -47,7 +47,7 @@ export default function LandingPagePricing(props) {
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Box
             display="flex"
-            justifyContent="flex-end"
+            justifyContent="center"
             alignItems="center"
             p={2}
             flexWrap="wrap"
