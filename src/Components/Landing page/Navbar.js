@@ -10,6 +10,7 @@ import Widgets from "@material-ui/icons/Widgets";
 import { Item } from "@mui-treasury/components/flex";
 
 import { Link, NavLink, useLocation, useRouteMatch } from "react-router-dom";
+import BaseBrandContainer from "../Common/BaseBrandContainer";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -23,13 +24,6 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: "1%",
     },
   },
-  hamburgerButton: {
-    marginRight: theme.spacing(1),
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up("lg")]: {
-      display: "none",
-    },
-  },
   nav: {
     margin: theme.spacing(2),
     cursor: "pointer",
@@ -38,6 +32,14 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  hamburgerButton: {
+    marginRight: theme.spacing(1),
+    color: theme.palette.primary.main,
+    [theme.breakpoints.up("lg")]: {
+      display: "none",
+    },
+  },
+
   brandSpace: {
     flex: 1,
     display: "flex",
@@ -65,24 +67,7 @@ export default function Navbar(props) {
   return (
     <AppBar position="fixed" className={classes.appbar}>
       <Toolbar className={classes.toolbar}>
-        <IconButton
-          edge="start"
-          className={classes.hamburgerButton}
-          color="inherit"
-          aria-label="menu"
-          onClick={props.toggleDrawer(true)}
-        >
-          <i className="fas fa-bars"></i>
-        </IconButton>
-        <Box className={classes.brandSpace}>
-          <IconButton edge="start" color="inherit" aria-label="logo">
-            {/* <i className="fas fa-book-open" style={{ color: "#1F75FE" }}></i> */}
-            <Widgets fontSize={'large'}/>
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            TOMOJO
-          </Typography>
-        </Box>
+        <BaseBrandContainer toggleDrawer={props.toggleDrawer} />
         <Box flex="2">
           {props.links.map((each, i) => {
             return (
@@ -99,7 +84,9 @@ export default function Navbar(props) {
             );
           })}
         </Box>
-        <CustomButton color="primary">Login</CustomButton>
+        <Link to={"/dashboard"}>
+          <CustomButton color="primary">Login</CustomButton>
+        </Link>
       </Toolbar>
     </AppBar>
   );

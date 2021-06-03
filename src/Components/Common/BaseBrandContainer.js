@@ -1,0 +1,59 @@
+import {
+  Box,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import { Widgets, Menu } from "@material-ui/icons";
+
+const useStyles = makeStyles((theme) => ({
+  hamburgerButton: {
+    marginRight: theme.spacing(1),
+    color: theme.palette.primary.main,
+    [theme.breakpoints.up("lg")]: {
+      display: "none",
+    },
+  },
+
+  brandSpace: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: "left",
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold,
+    letterSpacing: theme.spacing(0.5),
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.05rem",
+    },
+  },
+}));
+export default function BaseBrandContainer(props) {
+  const classes = useStyles();
+  return (
+    <>
+      <IconButton
+        edge="start"
+        className={classes.hamburgerButton}
+        color="primary"
+        aria-label="menu"
+        onClick={props.toggleDrawer(!props.open)}
+      >
+        {/* <i className="fas fa-bars"></i> */}
+        <Menu />
+      </IconButton>
+      <Box className={classes.brandSpace}>
+        <IconButton edge="start" color="secondary" aria-label="logo">
+          <Widgets fontSize={"large"} />
+        </IconButton>
+        <Typography variant="h6" className={classes.title}>
+          TOMOJO
+        </Typography>
+      </Box>
+    </>
+  );
+}

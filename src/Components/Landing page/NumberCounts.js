@@ -73,6 +73,8 @@ export default function NumberCounts(props) {
         testCount: { ...statData.testCount, value: results.Total_countTest },
         userCount: { ...statData.userCount, value: results.Total_countUser },
       });
+    }).catch(err=>{
+      console.log(err)
     });
   }, []);
 

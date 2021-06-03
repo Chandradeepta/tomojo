@@ -1,6 +1,7 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 
-let theme = createMuiTheme({
+
+export let theme = createMuiTheme({
   palette: {
     primary: {
       main: "#1F75FE",
@@ -9,11 +10,11 @@ let theme = createMuiTheme({
       main: "#FEA81F",
     },
     background: {
-      default: '#f1faff'
+      default: "#f1faff",
     },
     text: {
       primary: "#171959",
-      secondary: "#a7bbc7"
+      secondary: "#a7bbc7",
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
@@ -21,7 +22,6 @@ let theme = createMuiTheme({
   typography: {
     fontSize: 14,
     fontFamily: `'Sarabun', sans-serif`,
-    
   },
 });
 
@@ -35,6 +35,9 @@ theme.overrides = {
         backgroundColor: "#111",
       },
     },
+  },
+  MuiListItemText: {
+    primary: {},
   },
 };
 
