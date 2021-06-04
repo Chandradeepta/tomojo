@@ -31,6 +31,7 @@ import LandingPagePartner from "./LandingPagePartner";
 import { Footer } from "../../Components/Common/Footer";
 import LandingPageBlogs from "./LandingPageBlogs";
 import LandingPagePricing from "./LandingPagePricing";
+import Login from "../Login";
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
@@ -41,9 +42,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "6%",
     paddingBottom: "1%",
     minHeight: "70vh",
-    display:'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   list: {
     width: 250,
@@ -136,6 +137,9 @@ export default function LandingPage(props) {
             </Route>
             <Route exact path={`/blogs`}>
               <LandingPageBlogs />
+            </Route>
+            <Route exact path={`/login`}>
+              <Login />
             </Route>
           </Switch>
         </Grid>

@@ -10,7 +10,13 @@ import Typography from "@material-ui/core/Typography";
 import { Check } from "@material-ui/icons";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import { useLightTopShadowStyles } from "@mui-treasury/styles/shadow/lightTop";
-import { CardActions, useTheme } from "@material-ui/core";
+import {
+  CardActions,
+  CardHeader,
+  Divider,
+  Toolbar,
+  useTheme,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,13 +42,17 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: theme.typography.fontWeightBold,
   },
+  discount: {
+    border: "1px solid white",
+    padding: theme.spacing(0.5),
+  },
 }));
 
 export const PricingInfoCard = (props) => {
   const styles = useStyles();
   const theme = useTheme();
   const shadowStyles = useLightTopShadowStyles();
-  const { model } = props;
+  const { model, selectedPackage } = props;
   return (
     <Card
       className={cx(styles.root, shadowStyles.root)}
@@ -65,35 +75,82 @@ export const PricingInfoCard = (props) => {
             }}
           >
             <Box display="flex" justifyContent="space-between" width="100%">
-              <Typography variant="h6" className={styles.title}>
+              <Typography variant="h4" className={styles.title} gutterBottom>
                 {model.type}
               </Typography>
-              <Typography variant="h4" className={styles.title}>
-                {model.price}
-              </Typography>
-            </Box>
-            <Box display="flex" width="100%" justifyContent="flex-start" p={1}>
-              <Typography align="left">Plan Includes:</Typography>
-            </Box>
-            {model.planIncludes.map((each) => {
-              return (
+              {model.type === "Free" ? (
                 <>
-                  <Box
-                    display="flex"
-                    width="100%"
-                    justifyContent="flex-start"
-                    p={1}
+                  <Typography
+                    variant="h4"
+                    className={styles.title}
+                    gutterBottom
                   >
-                    <Box pr={1}>
-                      <Check fontSize="small" />
-                    </Box>
-                    <Typography align="left" variant="body2">
-                      {each}
+                    $0
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Box>
+                    <Typography
+                      variant="h6"
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {selectedPackage.actualPrice}
+                    </Typography>
+                    <Typography variant="h4" className={styles.title}>
+                      {selectedPackage.discountedPrice}
                     </Typography>
                   </Box>
                 </>
-              );
-            })}
+              )}
+            </Box>
+            <Box m={"auto"}>
+              <Box
+                display="flex"
+                width="100%"
+                justifyContent="flex-start"
+                p={1}
+                pb={"auto"}
+              >
+                <Typography align="left">Plan Includes:</Typography>
+              </Box>
+              <Box
+                display="flex"
+                width="100%"
+                justifyContent="flex-start"
+                p={0.5}
+              >
+                <Box pr={1}>
+                  <Check fontSize="small" />
+                </Box>
+                <Typography align="left" variant="body2">
+                  {`${
+                    model.type === "Free"
+                      ? selectedPackage.freeTestCount
+                      : selectedPackage.premiumTestCount
+                  } Tests included`}
+                </Typography>
+              </Box>
+              {model.planIncludes.map((each) => {
+                return (
+                  <>
+                    <Box
+                      display="flex"
+                      width="100%"
+                      justifyContent="flex-start"
+                      p={0.5}
+                    >
+                      <Box pr={1}>
+                        <Check fontSize="small" />
+                      </Box>
+                      <Typography align="left" variant="body2">
+                        {each}
+                      </Typography>
+                    </Box>
+                  </>
+                );
+              })}
+            </Box>
           </Box>
         </CardContent>
       </CardActionArea>
@@ -105,7 +162,9 @@ export const PricingInfoCard = (props) => {
             borderRadius={10}
             fullWidth={true}
           >
-            Choose Plan
+            {props.type === "Free"
+              ? "Choose"
+              : `Save ${selectedPackage.discountAmount}`}
           </CustomButton>
         </Box>
       </CardActions>

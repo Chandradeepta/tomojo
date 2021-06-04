@@ -14,7 +14,7 @@ export default function CustomButton(props) {
   return (
     <>
       <Button
-        variant="contained"
+        variant={props.variant || "contained"}
         size="small"
         {...(props.fullWidth && { fullWidth: true })}
         color={color}

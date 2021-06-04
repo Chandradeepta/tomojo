@@ -16,11 +16,13 @@ const MenuProps = {
   },
 };
 
-const MinimalSelect = () => {
+const CustomSelect = (props) => {
   const [val, setVal] = useState(0);
+  const { items, getSelectedClass } = props;
 
   const handleChange = (event) => {
     setVal(event.target.value);
+    getSelectedClass(event.target.value);
   };
 
   const minimalSelectClasses = useMinimalSelectStyles();
@@ -38,7 +40,7 @@ const MinimalSelect = () => {
     classes: {
       paper: minimalSelectClasses.paper,
       list: minimalSelectClasses.list,
-      maxHeight: 20
+      maxHeight: 20,
     },
     anchorOrigin: {
       vertical: "bottom",
@@ -56,26 +58,14 @@ const MinimalSelect = () => {
       <Select
         disableUnderline
         classes={{ root: minimalSelectClasses.select }}
-        style={{maxHeight: 20}}
+        style={{ maxHeight: 20 }}
         MenuProps={menuProps}
         IconComponent={iconComponent}
         value={val}
         onChange={handleChange}
         MenuProps={MenuProps}
       >
-        {[
-          "class KG",
-          "class I",
-          "class II",
-          "class III",
-          "class IV",
-          "class V",
-          "class VI",
-          "class VII",
-          "class VIII",
-          "class IX",
-          "class X",
-        ].map((each, i) => {
+        {items.map((each, i) => {
           return (
             <MenuItem key={i} value={i}>
               {each}
@@ -87,4 +77,4 @@ const MinimalSelect = () => {
   );
 };
 
-export default MinimalSelect;
+export default CustomSelect;

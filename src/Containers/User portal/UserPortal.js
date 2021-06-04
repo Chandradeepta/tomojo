@@ -25,6 +25,7 @@ import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef } from "react";
 import UserHeader from "../../Components/User portal/UserHeader";
+import Dashboard from "./Dashboard";
 
 const drawerWidth = 240;
 
@@ -79,7 +80,7 @@ export default function UserPortal(props) {
               <Toolbar id="back-to-top-anchor" />
               <Switch>
                 <Route exact path={`/dashboard`}>
-                  {/* <LandingPageHome /> */}
+                  <Dashboard />
                 </Route>
               </Switch>
             </main>

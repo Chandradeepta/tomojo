@@ -36,9 +36,16 @@ theme.overrides = {
       },
     },
   },
-  MuiListItemText: {
-    primary: {},
+  MuiCardContent: {
+    root: {
+      "&:hover":{
+        backgroundColor: "none"
+      }
+    },
   },
+  MuiButtonBase: {
+    disableRipple: true
+  }
 };
 
 export const mainTheme = responsiveFontSizes(theme);
