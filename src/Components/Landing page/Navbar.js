@@ -85,7 +85,7 @@ export default function Navbar(props) {
           })}
         </Box>
         <Link to={"/login"}>
-          <CustomButton color="primary">Login</CustomButton>
+          <CustomButton color="primary" size="small">Login</CustomButton>
         </Link>
       </Toolbar>
     </AppBar>

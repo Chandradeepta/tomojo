@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Grid, makeStyles, Typography, Box } from "@material-ui/core";
 import clsx from "clsx";
-import Illustraion1 from "../../Assets/Nerd-amico.svg";
-import Illustraion2 from "../../Assets/Studying.svg";
+import Illustraion1 from "../../Assets/Home/Illustration1_1.gif";
+import Illustraion2 from "../../Assets/Home/Illustration2_1.gif";
 import GPlay from "../../Assets/gplayImage.png";
 
 import CustomButton from "../../Components/Common/CustomButton";
@@ -170,6 +170,7 @@ export default function LandingPageHome(props) {
           <img
             src={Illustraion1}
             alt="image1"
+            width="100%"
             className={
               isVisibleSection1
                 ? clsx(
@@ -225,9 +226,9 @@ export default function LandingPageHome(props) {
             className={
               isVisibleSection2
                 ? clsx(
-                    classes.animated,
-                    classes.animatedFade,
-                    classes.fadeInLeft
+                    // classes.animated,
+                    // classes.animatedFade,
+                    // classes.fadeInLeft
                   )
                 : clsx(classes.fadeOutRight)
             }

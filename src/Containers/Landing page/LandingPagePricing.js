@@ -72,7 +72,7 @@ export default function LandingPagePricing(props) {
         md={12}
         sm={12}
         xs={12}
-        style={{ display: "flex", alignItems: "center", marginTop: "-3%" }}
+        style={{ display: "flex", alignItems: "center", marginTop: '2%' }}
       >
         <Grid item lg={5} md={5} sm={12} xs={12}>
           <Typography

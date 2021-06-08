@@ -162,9 +162,9 @@ export const PricingInfoCard = (props) => {
             borderRadius={10}
             fullWidth={true}
           >
-            {props.type === "Free"
+            {model.type === "Free"
               ? "Choose"
-              : `Save ${selectedPackage.discountAmount}`}
+              : `Save ${selectedPackage.discountPercentage}`}
           </CustomButton>
         </Box>
       </CardActions>

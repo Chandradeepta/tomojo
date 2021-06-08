@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   initialContainer: {
     padding: "6%",
+    paddingTop: "2%",
     paddingBottom: "1%",
     minHeight: "70vh",
     display: "flex",
@@ -145,7 +146,7 @@ export default function LandingPage(props) {
         </Grid>
         <ScrollTop {...props}>
           <Fab color="primary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUp color="textSecondary" />
+            <KeyboardArrowUp color="primary" />
           </Fab>
         </ScrollTop>
         <br />

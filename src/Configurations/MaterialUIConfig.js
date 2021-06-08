@@ -1,6 +1,5 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 
-
 export let theme = createMuiTheme({
   palette: {
     primary: {
@@ -21,7 +20,7 @@ export let theme = createMuiTheme({
   },
   typography: {
     fontSize: 14,
-    fontFamily: `'Sarabun', sans-serif`,
+    fontFamily: `'Rubik', sans-serif`,
   },
 });
 
@@ -38,14 +37,14 @@ theme.overrides = {
   },
   MuiCardContent: {
     root: {
-      "&:hover":{
-        backgroundColor: "none"
-      }
+      "&:hover": {
+        backgroundColor: "none",
+      },
     },
   },
   MuiButtonBase: {
-    disableRipple: true
-  }
+    disableRipple: true,
+  },
 };
 
 export const mainTheme = responsiveFontSizes(theme);

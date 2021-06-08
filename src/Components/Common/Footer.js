@@ -66,6 +66,11 @@ const useStyles = makeStyles(
 
 export const Footer = React.memo(function AppFooter(props) {
   const classes = useStyles();
+
+  const isActive = (path) => {
+    return window.location.pathname === `/${path}`;
+  };
+
   return (
     <Box bgcolor={"background.paper"} width={"100%"}>
       <Container>
@@ -87,16 +92,21 @@ export const Footer = React.memo(function AppFooter(props) {
                 </Item>
               </Row>
               <NavMenu className={classes.navMenu}>
-                {props.links.map((nav) => {
+                {props.links.map((nav, i) => {
                   return (
-                    <Link to={nav.link}>
-                      <NavItem>{nav.name}</NavItem>
-                    </Link>
+                    <NavItem
+                      as={Link}
+                      to={nav.link}
+                      key={i}
+                      active={isActive(nav.link)}
+                    >
+                      {nav.name}
+                    </NavItem>
                   );
                 })}
-                <Link to={'/blogs'}>
-                  <NavItem>Blogs</NavItem>
-                </Link>
+                <NavItem active={isActive("/blogs")} as={Link} to="/blogs">
+                  Blogs
+                </NavItem>
               </NavMenu>
             </Item>
             <Item grow maxWidth={500} mx={"auto"}>
@@ -158,7 +168,7 @@ export const Footer = React.memo(function AppFooter(props) {
                 <Typography
                   component={"p"}
                   variant={"caption"}
-                  color={"textSecondary"}
+                  color="textSecondary"
                 >
                   Designed by Chandradeepta Laha © All right reserved
                 </Typography>

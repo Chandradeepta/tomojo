@@ -1,26 +1,29 @@
 import { Button, useTheme } from "@material-ui/core";
 
-export default function CustomButton(props) {
+export default function CustomButton({
+  size,
+  color,
+  borderRadius,
+  variant,
+  fullWidth,
+  children,
+  ...buttonProps
+}) {
   const theme = useTheme();
-  const { size, color } = props;
   const buttonStyle = {
-    borderRadius: 0,
-    paddingLeft: size === "large" ? 25 : 15,
-    paddingRight: size === "large" ? 25 : 15,
-    paddingTop: size === "large" ? 10 : 5,
-    paddingBottom: size === "large" ? 10 : 5,
     borderColor: theme.palette.primary.main,
   };
   return (
     <>
       <Button
-        variant={props.variant || "contained"}
-        size="small"
-        {...(props.fullWidth && { fullWidth: true })}
+        variant={variant || "contained"}
+        size={size}
+        {...(fullWidth && { fullWidth: true })}
         color={color}
-        style={{ ...buttonStyle, borderRadius: props.borderRadius }}
+        {...buttonProps}
+        style={{ ...buttonStyle, borderRadius: borderRadius }}
       >
-        {props.children}
+        {children}
       </Button>
     </>
   );
