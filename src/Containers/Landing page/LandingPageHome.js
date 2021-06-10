@@ -1,18 +1,24 @@
-import React, { useEffect, useRef } from "react";
-import { Grid, makeStyles, Typography, Box } from "@material-ui/core";
 import clsx from "clsx";
-import Illustraion1 from "../../Assets/Home/Illustration1_1.gif";
-import Illustraion2 from "../../Assets/Home/Illustration2_1.gif";
-import GPlay from "../../Assets/gplayImage.png";
-
-import CustomButton from "../../Components/Common/CustomButton";
-import OfferedServices from "../../Components/Landing page/OfferedServices";
-import TextTransitions from "../../Components/Common/TextTransitions";
-import Testimonials from "../../Components/Landing page/Testimonials";
+import React, { useRef, Suspense } from "react";
+import { Grid, makeStyles, Typography, Box } from "@material-ui/core";
 import useOnScreen from "../../Hooks/useOnScreen";
-import NumberCounts from "../../Components/Landing page/NumberCounts";
+import Skeleton from "@material-ui/lab/Skeleton";
+import TextTransitions from "../../Components/Common/TextTransitions";
 import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
-import DownloadButton from "../../Components/Landing page/DownloadButton";
+import GPlay from "../../Assets/gplayImage.png";
+import Illustraion1 from "../../Assets/Home/Illustration1_1.svg";
+import Illustraion2 from "../../Assets/Home/Illustration2_1.svg";
+import CustomButton from '../../Components/Common/CustomButton';
+
+const OfferedServices = React.lazy(() =>
+  import("../../Components/Landing page/OfferedServices")
+);
+const Testimonials = React.lazy(() =>
+  import("../../Components/Landing page/Testimonials")
+);
+const NumberCounts = React.lazy(() =>
+  import("../../Components/Landing page/NumberCounts")
+);
 
 const mainContainerStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -56,13 +62,6 @@ const mainContainerStyles = makeStyles((theme) => ({
     justifyContent: "center",
     paddingTop: theme.spacing(4),
   },
-  animated: {
-    animationDuration: "1s",
-    animationFillMode: "both",
-  },
-  animatedFade: {
-    opacity: 0,
-  },
   download: {
     textAlign: "left",
     [theme.breakpoints.down("sm")]: {
@@ -81,242 +80,253 @@ export default function LandingPageHome(props) {
 
   return (
     <>
-      <Grid
-        container
-        item
-        lg={12}
-        md={12}
-        sm={12}
-        xs={12}
-        className={classes.contentContainer}
-        ref={gridRef1}
+      <Suspense
+        fallback={
+          <>
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
+
+
+          </>
+        }
       >
         <Grid
+          container
           item
-          lg={6}
-          md={6}
-          sm={12}
-          xs={12}
-          className={classes.textContainer}
-        >
-          <Typography
-            variant="h3"
-            className={
-              isVisibleSection1
-                ? clsx(
-                    classes.bold,
-                    classes.animated,
-                    classes.animatedFade,
-                    classes.fadeInUp
-                  )
-                : undefined
-            }
-            gutterBottom
-            color="textPrimary"
-          >
-            Let your child lead the academics
-          </Typography>
-          <Typography
-            variant="body1"
-            align="justify"
-            gutterBottom
-            color="textPrimary"
-            className={
-              isVisibleSection1
-                ? clsx(classes.animated, classes.animatedFade, classes.fadeInUp)
-                : undefined
-            }
-          >
-            Give your child handpicked questions to practise and ensure indepth
-            understanding
-          </Typography>
-          <Box pt={3}>
-            <CustomButton size="large" color="primary">
-              Get started
-            </CustomButton>
-          </Box>
-          <Box pt={3} width="100%" className={classes.download}>
-            <Typography
-              variant="h6"
-              color="textPrimary"
-              gutterBottom
-              className={clsx(
-                classes.bold,
-                classes.animated,
-                classes.animatedFade,
-                classes.fadeInUp
-              )}
-            >
-              Our app is now available on Google Play.
-            </Typography>
-            <Box ml={"-12px"}>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.tomojo.application&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
-                target="_blank"
-              >
-                <img src={GPlay} width="200" />
-              </a>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          lg={6}
-          md={6}
+          lg={12}
+          md={12}
           sm={12}
           xs={12}
           className={classes.contentContainer}
+          ref={gridRef1}
         >
-          <img
-            src={Illustraion1}
-            alt="image1"
-            width="100%"
-            className={
-              isVisibleSection1
-                ? clsx(
-                    classes.animated,
-                    classes.animatedFade,
-                    classes.fadeInLeft
-                  )
-                : undefined
-            }
-          />
-        </Grid>
-      </Grid>
-
-      <Grid item lg={12} md={12} sm={12} xs={12}>
-        <Box pt={5}>
-          <Typography
-            variant="h4"
-            className={classes.bold}
-            align="center"
-            color="secondary"
-            gutterBottom
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            className={classes.textContainer}
           >
-            What you can get
-          </Typography>
-        </Box>
-      </Grid>
-
-      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
-        <OfferedServices />
-      </Grid>
-
-      <Grid
-        container
-        item
-        lg={12}
-        md={12}
-        sm={12}
-        xs={12}
-        className={classes.contentContainer}
-        ref={gridRef2}
-      >
-        <Grid
-          item
-          lg={6}
-          md={6}
-          sm={12}
-          xs={12}
-          className={classes.contentContainer}
-        >
-          <img
-            src={Illustraion2}
-            alt="image2"
-            className={
-              isVisibleSection2
-                ? clsx(
-                    // classes.animated,
-                    // classes.animatedFade,
-                    // classes.fadeInLeft
-                  )
-                : clsx(classes.fadeOutRight)
-            }
-            width="90%"
-          />
-        </Grid>
-        <Grid
-          item
-          lg={6}
-          md={6}
-          sm={12}
-          xs={12}
-          className={clsx(classes.textContainer, classes.textContainer_alt)}
-        >
-          <Box display="flex">
             <Typography
               variant="h3"
+              className={
+                isVisibleSection1
+                  ? clsx(
+                      classes.bold,
+                      classes.animated,
+                      classes.animatedFade,
+                      classes.fadeInUp
+                    )
+                  : undefined
+              }
+              gutterBottom
+              color="textPrimary"
+            >
+              Let your child lead the academics
+            </Typography>
+            <Typography
+              variant="h5"
+              align="justify"
+              gutterBottom
+              color="textPrimary"
+              className={
+                isVisibleSection1
+                  ? clsx(
+                      classes.animated,
+                      classes.animatedFade,
+                      classes.fadeInUp
+                    )
+                  : undefined
+              }
+            >
+              Give your child handpicked questions to practise and ensure
+              indepth understanding
+            </Typography>
+            <Box pt={3}>
+              <CustomButton size="large" color="primary">
+                Get started
+              </CustomButton>
+            </Box>
+            <Box pt={3} width="100%" className={classes.download}>
+              <Typography
+                variant="h6"
+                color="textPrimary"
+                gutterBottom
+                className={clsx(
+                  classes.bold,
+                  classes.animated,
+                  classes.animatedFade,
+                  classes.fadeInUp
+                )}
+              >
+                Our app is now available on Google Play.
+              </Typography>
+              <Box ml={"-12px"}>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.tomojo.application&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Box width="100%">
+                    <img
+                      src={GPlay}
+                      alt="google_play"
+                      width="200"
+                      height="100%"
+                    />
+                  </Box>
+                </a>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            className={classes.contentContainer}
+          >
+            <img
+              src={Illustraion1}
+              width="100%"
+              height="100%"
+              alt={"Let your child lead the academics"}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Box pt={5}>
+            <Typography
+              variant="h4"
               className={classes.bold}
+              align="center"
+              color="secondary"
+              gutterBottom
+            >
+              What you can get
+            </Typography>
+          </Box>
+        </Grid>
+
+        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
+          <Box pb={3}>
+            <OfferedServices />
+          </Box>
+        </Grid>
+
+        <Grid
+          container
+          item
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className={classes.contentContainer}
+          ref={gridRef2}
+        >
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            className={classes.contentContainer_alt}
+          >
+            <img
+              src={Illustraion2}
+              width="100%"
+              height="100%"
+              alt={"Practice aytime, anywhere"}
+            />
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            className={clsx(classes.textContainer, classes.textContainer_alt)}
+          >
+            <Box display="flex">
+              <Typography
+                variant="h3"
+                className={classes.bold}
+                gutterBottom
+                align="right"
+                color="textPrimary"
+                display="inline"
+              >
+                Practice &nbsp;
+              </Typography>
+              <TextTransitions textArray={[" Anywhere.", " Anytime."]} />
+            </Box>
+            <Typography
+              variant="h6"
+              align="justify"
               gutterBottom
               align="right"
               color="textPrimary"
-              display="inline"
+              className={
+                isVisibleSection2
+                  ? clsx(
+                      classes.animated,
+                      classes.animatedFade,
+                      classes.fadeInUp,
+                      classes.centerAlign
+                    )
+                  : undefined
+              }
             >
-              Practice &nbsp;
+              Access the best questions right from home
             </Typography>
-            <TextTransitions textArray={[" Anywhere.", " Anytime."]} />
-          </Box>
-          <Typography
-            variant="body1"
-            align="justify"
-            gutterBottom
-            align="right"
-            color="textPrimary"
-            className={
-              isVisibleSection2
-                ? clsx(
-                    classes.animated,
-                    classes.animatedFade,
-                    classes.fadeInUp,
-                    classes.centerAlign
-                  )
-                : undefined
-            }
-          >
-            Access the best questions right from home
-          </Typography>
-          <Box pt={3} textAlign="right">
-            <CustomButton size="large" color="primary">
-              Get started
-            </CustomButton>
+            <Box pt={3} textAlign="right">
+              <CustomButton size="large" color="primary">
+                Get started
+              </CustomButton>
+            </Box>
+          </Grid>
+        </Grid>
+
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Box pt={5}>
+            <Typography
+              variant="h4"
+              className={classes.bold}
+              align="center"
+              color="secondary"
+              gutterBottom
+            >
+              Data that matters
+            </Typography>
           </Box>
         </Grid>
-      </Grid>
+        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
+          <NumberCounts />
+        </Grid>
 
-      <Grid item lg={12} md={12} sm={12} xs={12}>
-        <Box pt={5}>
-          <Typography
-            variant="h4"
-            className={classes.bold}
-            align="center"
-            color="secondary"
-            gutterBottom
-          >
-            Data that matters
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
-        <NumberCounts />
-      </Grid>
-
-      <Grid item lg={12} md={12} sm={12} xs={12}>
-        <Box pt={8} pb={4}>
-          <Typography
-            variant="h4"
-            className={classes.bold}
-            align="center"
-            color="secondary"
-            gutterBottom
-          >
-            Testimonials
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item lg={12} md={12} sm={12} xs={12}>
-        <Testimonials />
-      </Grid>
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Box pt={8} pb={4}>
+            <Typography
+              variant="h4"
+              className={classes.bold}
+              align="center"
+              color="secondary"
+              gutterBottom
+            >
+              Testimonials
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Testimonials />
+        </Grid>
+      </Suspense>
     </>
   );
 }
-

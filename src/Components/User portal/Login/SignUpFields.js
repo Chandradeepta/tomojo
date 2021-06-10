@@ -12,21 +12,18 @@ export function SignupFields(props) {
   const history = useHistory();
 
   const requestVerificationCode = () => {
-    const appVerifier = new auth.RecaptchaVerifier(
-      "phone-sign-in-button",
-      {
-        size: "invisible",
-        callback: (response) => {
-          shouldShowOtp(true);
-        },
-      }
-    );
-    auth
+    const appVerifier = new auth.RecaptchaVerifier("phone-sign-in-button", {
+      size: "invisible",
+      callback: (response) => {
+        shouldShowOtp(true);
+      },
+    });
+    auth()
       .signInWithPhoneNumber(phoneNumber, appVerifier)
       .then((confirmResult) => {
         setServerOtp(confirmResult);
       })
-      .catch((error) => console.log("Error", error));
+      .catch((error) => props.setIsSignedUpByPhone(false));
   };
 
   const signUp = () => {
@@ -34,9 +31,9 @@ export function SignupFields(props) {
       .confirm(otp)
       .then((res) => {
         console.log("res", res);
-        // history.push("/dashboard");
+        props.setIsSignedUpByPhone(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => props.setIsSignedUpByPhone(false));
   };
 
   return (
@@ -74,12 +71,12 @@ export function SignupFields(props) {
             <CustomButton
               color="primary"
               size="small"
-              id="phone-sign-in-button"
               // onClick={() => requestVerificationCode()}
-              onClick={()=> history.push("/dashboard")}
+              onClick={()=> history.push('/user/dashboard')}
             >
               Get started
             </CustomButton>
+            <div id="phone-sign-in-button" />
           </>
         )}
       </Box>

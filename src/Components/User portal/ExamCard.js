@@ -13,8 +13,16 @@ import CompletionBar from "./CompletionBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 300,
+    minWidth: 245,
     boxShadow: "none",
     borderRadius: 15,
+    // margin: "5%",
+    transition: "all 0.3s ease-in-out",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
+    "&:hover": {
+      boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+      transform: "scale(1.04)",
+    },
   },
   media: {
     height: 140,
@@ -29,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExamCard() {
+export default function ExamCard(props) {
   const classes = useStyles();
 
   return (
@@ -45,7 +53,7 @@ export default function ExamCard() {
           </Avatar>
         }
         title="Free"
-        subheader="Biology Exam 1"
+        subheader={`${props.subject} Test series`}
       />
       <CardContent>
         <Box
@@ -75,7 +83,7 @@ export default function ExamCard() {
           variant="outlined"
           borderRadius={10}
         >
-          Start Exam
+          View tests
         </CustomButton>
       </CardActions>
     </Card>

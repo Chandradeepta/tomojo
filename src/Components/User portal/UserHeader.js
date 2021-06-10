@@ -9,9 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { theme } from "../../Configurations/MaterialUIConfig";
 import {
-  Mail,
   Home,
   CardMembership,
   AccountBox,
@@ -22,6 +20,8 @@ import {
 } from "@material-ui/icons";
 import BaseBrandContainer from "../Common/BaseBrandContainer";
 import clsx from "clsx";
+import { NavItem, NavMenu } from "@mui-treasury/components/menu/navigation";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 220;
 
@@ -36,48 +36,31 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    marginTop: 6,
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    border: 0,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: "hidden",
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
-  hamburgerButton: {
-    marginRight: theme.spacing(1),
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up("lg")]: {
-      display: "none",
-    },
-  },
-  title: {
-    flexGrow: 1,
-    textAlign: "left",
-    color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightBold,
-    letterSpacing: theme.spacing(0.5),
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.05rem",
-    },
-  },
+  // drawer: {
+  //   width: drawerWidth,
+  //   flexShrink: 0,
+  //   whiteSpace: "nowrap",
+  //   marginTop: 6,
+  // },
+  // drawerOpen: {
+  //   width: drawerWidth,
+  //   // border: 0,
+  //   transition: theme.transitions.create("width", {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  // },
+  // drawerClose: {
+  //   transition: theme.transitions.create("width", {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.leavingScreen,
+  //   }),
+  //   overflowX: "hidden",
+  //   width: 0,
+  //   [theme.breakpoints.up("sm")]: {
+  //     width: 0,
+  //   },
+  // },
   List: {
     [theme.breakpoints.up("sm")]: {
       padding: 10,
@@ -88,9 +71,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ClippedDrawer() {
+export default function UserHeader(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+
+  const isActive = (path) => {
+    return window.location.pathname === `${path}`;
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -110,19 +97,22 @@ export default function ClippedDrawer() {
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
-        nClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
+        // variant="permanent"
+        // onClose={toggleDrawer(false)}
+        // onOpen={toggleDrawer(true)}
+        // className={clsx(classes.drawer, {
+        //   [classes.drawerOpen]: open,
+        //   [classes.drawerClose]: !open,
+        // })}
+        // classes={{
+        //   paper: clsx({
+        //     [classes.drawerOpen]: open,
+        //     [classes.drawerClose]: !open,
+        //   }),
+        // }}
+        anchor={"left"}
+        open={open}
+        onClose={toggleDrawer(false)}
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
@@ -134,10 +124,20 @@ export default function ClippedDrawer() {
                     <ListItemText primary={each.category} />
                   </ListItem>
                   {each.subCategory.map((sub, index) => (
-                    <ListItem button key={index}>
-                      <ListItemIcon>{sub.icon}</ListItemIcon>
-                      <ListItemText primary={sub.label} />
-                    </ListItem>
+                    <Link
+                      // active={isActive(`${sub.path}`)}
+                      // as={Link}
+                      to={`${sub.path}`}
+                    >
+                      <ListItem
+                        button
+                        key={index}
+                        selected={isActive(`${sub.path}`)}
+                      >
+                        <ListItemIcon>{sub.icon}</ListItemIcon>
+                        <ListItemText primary={sub.label} />
+                      </ListItem>
+                    </Link>
                   ))}
                 </List>
                 <Divider />
@@ -156,10 +156,12 @@ const drawerNavs = [
     subCategory: [
       {
         label: "Dashboard",
+        path: "/user/dashboard",
         icon: <Home fontSize="small" />,
       },
       {
         label: "My Packages",
+        path: "/user/packages",
         icon: <CardMembership fontSize="small" />,
       },
     ],

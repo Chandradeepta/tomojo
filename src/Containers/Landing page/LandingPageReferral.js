@@ -33,13 +33,6 @@ const useStyles = makeStyles((theme) => ({
   centerAlign: {
     textAlign: "center",
   },
-  animated: {
-    animationDuration: "1s",
-    animationFillMode: "both",
-  },
-  animatedFade: {
-    opacity: 0,
-  },
   download: {
     textAlign: "left",
     [theme.breakpoints.down("sm")]: {

@@ -1,10 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useRouteMatch,
-  useLocation,
-} from "react-router-dom";
+import React, { lazy, useEffect, useRef, Suspense } from "react";
+import { Switch, Route, useLocation } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -20,18 +15,18 @@ import {
   Zoom,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { KeyboardArrowUp } from "@material-ui/icons";
-import LandingPageAbout from "./LandingPageAbout";
-import LandingPageHome from "./LandingPageHome";
-import React, { useEffect, useRef } from "react";
+import { KeyboardArrowUp, Widgets } from "@material-ui/icons";
 import Navbar from "../../Components/Landing page/Navbar";
-import LandingPageContact from "./LandingPageContact";
-import LandingPageReferral from "./LandingPageReferral";
-import LandingPagePartner from "./LandingPagePartner";
-import { Footer } from "../../Components/Common/Footer";
-import LandingPageBlogs from "./LandingPageBlogs";
-import LandingPagePricing from "./LandingPagePricing";
-import Login from "../Login";
+// import { Footer } from "../../Components/Common/Footer";
+const Login = lazy(() => import("../Login"));
+const Footer = lazy(() => import("../../Components/Common/Footer"));
+const LandingPageHome = lazy(() => import("./LandingPageHome"));
+const LandingPageContact = lazy(() => import("./LandingPageContact"));
+const LandingPageReferral = lazy(() => import("./LandingPageReferral"));
+const LandingPagePartner = lazy(() => import("./LandingPagePartner"));
+const LandingPageAbout = lazy(() => import("./LandingPageAbout"));
+const LandingPageBlogs = lazy(() => import("./LandingPageBlogs"));
+const LandingPagePricing = lazy(() => import("./LandingPagePricing"));
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
@@ -39,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   initialContainer: {
-    padding: "6%",
+    padding: "7%",
     paddingTop: "2%",
     paddingBottom: "1%",
     minHeight: "70vh",
@@ -106,51 +101,65 @@ export default function LandingPage(props) {
   return (
     <>
       <Container maxWidth="lg" className={classes.landingPageRoot}>
-        <Navbar toggleDrawer={toggleDrawer} links={links} />
-        <Toolbar id="back-to-top-anchor" />
-        <Drawer
-          open={open}
-          onClose={toggleDrawer(false)}
-          onOpen={toggleDrawer(true)}
+        <Suspense
+          fallback={
+            <Box
+              width="100%"
+              minHeight="100vh"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Widgets color="secondary" style={{ fontSize: "20vh" }} />
+            </Box>
+          }
         >
-          {list()}
-        </Drawer>
+          <Navbar toggleDrawer={toggleDrawer} links={links} />
+          <Toolbar id="back-to-top-anchor" />
+          <Drawer
+            open={open}
+            onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
+          >
+            {list()}
+          </Drawer>
 
-        <Grid container className={classes.initialContainer}>
-          <Switch>
-            <Route exact path={`/home`}>
-              <LandingPageHome />
-            </Route>
-            <Route exact path={`/about`}>
-              <LandingPageAbout />
-            </Route>
-            <Route exact path={`/contact`}>
-              <LandingPageContact />
-            </Route>
-            <Route exact path={`/refer`}>
-              <LandingPageReferral />
-            </Route>
-            <Route exact path={`/partner-with-us`}>
-              <LandingPagePartner />
-            </Route>
-            <Route exact path={`/pricing`}>
-              <LandingPagePricing />
-            </Route>
-            <Route exact path={`/blogs`}>
-              <LandingPageBlogs />
-            </Route>
-            <Route exact path={`/login`}>
-              <Login />
-            </Route>
-          </Switch>
-        </Grid>
-        <ScrollTop {...props}>
-          <Fab color="primary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUp color="primary" />
-          </Fab>
-        </ScrollTop>
-        <br />
-        <Footer links={links} />
+          <Grid container className={classes.initialContainer}>
+            <Switch>
+              <Route exact path={`/home`}>
+                <LandingPageHome />
+              </Route>
+              <Route exact path={`/about`}>
+                <LandingPageAbout />
+              </Route>
+              <Route exact path={`/contact`}>
+                <LandingPageContact />
+              </Route>
+              <Route exact path={`/refer`}>
+                <LandingPageReferral />
+              </Route>
+              <Route exact path={`/partner-with-us`}>
+                <LandingPagePartner />
+              </Route>
+              <Route exact path={`/pricing`}>
+                <LandingPagePricing />
+              </Route>
+              <Route exact path={`/blogs`}>
+                <LandingPageBlogs />
+              </Route>
+              <Route exact path={`/login`}>
+                <Login />
+              </Route>
+            </Switch>
+          </Grid>
+          <ScrollTop {...props}>
+            <Fab color="primary" size="small" aria-label="scroll back to top">
+              <KeyboardArrowUp color="primary" />
+            </Fab>
+          </ScrollTop>
+          <br />
+          <Footer links={links} />
+        </Suspense>
       </Container>
     </>
   );

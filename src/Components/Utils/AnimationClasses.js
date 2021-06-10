@@ -1,4 +1,11 @@
 export const AnimationClasses = {
+  animated: {
+    animationDuration: "1s",
+    animationFillMode: "both",
+  },
+  animatedFade: {
+    opacity: 0,
+  },
   fadeInUp: {
     opacity: 0,
     animationName: "fadeInUp",

@@ -1,23 +1,28 @@
 import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import AutoSwipe from "../Common/AutoSwipe";
+import TopLeftCorner from "../../Assets/Home/Corner 1.svg";
+import BottomRightCorner from "../../Assets/Home/Corner 2.svg";
 
 const useStyles = makeStyles((theme) => ({
   Paper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
+    position: "relative",
     margin: theme.spacing(2),
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
     textAlign: "justify",
-    minHeight: 200,
-    backgroundColor: theme.palette.background.default,
-    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+    height: 250,
+    boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
     "&:hover": {
-      boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-      transition: "box-shadow 0.3s ease-in-out",
+      boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+      transform: "scale(1.04)",
+    },
+    [theme.breakpoints.down("md")]: {
+      height: 300,
     },
   },
   bold: {
@@ -28,6 +33,12 @@ export default function Testimonials(props) {
   const classes = useStyles();
   const TestimonialCard = (props) => (
     <Paper className={classes.Paper} elevation={3}>
+      <Box position="absolute" width="100px" left="0" top="0">
+        <img src={TopLeftCorner} width="100%" height="100%" />
+      </Box>
+      <Box position="absolute" width="200px" right="0" bottom="-4px">
+        <img src={BottomRightCorner} width="100%" height="100%" />
+      </Box>
       <Typography
         variant="body1"
         align="center"
@@ -37,7 +48,7 @@ export default function Testimonials(props) {
         {`"${props.testimonial.feedback}"`}
       </Typography>
       <Box>
-        <Typography variant="subtitle1" align="center" color="textPrimary">
+        <Typography variant="subtitle1" align="center" color="secondary">
           {props.testimonial.client}
         </Typography>
         <Typography variant="body2" align="center" className={classes.bold}>
@@ -49,7 +60,7 @@ export default function Testimonials(props) {
 
   return (
     <>
-      <AutoSwipe listLength={testimonials.length}>
+      <AutoSwipe showDots showArrows={false} xl={4} lg={2} md={2} sm={1}>
         {testimonials.map((testimonial, index) => {
           return <TestimonialCard testimonial={testimonial} key={index} />;
         })}

@@ -68,7 +68,7 @@ export default function Navbar(props) {
     <AppBar position="fixed" className={classes.appbar}>
       <Toolbar className={classes.toolbar}>
         <BaseBrandContainer toggleDrawer={props.toggleDrawer} />
-        <Box flex="2">
+        <Box flex="2" display="flex" justifyContent="space-evenly">
           {props.links.map((each, i) => {
             return (
               <NavLink to={each.link} key={i}>

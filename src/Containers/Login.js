@@ -5,6 +5,8 @@ import CustomButton from "../Components/Common/CustomButton";
 import clsx from "clsx";
 import { AnimationClasses } from "../Components/Utils/AnimationClasses";
 import { SignupFields } from "../Components/User portal/Login/SignUpFields";
+import { useState } from "react";
+import { CommonClasses } from "../Components/Utils/CommonClasses";
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -30,17 +32,23 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: theme.spacing(1),
     fontWeight: theme.typography.fontWeightBold,
   },
-  animated: {
-    animationDuration: "1s",
-    animationFillMode: "both",
+  handCursor: {
+    cursor: "pointer",
+    color: theme.palette.secondary.main,
   },
-  animatedFade: {
-    opacity: 0,
-  },
+
   ...AnimationClasses,
 }));
 export default function Login(props) {
   const classes = useStyles();
+  const commonStyle = CommonClasses();
+
+  const [isSignedUpByPhone, setIsSignedUpByPhone] = useState(false);
+  const [UserAction, setUserAction] = useState({
+    signUp: false,
+    signIn: false,
+  });
+
   return (
     <>
       <Grid
@@ -100,13 +108,67 @@ export default function Login(props) {
               width="100%"
               p={5}
             >
-              {/* <CustomButton color="primary" size="large">
-                Sign Up
-              </CustomButton>
-              <CustomButton color="primary" size="large">
-                Sign In
-              </CustomButton> */}
-              <SignupFields />
+              {!(UserAction.signUp || UserAction.signIn) && (
+                <>
+                  <CustomButton
+                    color="primary"
+                    size="large"
+                    onClick={() =>
+                      setUserAction({ signUp: true, signIn: false })
+                    }
+                  >
+                    Sign Up
+                  </CustomButton>
+                  <CustomButton
+                    color="primary"
+                    size="large"
+                    onClick={() =>
+                      setUserAction({ signUp: false, signIn: true })
+                    }
+                  >
+                    Sign In
+                  </CustomButton>
+                </>
+              )}
+              {UserAction.signUp ? (
+                !isSignedUpByPhone ? (
+                  <SignupFields setIsSignedUpByPhone={setIsSignedUpByPhone} />
+                ) : (
+                  <GoogleSignInButton buttonText="Sign in with Google" />
+                )
+              ) : (
+                UserAction.signIn && (
+                  <GoogleSignInButton buttonText="Sign in with Google" />
+                )
+              )}
+            </Box>
+            <Box>
+              {UserAction.signUp && (
+                <Typography variant="body2">
+                  Already have an account?{" "}
+                  <span
+                    className={classes.handCursor}
+                    onClick={() =>
+                      setUserAction({ signUp: false, signIn: true })
+                    }
+                  >
+                    Sign in
+                  </span>
+                </Typography>
+              )}
+              {UserAction.signIn && (
+                <Typography variant="body2">
+                  Don't have an account ?{" "}
+                  <span
+                    className={classes.handCursor}
+                    onClick={() =>
+                      setUserAction({ signUp: true, signIn: false })
+                    }
+                  >
+                    Sign up
+                  </span>
+                </Typography>
+              )}
             </Box>
           </Box>
         </Grid>
