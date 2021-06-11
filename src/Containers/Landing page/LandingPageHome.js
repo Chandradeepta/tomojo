@@ -8,7 +8,7 @@ import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
 import GPlay from "../../Assets/gplayImage.png";
 import Illustraion1 from "../../Assets/Home/Illustration1_1.svg";
 import Illustraion2 from "../../Assets/Home/Illustration2_1.svg";
-import CustomButton from '../../Components/Common/CustomButton';
+import CustomButton from "../../Components/Common/CustomButton";
 
 const OfferedServices = React.lazy(() =>
   import("../../Components/Landing page/OfferedServices")
@@ -35,6 +35,13 @@ const mainContainerStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
+  },
+  imageContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    flexDirection: "row",
   },
   textContainer: {
     display: "flex",
@@ -83,13 +90,16 @@ export default function LandingPageHome(props) {
       <Suspense
         fallback={
           <>
-            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
-            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
-            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
-            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
-            <Skeleton variant="rect" width={"100vw"} height={"20vh"} /><br/>
-
-
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} />
+            <br />
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} />
+            <br />
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} />
+            <br />
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} />
+            <br />
+            <Skeleton variant="rect" width={"100vw"} height={"20vh"} />
+            <br />
           </>
         }
       >
@@ -189,7 +199,7 @@ export default function LandingPageHome(props) {
             md={6}
             sm={12}
             xs={12}
-            className={classes.contentContainer}
+            className={classes.imageContainer}
           >
             <img
               src={Illustraion1}
