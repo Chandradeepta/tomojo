@@ -17,7 +17,7 @@ import {
 import PropTypes from "prop-types";
 import { KeyboardArrowUp, Widgets } from "@material-ui/icons";
 import Navbar from "../../Components/Landing page/Navbar";
-// import { Footer } from "../../Components/Common/Footer";
+
 const Login = lazy(() => import("../Login"));
 const Footer = lazy(() => import("../../Components/Common/Footer"));
 const LandingPageHome = lazy(() => import("./LandingPageHome"));
