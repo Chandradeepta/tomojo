@@ -95,10 +95,10 @@ export const PricingInfoCard = (props) => {
                       variant="h6"
                       style={{ textDecoration: "line-through" }}
                     >
-                      {selectedPackage.actualPrice}
+                      {selectedPackage?.actualPrice}
                     </Typography>
                     <Typography variant="h4" className={styles.title}>
-                      {selectedPackage.discountedPrice}
+                      {selectedPackage?.discountPrice}
                     </Typography>
                   </Box>
                 </>
@@ -126,28 +126,27 @@ export const PricingInfoCard = (props) => {
                 <Typography align="left" variant="body2">
                   {`${
                     model.type === "Free"
-                      ? selectedPackage.freeTestCount
-                      : selectedPackage.premiumTestCount
+                      ? selectedPackage?.freeTestCount
+                      : selectedPackage?.premiumTestCount
                   } Tests included`}
                 </Typography>
               </Box>
-              {model.planIncludes.map((each) => {
+              {model.planIncludes.map((each, i) => {
                 return (
-                  <>
-                    <Box
-                      display="flex"
-                      width="100%"
-                      justifyContent="flex-start"
-                      p={0.5}
-                    >
-                      <Box pr={1}>
-                        <Check fontSize="small" />
-                      </Box>
-                      <Typography align="left" variant="body2">
-                        {each}
-                      </Typography>
+                  <Box
+                    display="flex"
+                    width="100%"
+                    justifyContent="flex-start"
+                    p={0.5}
+                    key={i}
+                  >
+                    <Box pr={1}>
+                      <Check fontSize="small" />
                     </Box>
-                  </>
+                    <Typography align="left" variant="body2">
+                      {each}
+                    </Typography>
+                  </Box>
                 );
               })}
             </Box>
@@ -158,13 +157,13 @@ export const PricingInfoCard = (props) => {
         <Box width="100%" m={2} mt={0} display="flex" justifyContent="center">
           <CustomButton
             size="small"
-            color={model.type === "Free" ? "primary" : "textSecondary"}
+            color={model.type === "Free" ? "primary" : "default"}
             borderRadius={10}
             fullWidth={true}
           >
             {model.type === "Free"
               ? "Choose"
-              : `Save ${selectedPackage.discountPercentage}`}
+              : `Save ${selectedPackage?.discountPercentage}`}
           </CustomButton>
         </Box>
       </CardActions>

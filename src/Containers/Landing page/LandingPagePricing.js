@@ -1,10 +1,14 @@
 import { Box, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import CustomSelect from "../../Components/Common/CustomSelect";
 import SlideTabs from "../../Components/Common/SlideTabs";
 import PricingInfoCard from "../../Components/Landing page/PricingInfoCard";
 import axios from "axios";
+import rootReducer from "../../Redux/Reducers/rootReducer";
+import { LandingPageTypes } from "../../Redux/Types/landingPageTypes";
 
 const useStyles = makeStyles((theme) => ({
   bold: {
@@ -38,30 +42,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function LandingPagePricing(props) {
   const classes = useStyles();
-  const [packages, setPackages] = useState([]);
-  const [studentClasses, setClasses] = useState([]);
+  const { classPackages, competitivePackages } = useSelector(
+    (state) => state.landingPageState
+  );
+  const dispatch = useDispatch();
+
   const [selectedPackage, setSelectedPackage] = useState({});
+  const [studentClasses, setClasses] = useState([]);
 
   const handleSelectedClass = (index) => {
-    const selectedClass = studentClasses[index];
     setSelectedPackage(
-      packages.filter((each) => each.class === selectedClass)[0]
+      classPackages.filter(
+        (each) => each.className === studentClasses[index]
+      )[0]
     );
   };
 
   useEffect(() => {
-    axios
-      .get("https://6098e4a399011f001713f9d2.mockapi.io/api/packages")
-      .then((response) => {
-        const packagesArray = response.data;
-        const classArrray = packagesArray.map((each) => {
-          return each.class;
-        });
-        setPackages(packagesArray);
-        setClasses(classArrray);
-        setSelectedPackage(packagesArray[0]);
-      });
+    dispatch({ type: LandingPageTypes.GET_PRICING_PACKAGES });
   }, []);
+
+  useEffect(() => {
+    setSelectedPackage(classPackages[0]);
+    setClasses(
+      classPackages.map((each) => {
+        return each.className;
+      })
+    );
+  }, [classPackages]);
 
   return (
     <>
@@ -72,7 +80,7 @@ export default function LandingPagePricing(props) {
         md={12}
         sm={12}
         xs={12}
-        style={{ display: "flex", alignItems: "center", marginTop: '2%' }}
+        style={{ display: "flex", alignItems: "center", marginTop: "2%" }}
       >
         <Grid item lg={5} md={5} sm={12} xs={12}>
           <Typography

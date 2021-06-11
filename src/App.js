@@ -7,9 +7,10 @@ import {
 import LandingPage from "./Containers/Landing page/LandingPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import 'react-multi-carousel/lib/styles.css';
+import "react-multi-carousel/lib/styles.css";
 
 import UserPortal from "./Containers/User portal/UserPortal";
+import SnackbarComponent from "./Components/Common/SnackbarComponent";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <LandingPage />
         </Route>
       </Switch>
+      <SnackbarComponent />
     </Router>
   );
 }
