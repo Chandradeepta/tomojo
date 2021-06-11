@@ -16,6 +16,7 @@ function CircularProgressWithLabel(props) {
         {...props}
         size={100}
         thickness={5}
+        color="secondary"
       />
       <Box
         top={0}

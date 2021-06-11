@@ -7,13 +7,6 @@ const useStyles = makeStyles((theme) => ({
   bold: {
     fontWeight: theme.typography.fontWeightBold,
   },
-  animated: {
-    animationDuration: "1s",
-    animationFillMode: "both",
-  },
-  animatedFade: {
-    opacity: 0,
-  },
   ...AnimationClasses,
 }));
 export default function LandingPageBlogs(props) {

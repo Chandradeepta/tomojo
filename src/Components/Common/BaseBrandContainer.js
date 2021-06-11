@@ -11,18 +11,20 @@ const useStyles = makeStyles((theme) => ({
   hamburgerButton: {
     marginRight: theme.spacing(1),
     color: theme.palette.primary.main,
-    [theme.breakpoints.up("lg")]: {
-      display: "none",
-    },
+    // [theme.breakpoints.up("lg")]: {
+    //   display: "none",
+    // },
   },
 
   brandSpace: {
     flex: 1,
     display: "flex",
     alignItems: "center",
+    [theme.breakpoints.down("md")]:{
+      flex: 0
+    }
   },
   title: {
-    flexGrow: 1,
     textAlign: "left",
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightBold,
@@ -43,7 +45,6 @@ export default function BaseBrandContainer(props) {
         aria-label="menu"
         onClick={props.toggleDrawer(!props.open)}
       >
-        {/* <i className="fas fa-bars"></i> */}
         <Menu />
       </IconButton>
       <Box className={classes.brandSpace}>

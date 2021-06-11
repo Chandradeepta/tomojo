@@ -7,6 +7,7 @@ import PerformanceSVG from "../../Assets/Performance.svg";
 import AnalysisSVG from "../../Assets/Test_Analysis.svg";
 import UnderstandingSVG from "../../Assets/Understanding.svg";
 import QuestionsSVG from "../../Assets/topicQuestions.svg";
+// import CardCorners from "../../Assets/Home/card-corners.svg"
 
 const useStyles = makeStyles((theme) => ({
   Paper: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    // background: `url(${CardCorners})`,
     margin: theme.spacing(2),
     padding: theme.spacing(2),
     paddingLeft: theme.spacing(4),
@@ -29,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
   bold: {
     fontWeight: theme.typography.fontWeightBold,
+  },
+  logo: {
+    width: 100,
   },
 }));
 export default function OfferedServices(props) {
@@ -76,37 +81,37 @@ export default function OfferedServices(props) {
 
 const services = [
   {
-    logo: <img src={QuestionsSVG} width="60%" />,
+    logo: <img src={QuestionsSVG} width="100%" height="100%" />,
     title: "Topic wise Questions",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={RankingSVG} width="60%" />,
+    logo: <img src={RankingSVG} width="100%" height="100%" />,
     title: "National Ranks",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={ChapterCoverageSVG} width="60%" />,
+    logo: <img src={ChapterCoverageSVG} width="100%" height="100%" />,
     title: "Chapters Coverage",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={UnderstandingSVG} width="60%" />,
+    logo: <img src={UnderstandingSVG} width="100%" height="100%" />,
     title: "In-depth Understanding",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={AnalysisSVG} width="60%" />,
+    logo: <img src={AnalysisSVG} width="100%" height="100%" />,
     title: "Test Analysis",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={PerformanceSVG} width="60%" />,
+    logo: <img src={PerformanceSVG} width="100%" height="100%" />,
     title: "Performance Report",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",

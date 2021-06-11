@@ -7,7 +7,7 @@ export function GoogleSignInButton(props) {
       <div id="gSignInWrapper">
         <div id="customBtn" class="customGPlusSignIn">
           <span class="icon"></span>
-          <span class="buttonText">Sign in with Google</span>
+          <span class="buttonText">{props.buttonText}</span>
         </div>
       </div>
     </>

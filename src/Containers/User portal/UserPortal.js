@@ -26,6 +26,9 @@ import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef } from "react";
 import UserHeader from "../../Components/User portal/UserHeader";
 import Dashboard from "./Dashboard";
+import ExamCard from "../../Components/User portal/ExamCard";
+import AutoSwipe from "../../Components/Common/AutoSwipe";
+import MyPackages from "./MyPackages";
 
 const drawerWidth = 240;
 
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
     width: "100%",
     minHeight: "100vh",
-    background: "#F5F5F5",
+    // background: "#F5F5F5",
   },
   initialContainer: {
     padding: "6%",
@@ -53,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(7),
   },
   content: {
+    paddingTop: theme.spacing(3),
     flexGrow: 1,
-    padding: theme.spacing(3),
     width: "100%",
   },
 }));
@@ -62,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UserPortal(props) {
   const location = useLocation();
   const classes = useStyles();
+  let { path, url } = useRouteMatch();
 
   useEffect(() => {
     const anchor = document.querySelector("#back-to-top-anchor");
@@ -72,26 +76,35 @@ export default function UserPortal(props) {
 
   return (
     <>
-      <Container className={classes.landingPageRoot}>
-        <Grid container item lg={12} md={12} sm={12} xs={12}>
-          <Box display="flex">
+      <Container
+        className={classes.landingPageRoot}
+        style={{ display: "flex" }}
+      >
+        <Grid container style={{ display: "flex" }}>
+          <Grid item lg={2} md={2} sm={2} xs={2}>
             <UserHeader />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
             <main className={classes.content}>
               <Toolbar id="back-to-top-anchor" />
               <Switch>
-                <Route exact path={`/dashboard`}>
+                <Route exact path={`${path}/dashboard`}>
                   <Dashboard />
+                </Route>
+                <Route exact path={`${path}/packages`}>
+                  <MyPackages />
                 </Route>
               </Switch>
             </main>
-          </Box>
-        </Grid>
+          </Grid>
+          {/* </Grid> */}
 
-        <ScrollTop {...props}>
-          <Fab color="primary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUp color="textSecondary" />
-          </Fab>
-        </ScrollTop>
+          <ScrollTop {...props}>
+            <Fab color="primary" size="small" aria-label="scroll back to top">
+              <KeyboardArrowUp color="textSecondary" />
+            </Fab>
+          </ScrollTop>
+        </Grid>
       </Container>
     </>
   );

@@ -64,7 +64,7 @@ const useStyles = makeStyles(
   })
 );
 
-export const Footer = React.memo(function AppFooter(props) {
+export default React.memo(function Footer(props) {
   const classes = useStyles();
 
   const isActive = (path) => {
@@ -72,7 +72,7 @@ export const Footer = React.memo(function AppFooter(props) {
   };
 
   return (
-    <Box bgcolor={"background.paper"} width={"100%"}>
+    <Box bgcolor={"background.default"} width={"100%"}>
       <Container>
         <Box pt={10} pb={2}>
           <Row wrap>
@@ -99,8 +99,9 @@ export const Footer = React.memo(function AppFooter(props) {
                       to={nav.link}
                       key={i}
                       active={isActive(nav.link)}
+                      activeClassName="active"
                     >
-                      {nav.name}
+                      <span>{nav.name}</span>
                     </NavItem>
                   );
                 })}

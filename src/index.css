@@ -9,6 +9,7 @@ body {
 
 a{
   text-decoration: none;
+  color: inherit;
 }
 
 body::-webkit-scrollbar {
@@ -22,4 +23,10 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+/* carasoule dot position css */
+.react-multi-carousel-list{
+  padding-bottom: 4%;
+  padding-top: 4%;
 }

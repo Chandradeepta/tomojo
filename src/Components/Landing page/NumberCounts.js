@@ -2,7 +2,6 @@ import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 import questionsLogo from "../../Assets/Knowledge _Isometric.svg";
 import studentLogo from "../../Assets/Smiley face_Two Color.svg";
-import axios from "axios";
 import clsx from "clsx";
 import useOnScreen from "../../Hooks/useOnScreen";
 import { AnimationClasses } from "../Utils/AnimationClasses";
@@ -30,12 +29,8 @@ const useStyles = makeStyles((theme) => ({
   bold: {
     fontWeight: theme.typography.fontWeightBold,
   },
-  animated: {
-    animationDuration: "1s",
-    animationFillMode: "both",
-  },
-  animatedFade: {
-    opacity: 0,
+  logo:{
+    width: 100
   },
   ...AnimationClasses,
 }));
@@ -45,17 +40,17 @@ export default function NumberCounts(props) {
   const isVisible = useOnScreen(counterRef);
   const [statData, setStatData] = React.useState({
     questionCount: {
-      logo: <img src={questionsLogo} width="40%" />,
+      logo: <img src={questionsLogo} width="100%" height="100%"/>,
       value: "",
       label: "Questions Attempted",
     },
     testCount: {
-      logo: <img src={studentLogo} width="40%" />,
+      logo: <img src={studentLogo} width="100%" height="100%"/>,
       value: "",
       label: "Tests Attempted",
     },
     userCount: {
-      logo: <img src={studentLogo} width="40%" />,
+      logo: <img src={studentLogo} width="100%" height="100%"/>,
       value: "",
       label: "Students Registered",
     },
@@ -107,7 +102,7 @@ const CounterCard = (props) => {
 
   return (
     <Paper elevation={0} className={classes.Paper}>
-      <Box display="flex" justifyContent="center" p={1} pb={2}>
+      <Box display="flex" justifyContent="center" p={1} pb={2} className={classes.logo}>
         {countData.logo}
       </Box>
       <Typography
