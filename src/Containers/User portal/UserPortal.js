@@ -29,6 +29,7 @@ import Dashboard from "./Dashboard";
 import ExamCard from "../../Components/User portal/ExamCard";
 import AutoSwipe from "../../Components/Common/AutoSwipe";
 import MyPackages from "./MyPackages";
+import { Examscreen } from "./ExamScreen";
 
 const drawerWidth = 240;
 
@@ -36,15 +37,9 @@ const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
     width: "100%",
     minHeight: "100vh",
-    // background: "#F5F5F5",
-  },
-  initialContainer: {
-    padding: "6%",
-    paddingBottom: "1%",
-    minHeight: "70vh",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: "baseline",
+    // background: "#F5F5F5",
   },
   list: {
     width: 250,
@@ -65,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UserPortal(props) {
   const location = useLocation();
   const classes = useStyles();
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   useEffect(() => {
     const anchor = document.querySelector("#back-to-top-anchor");
@@ -73,6 +68,10 @@ export default function UserPortal(props) {
       anchor.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [location]);
+
+  // const shouldShowHeader = () => {
+  //   return !window.location.pathname.includes("/exam-portal");
+  // };
 
   return (
     <>
@@ -82,7 +81,7 @@ export default function UserPortal(props) {
       >
         <Grid container style={{ display: "flex" }}>
           <Grid item lg={2} md={2} sm={2} xs={2}>
-            <UserHeader />
+            {<UserHeader />}
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <main className={classes.content}>
@@ -94,11 +93,12 @@ export default function UserPortal(props) {
                 <Route exact path={`${path}/packages`}>
                   <MyPackages />
                 </Route>
+                <Route exact path={`${path}/exam-portal`}>
+                  <Examscreen />
+                </Route>
               </Switch>
             </main>
           </Grid>
-          {/* </Grid> */}
-
           <ScrollTop {...props}>
             <Fab color="primary" size="small" aria-label="scroll back to top">
               <KeyboardArrowUp color="textSecondary" />
