@@ -21,3 +21,14 @@ export const getAboutUs = () => {
       return error;
     });
 };
+
+export const getPackagePricing = () => {
+  return http
+    .get("get_PackageData")
+    .then((response) => {
+      return { response };
+    })
+    .catch((error) => {
+      return { error };
+    });
+};

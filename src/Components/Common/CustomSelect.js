@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMinimalSelectStyles } from "@mui-treasury/styles/select/minimal";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -17,13 +17,17 @@ const MenuProps = {
 };
 
 const CustomSelect = (props) => {
-  const [val, setVal] = useState(0);
   const { items, getSelectedClass } = props;
+  const [val, setVal] = useState("default");
 
   const handleChange = (event) => {
     setVal(event.target.value);
     getSelectedClass(event.target.value);
   };
+
+  useEffect(()=>{
+    setVal(0);
+  },[])
 
   const minimalSelectClasses = useMinimalSelectStyles();
 
@@ -65,6 +69,7 @@ const CustomSelect = (props) => {
         onChange={handleChange}
         MenuProps={MenuProps}
       >
+        <MenuItem value={"default"} disabled>Select Class</MenuItem>
         {items.map((each, i) => {
           return (
             <MenuItem key={i} value={i}>
