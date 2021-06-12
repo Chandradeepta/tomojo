@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { Avatar, Box, CardHeader, IconButton } from "@material-ui/core";
 import { AssignmentSharp } from "@material-ui/icons";
 import CompletionBar from "./CompletionBar";
+import { Link } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ExamCard(props) {
   const classes = useStyles();
-
+  const history = useHistory();
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -82,6 +84,7 @@ export default function ExamCard(props) {
           color="primary"
           variant="outlined"
           borderRadius={10}
+          onClick={() => history.push("/user/tests")}
         >
           View tests
         </CustomButton>

@@ -26,7 +26,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-export function Examscreen(props) {
+export default function ExamScreen(props) {
   return (
     <>
       <Grid container style={{ paddingLeft: "4%", paddingRight: "4%" }}>
@@ -74,8 +74,6 @@ export function Examscreen(props) {
             }}
           >
             <QnASection />
-            
-
           </Grid>
           <Box width="100%" display="flex" justifyContent="center">
             <Box p={2}>

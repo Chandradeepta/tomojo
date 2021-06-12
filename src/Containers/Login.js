@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Login(props) {
   const classes = useStyles();
-  const commonStyle = CommonClasses();
 
   const [isSignedUpByPhone, setIsSignedUpByPhone] = useState(false);
   const [UserAction, setUserAction] = useState({

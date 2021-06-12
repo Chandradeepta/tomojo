@@ -6,15 +6,10 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   makeStyles,
   Container,
   Grid,
   Toolbar,
-  Box,
   Fab,
   useScrollTrigger,
   Zoom,
@@ -22,14 +17,12 @@ import {
 import PropTypes from "prop-types";
 import { KeyboardArrowUp } from "@material-ui/icons";
 import clsx from "clsx";
-import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef } from "react";
 import UserHeader from "../../Components/User portal/UserHeader";
 import Dashboard from "./Dashboard";
-import ExamCard from "../../Components/User portal/ExamCard";
-import AutoSwipe from "../../Components/Common/AutoSwipe";
 import MyPackages from "./MyPackages";
-import { Examscreen } from "./ExamScreen";
+import ExamScreen from "./ExamScreen";
+import TestContainer from "./TestContainer";
 
 const drawerWidth = 240;
 
@@ -94,7 +87,10 @@ export default function UserPortal(props) {
                   <MyPackages />
                 </Route>
                 <Route exact path={`${path}/exam-portal`}>
-                  <Examscreen />
+                  <ExamScreen />
+                </Route>
+                <Route exact path={`${path}/tests`}>
+                  <TestContainer />
                 </Route>
               </Switch>
             </main>

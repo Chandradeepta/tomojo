@@ -82,11 +82,7 @@ export default function NumberCounts(props) {
         justifyContent="center"
         alignItems="center"
         ref={counterRef}
-        className={
-          isVisible
-            ? clsx(classes.animated, classes.animatedFade, classes.fadeInLeft)
-            : clsx(classes.fadeOutLeft)
-        }
+        
       >
         {Object.values(statData).map((data, index) => {
           return <CounterCard countData={data} key={index} classes={classes} />;

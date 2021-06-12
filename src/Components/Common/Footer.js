@@ -72,7 +72,7 @@ export default React.memo(function Footer(props) {
   };
 
   return (
-    <Box bgcolor={"background.default"} width={"100%"}>
+    <Box bgcolor={"background.paper"} width={"100%"}>
       <Container>
         <Box pt={10} pb={2}>
           <Row wrap>

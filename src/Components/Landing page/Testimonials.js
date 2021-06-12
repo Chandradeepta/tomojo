@@ -10,16 +10,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    margin: theme.spacing(2),
-    padding: theme.spacing(2),
-    paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4),
+    padding: "12%",
     textAlign: "justify",
-    height: 250,
+    height: 200,
+    maxWidth: 300,
     boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
     "&:hover": {
       boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
-      transform: "scale(1.04)",
+      // transform: "scaleY(1.04)",
     },
     [theme.breakpoints.down("md")]: {
       height: 300,
@@ -28,15 +26,37 @@ const useStyles = makeStyles((theme) => ({
   bold: {
     fontWeight: theme.typography.fontWeightBold,
   },
+  cornerSvgTop: {
+    width: 70,
+    [theme.breakpoints.up("sm")]: {
+      width: 120,
+    },
+  },
+  cornerSvgBottom: {
+    width: 120,
+    [theme.breakpoints.up("sm")]: {
+      width: 150,
+    },
+  },
 }));
 export default function Testimonials(props) {
   const classes = useStyles();
   const TestimonialCard = (props) => (
     <Paper className={classes.Paper} elevation={3}>
-      <Box position="absolute" width="100px" left="0" top="0">
+      <Box
+        position="absolute"
+        className={classes.cornerSvgTop}
+        left="0"
+        top="0"
+      >
         <img src={TopLeftCorner} width="100%" height="100%" />
       </Box>
-      <Box position="absolute" width="200px" right="0" bottom="-4px">
+      <Box
+        position="absolute"
+        className={classes.cornerSvgBottom}
+        right="0"
+        bottom="-4px"
+      >
         <img src={BottomRightCorner} width="100%" height="100%" />
       </Box>
       <Typography
@@ -44,6 +64,7 @@ export default function Testimonials(props) {
         align="center"
         className={classes.bold}
         gutterBottom
+        style={{ zIndex: 2 }}
       >
         {`"${props.testimonial.feedback}"`}
       </Typography>
@@ -60,9 +81,13 @@ export default function Testimonials(props) {
 
   return (
     <>
-      <AutoSwipe showDots showArrows={false} xl={4} lg={2} md={2} sm={1}>
+      <AutoSwipe showDots={false} showArrows={true} xl={4} lg={2} md={2} sm={1}>
         {testimonials.map((testimonial, index) => {
-          return <TestimonialCard testimonial={testimonial} key={index} />;
+          return (
+            <Box  p={2}>
+              <TestimonialCard testimonial={testimonial} key={index} />
+            </Box>
+          );
         })}
       </AutoSwipe>
     </>

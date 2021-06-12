@@ -6,7 +6,7 @@ import { Box } from "@material-ui/core";
 const CustomDot = ({ onMove, index, onClick, active }) => {
   return (
     <li className={active ? "active" : "inactive"} onClick={() => onClick()}>
-      <Adjust fontSize="small"/>
+      <Adjust fontSize="small" />
     </li>
   );
 };
@@ -21,10 +21,12 @@ export default function AutoSwipe(props) {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: lg,
+      paritialVisibilityGutter: 160
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: md,
+      paritialVisibilityGutter: 160
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -39,6 +41,7 @@ export default function AutoSwipe(props) {
         showDots={showDots}
         arrows={showArrows}
         customDot={<CustomDot />}
+        itemClass="image-class"
       >
         {props.children}
       </Carousel>

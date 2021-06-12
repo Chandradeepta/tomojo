@@ -1,13 +1,12 @@
 import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
-import { QuestionAnswer, Milita } from "@material-ui/icons";
-// import AutoSwipe from "../Common/AutoSwipe";
 import RankingSVG from "../../Assets/Ranking.svg";
 import ChapterCoverageSVG from "../../Assets/Chapter_Coverage.svg";
 import PerformanceSVG from "../../Assets/Performance.svg";
 import AnalysisSVG from "../../Assets/Test_Analysis.svg";
 import UnderstandingSVG from "../../Assets/Understanding.svg";
 import QuestionsSVG from "../../Assets/topicQuestions.svg";
-// import CardCorners from "../../Assets/Home/card-corners.svg"
+import clsx from "clsx";
+import AutoSwipe from "../Common/AutoSwipe";
 
 const useStyles = makeStyles((theme) => ({
   Paper: {
@@ -15,31 +14,45 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    // background: `url(${CardCorners})`,
-    margin: theme.spacing(2),
     padding: theme.spacing(2),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
+    background: "transparent",
     textAlign: "justify",
     maxWidth: 200,
     transition: "all 0.3s ease-in-out",
-    boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
     "&:hover": {
       boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
       transform: "scale(1.04)",
+      background: "rgba(31,117,254,0.5)",
+      "& $title": {
+        color: theme.palette.background.default,
+      },
+      "& $subtitle": {
+        color: theme.palette.background.default,
+      },
     },
   },
-  bold: {
+  title: {
     fontWeight: theme.typography.fontWeightBold,
+    [theme.breakpoints.up("sm")]: {
+      color: theme.palette.background.default,
+    },
   },
   logo: {
     width: 100,
+  },
+  subtitle: {
+    [theme.breakpoints.up("sm")]: {
+      color: theme.palette.background.default,
+    },
   },
 }));
 export default function OfferedServices(props) {
   const classes = useStyles();
   const ServicesCard = (props) => (
-    <Paper className={classes.Paper} elevation={0}>
+    <Paper className={clsx(classes.Paper)} elevation={0}>
       <Box
         display="flex"
         justifyContent="center"
@@ -51,7 +64,7 @@ export default function OfferedServices(props) {
       <Typography
         variant="subtitle1"
         align="center"
-        className={classes.bold}
+        className={classes.title}
         color="secondary"
       >
         {props.service.title}
@@ -64,17 +77,11 @@ export default function OfferedServices(props) {
 
   return (
     <>
-      <Box
-        width="100%"
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <AutoSwipe xl={5} lg={3} md={2} sm={1} showDots={false} showArrows={true}>
         {services.map((service, index) => {
           return <ServicesCard service={service} key={index} />;
         })}
-      </Box>
+      </AutoSwipe>
     </>
   );
 }
