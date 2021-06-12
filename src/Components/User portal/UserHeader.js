@@ -23,7 +23,7 @@ import clsx from "clsx";
 import { NavItem, NavMenu } from "@mui-treasury/components/menu/navigation";
 import { Link } from "react-router-dom";
 
-const drawerWidth = 220;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,31 +36,23 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  // drawer: {
-  //   width: drawerWidth,
-  //   flexShrink: 0,
-  //   whiteSpace: "nowrap",
-  //   marginTop: 6,
-  // },
-  // drawerOpen: {
-  //   width: drawerWidth,
-  //   // border: 0,
-  //   transition: theme.transitions.create("width", {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.enteringScreen,
-  //   }),
-  // },
-  // drawerClose: {
-  //   transition: theme.transitions.create("width", {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.leavingScreen,
-  //   }),
-  //   overflowX: "hidden",
-  //   width: 0,
-  //   [theme.breakpoints.up("sm")]: {
-  //     width: 0,
-  //   },
-  // },
+  drawer: {
+    width: drawerWidth,
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: "hidden",
+  },
   List: {
     [theme.breakpoints.up("sm")]: {
       padding: 10,
@@ -97,19 +89,13 @@ export default function UserHeader(props) {
         </Toolbar>
       </AppBar>
       <Drawer
-        // variant="permanent"
-        // onClose={toggleDrawer(false)}
-        // onOpen={toggleDrawer(true)}
-        // className={clsx(classes.drawer, {
-        //   [classes.drawerOpen]: open,
-        //   [classes.drawerClose]: !open,
-        // })}
-        // classes={{
-        //   paper: clsx({
-        //     [classes.drawerOpen]: open,
-        //     [classes.drawerClose]: !open,
-        //   }),
-        // }}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+        className={classes.drawer}
         anchor={"left"}
         open={open}
         onClose={toggleDrawer(false)}
@@ -125,9 +111,8 @@ export default function UserHeader(props) {
                   </ListItem>
                   {each.subCategory.map((sub, index) => (
                     <Link
-                      // active={isActive(`${sub.path}`)}
-                      // as={Link}
                       to={`${sub.path}`}
+                      onClick={toggleDrawer(false)}
                     >
                       <ListItem
                         button
