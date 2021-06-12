@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="clip-BG_element_2">
+      <rect width="200" height="200"/>
+    </clipPath>
+  </defs>
+  <g id="BG_element_2" data-name="BG element 2" clip-path="url(#clip-BG_element_2)">
+    <g id="Group_61" data-name="Group 61" opacity="0.2">
+      <path id="Path_996" data-name="Path 996" d="M74.09-424.335l1.613,7.429a8.583,8.583,0,0,1-2.486,8.058L23.332-361.6a12.5,12.5,0,0,0,2.313,19.882l31.529,18.333a13.223,13.223,0,0,0,19.531-8.46l15.383-66.688a8.588,8.588,0,0,1,6.04-6.337l6.356-1.791Z" transform="translate(13.388 492.427)" fill="none" stroke="#1f64ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <path id="Path_999" data-name="Path 999" d="M110.05-422.759c-.513-3.311-2.712-6.115-5.143-8.418a28.4,28.4,0,0,0-15.31-7.848,22.951,22.951,0,0,0-17.426,4.877A21.19,21.19,0,0,0,64.246-418.7c-.568,3.9,3.51,7.207,7.451,7.416s7.64-1.7,11.181-3.443,7.433-3.407,11.311-2.68c3.931.735,7.633,3.875,11.468,2.74C108.87-415.62,110.562-419.448,110.05-422.759Z" transform="translate(42.908 482.603)" fill="none" stroke="#1f64ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <path id="Path_1000" data-name="Path 1000" d="M113.023-430.3c-.236-3.075-2.6-7.934-8.242-7.229-2.328-.048-4.832,2.876-5.436,5.126a6.357,6.357,0,0,0,2.069,6.294,7.726,7.726,0,0,0,6.565,1.547C110.7-425.145,113.237-427.528,113.023-430.3Z" transform="translate(65.964 483.68)" fill="none" stroke="#1f64ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    </g>
+  </g>
+</svg>

@@ -1,19 +1,26 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 
-let theme = createMuiTheme({
+export let theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#71c5f3",
+      main: "#1F75FE",
     },
     secondary: {
-      main: "#4e90b5",
+      main: "#FEA81F",
     },
-    contrastThreshold: 1,
+    background: {
+      default: "#f1faff",
+    },
+    text: {
+      primary: "#171959",
+      secondary: "#a7bbc7",
+    },
+    contrastThreshold: 3,
     tonalOffset: 0.2,
   },
   typography: {
-    fontSize: 10,
-    fontFamily: `'Nunito', sans-serif`,
+    fontSize: 14,
+    fontFamily: `'Rubik', sans-serif`,
   },
 });
 
@@ -27,6 +34,16 @@ theme.overrides = {
         backgroundColor: "#111",
       },
     },
+  },
+  MuiCardContent: {
+    root: {
+      "&:hover": {
+        backgroundColor: "none",
+      },
+    },
+  },
+  MuiButtonBase: {
+    disableRipple: true,
   },
 };
 
