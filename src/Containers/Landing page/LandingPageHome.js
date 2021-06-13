@@ -11,7 +11,7 @@ import Illustraion2 from "../../Assets/Home/Illustration2_1.svg";
 import CustomButton from "../../Components/Common/CustomButton";
 // import BG1 from "../../Assets/Background/BG element 1.svg";
 // import BG2 from "../../Assets/Background/BG element 2.svg";
-// import BG3 from "../../Assets/Background/BG element 3.svg";
+import BG3 from "../../Assets/Background/BG element 3.svg";
 // import BG4 from "../../Assets/Background/BG element 4.svg";
 // import BG5 from "../../Assets/Background/BG element 5.svg";
 // import BG6 from "../../Assets/Background/BG element 6.svg";
@@ -34,6 +34,7 @@ const mainContainerStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "row",
+    zIndex: 2,
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column-reverse",
     },
@@ -131,14 +132,13 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={clsx(classes.contentContainer,"area")}
+          className={clsx(classes.contentContainer, "area")}
           ref={gridRef1}
         >
           <ul class="circles">
-            {
-              [0,1,2,3,4,5,6,7,8,9].map(each=> <li></li>)
-            }
-            
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((each) => (
+              <li></li>
+            ))}
           </ul>
           <Grid
             item
@@ -234,7 +234,7 @@ export default function LandingPageHome(props) {
               width="100%"
               height="100%"
               alt={"Let your child lead the academics"}
-              style={{zIndex: 3}}
+              style={{ zIndex: 3 }}
             />
           </Grid>
         </Grid>
@@ -247,11 +247,6 @@ export default function LandingPageHome(props) {
           xs={12}
           className={clsx(classes.section, "area")}
         >
-          <ul class="circles">
-            {
-              [0,1,2,3,4,5,6,7,8,9].map(each=> <li></li>)
-            }
-          </ul>
           <Box pt={3}>
             <Typography
               variant="h4"
@@ -275,16 +270,21 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={classes.contentContainer}
+          className={clsx(classes.contentContainer,"area")}
           ref={gridRef2}
         >
+          <ul class="circles">
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((each) => (
+              <li></li>
+            ))}
+          </ul>
           <Grid
             item
             lg={6}
             md={6}
             sm={12}
             xs={12}
-            className={classes.contentContainer_alt}
+            className={clsx(classes.contentContainer_alt)}
           >
             <img
               src={Illustraion2}
@@ -300,6 +300,7 @@ export default function LandingPageHome(props) {
             sm={12}
             xs={12}
             className={clsx(classes.textContainer, classes.textContainer_alt)}
+            style={{ background: "transparent" }}
           >
             <Box display="flex">
               <Typography

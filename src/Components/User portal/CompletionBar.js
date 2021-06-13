@@ -14,7 +14,7 @@ function CircularProgressWithLabel(props) {
       <CircularProgress
         variant="determinate"
         {...props}
-        size={100}
+        size={90}
         thickness={5}
         color="secondary"
       />

@@ -14,20 +14,15 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
-    minWidth: 245,
+    width: 250,
     boxShadow: "none",
     borderRadius: 15,
-    // margin: "5%",
     transition: "all 0.3s ease-in-out",
     boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
     "&:hover": {
       boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
       transform: "scale(1.04)",
     },
-  },
-  media: {
-    height: 140,
   },
   avatar: {
     color: theme.palette.primary.contrastText,
@@ -60,11 +55,12 @@ export default function ExamCard(props) {
       <CardContent>
         <Box
           display="flex"
+          flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
           width="100%"
         >
-          <Box p={1}>
+          <Box>
             <CompletionBar />
           </Box>
           <Box p={1}>
