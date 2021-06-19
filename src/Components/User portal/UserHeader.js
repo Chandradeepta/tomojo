@@ -18,7 +18,8 @@ import {
   Receipt,
   Share,
 } from "@material-ui/icons";
-import BaseBrandContainer from "../Common/BaseBrandContainer";
+import { Box, IconButton } from "@material-ui/core";
+import { Widgets, Menu } from "@material-ui/icons";
 import clsx from "clsx";
 import { NavItem, NavMenu } from "@mui-treasury/components/menu/navigation";
 import { Link } from "react-router-dom";
@@ -29,6 +30,33 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  hamburgerButton: {
+    marginRight: theme.spacing(1),
+    color: theme.palette.primary.main,
+  },
+  hide:{
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+  brandSpace: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      flex: 0,
+    },
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: "left",
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold,
+    letterSpacing: theme.spacing(0.5),
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.05rem",
+    },
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -36,17 +64,17 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  drawer: {
+  leftDrawer: {
     width: drawerWidth,
   },
-  drawerOpen: {
+  leftDrawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  drawerClose: {
+  leftDrawerClose: {
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -65,13 +93,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserHeader(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [openLeftDrawer, setOpenLeftDrawer] = React.useState(false);
 
   const isActive = (path) => {
     return window.location.pathname === `${path}`;
   };
 
-  const toggleDrawer = (open) => (event) => {
+  const toggleLeftDrawer = (open) => (event) => {
     if (
       event &&
       event.type === "keydown" &&
@@ -79,28 +107,72 @@ export default function UserHeader(props) {
     ) {
       return;
     }
-    setOpen(open);
+    setOpenLeftDrawer(open);
+  };
+
+  const handleRightDrawerOpen = (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    props.setOpenRightDrawer(!props.openRightDrawer);
   };
   return (
     <>
-      <AppBar position="fixed" color="inherit" className={clsx(classes.appBar)}>
+      <AppBar
+        position="fixed"
+        color="inherit"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: props.openRightDrawer,
+        })}
+      >
         <Toolbar>
-          <BaseBrandContainer toggleDrawer={toggleDrawer} open={open} />
+          <IconButton
+            edge="start"
+            className={classes.hamburgerButton}
+            color="primary"
+            aria-label="menu"
+            onClick={toggleLeftDrawer(!openLeftDrawer)}
+          >
+            <Menu />
+          </IconButton>
+          <Box className={classes.brandSpace}>
+            <IconButton edge="start" color="secondary" aria-label="logo">
+              <Widgets fontSize={"large"} />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              TOMOJO
+            </Typography>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleRightDrawerOpen}
+              className={clsx(classes.hamburgerButton, classes.hide)}
+              style={{position: 'absolute', right: 0}}
+            >
+              <Menu />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.leftDrawerOpen]: openLeftDrawer,
+            [classes.leftDrawerClose]: !openLeftDrawer,
           }),
         }}
-        className={classes.drawer}
+        className={classes.leftDrawer}
         anchor={"left"}
-        open={open}
-        onClose={toggleDrawer(false)}
+        open={openLeftDrawer}
+        onClose={toggleLeftDrawer(false)}
       >
         <Toolbar />
+
         <div className={classes.drawerContainer}>
           {drawerNavs.map((each, index) => {
             return (
@@ -110,10 +182,7 @@ export default function UserHeader(props) {
                     <ListItemText primary={each.category} />
                   </ListItem>
                   {each.subCategory.map((sub, index) => (
-                    <Link
-                      to={`${sub.path}`}
-                      onClick={toggleDrawer(false)}
-                    >
+                    <Link to={`${sub.path}`} onClick={toggleLeftDrawer(false)}>
                       <ListItem
                         button
                         key={index}

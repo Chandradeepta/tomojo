@@ -10,13 +10,9 @@ import Typography from "@material-ui/core/Typography";
 import { Check } from "@material-ui/icons";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import { useLightTopShadowStyles } from "@mui-treasury/styles/shadow/lightTop";
-import {
-  CardActions,
-  CardHeader,
-  Divider,
-  Toolbar,
-  useTheme,
-} from "@material-ui/core";
+import { CardActions, useTheme } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     position: "relative",
+    overflow: "visible",
+
     margin: "2%",
     maxWidth: 300,
     transition: "all 0.3s ease-in-out",
@@ -34,6 +32,72 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       margin: "4%",
     },
+  },
+  priceTag: {
+    width: 68,
+    height: 95,
+    position: "relative",
+    top: -16,
+    background:
+      "linear-gradient(80deg, rgba(0,91,255,1) 0%, rgba(0,158,252,1) 100%)",
+    marginLeft: "auto",
+    borderBottomColor: "#fff",
+    fontSize: 22,
+    padding: "auto",
+    "&::before": {
+      content: '""',
+      width: 14,
+      height: 16,
+      background: "#0f52ba",
+      position: "absolute",
+      left: -13,
+      clipPath: "polygon(100% 0, 0% 100%, 100% 100%);",
+    },
+    "&::after": {
+      content: '"/month"',
+      display: "block",
+      whiteSpace: "break-spaces",
+      fontSize: 12,
+      color: grey[100],
+    },
+  },
+  priceTagPremium: {
+    background: "#fff",
+    "& $triangle": {
+      background: theme.palette.primary.main,
+      bottom: -1,
+    },
+    "& $priceContainer": {
+      color: theme.palette.primary.main,
+    },
+    "& $currency": {
+      "&::before": {
+        content: "",
+        color: theme.palette.primary.main,
+      },
+    },
+  },
+  currency: {
+    "&::before": {
+      content: "",
+      color: grey[500],
+    },
+  },
+  triangle: {
+    width: 68,
+    height: 25,
+    position: "absolute",
+    bottom: 0,
+    background: "white",
+    clipPath: "polygon(50% 0%, 0% 102%, 100% 102%);",
+    borderBottomColor: "#fff",
+  },
+  priceContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
+    paddingTop: "10%",
   },
   content: {
     padding: theme.spacing(4),
@@ -49,19 +113,47 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const PricingInfoCard = (props) => {
-  const styles = useStyles();
+  const classes = useStyles();
   const theme = useTheme();
   const shadowStyles = useLightTopShadowStyles();
   const { model, selectedPackage } = props;
   return (
     <Card
-      className={cx(styles.root, shadowStyles.root)}
+      className={cx(classes.root, shadowStyles.root)}
       style={{
         background: model.type === "Free" ? "#fff" : theme.palette.primary.main,
       }}
     >
+      {/* <div style={{ position: "relative" }}>
+        <div
+          className={
+            model.type === "Free"
+              ? classes.priceTag
+              : clsx(classes.priceTag, classes.priceTagPremium)
+          }
+        >
+          <div
+            className={
+              model.type === "Free"
+                ? classes.priceContainer
+                : clsx(classes.priceContainer, classes.priceContainerPremium)
+            }
+          >
+            <div className={classes.currency}>
+              <Typography variant="h6">&#36;19</Typography>
+            </div>
+          </div>
+          <div
+            className={
+              model.type === "Free"
+                ? classes.triangle
+                : clsx(classes.triangle, classes.trianglePremium)
+            }
+          ></div>
+        </div>
+      </div> */}
       <CardActionArea>
-        <CardContent className={styles.content}>
+        <CardContent className={classes.content}>
           <Box
             display={"flex"}
             flexDirection={"column"}
@@ -75,14 +167,14 @@ export const PricingInfoCard = (props) => {
             }}
           >
             <Box display="flex" justifyContent="space-between" width="100%">
-              <Typography variant="h4" className={styles.title} gutterBottom>
+              <Typography variant="h4" className={classes.title} gutterBottom>
                 {model.type}
               </Typography>
               {model.type === "Free" ? (
                 <>
                   <Typography
                     variant="h4"
-                    className={styles.title}
+                    className={classes.title}
                     gutterBottom
                   >
                     $0
@@ -97,7 +189,7 @@ export const PricingInfoCard = (props) => {
                     >
                       {selectedPackage?.actualPrice}
                     </Typography>
-                    <Typography variant="h4" className={styles.title}>
+                    <Typography variant="h4" className={classes.title}>
                       {selectedPackage?.discountPrice}
                     </Typography>
                   </Box>

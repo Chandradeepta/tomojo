@@ -9,12 +9,8 @@ import GPlay from "../../Assets/gplayImage.png";
 import Illustraion1 from "../../Assets/Home/Illustration1_1.svg";
 import Illustraion2 from "../../Assets/Home/Illustration2_1.svg";
 import CustomButton from "../../Components/Common/CustomButton";
-// import BG1 from "../../Assets/Background/BG element 1.svg";
-// import BG2 from "../../Assets/Background/BG element 2.svg";
-import BG3 from "../../Assets/Background/BG element 3.svg";
-// import BG4 from "../../Assets/Background/BG element 4.svg";
-// import BG5 from "../../Assets/Background/BG element 5.svg";
-// import BG6 from "../../Assets/Background/BG element 6.svg";
+import CornerBGImage from "../../Assets/Home/Data that matters/CornerBGImage.svg";
+
 import Rellax from "rellax";
 
 const OfferedServices = React.lazy(() =>
@@ -85,6 +81,14 @@ const mainContainerStyles = makeStyles((theme) => ({
       background: theme.palette.primary.dark,
       borderRadius: 45,
     },
+  },
+  sectionStat: {
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(4),
+    background: theme.palette.primary.dark,
+    borderRadius: 45,
+
+
   },
   servicesTitle: {
     [theme.breakpoints.up("sm")]: {
@@ -258,9 +262,9 @@ export default function LandingPageHome(props) {
               What you can get
             </Typography>
           </Box>
-          <Box width="100%">
-            <OfferedServices />
-          </Box>
+          {/* <Box width="100%" > */}
+          <OfferedServices />
+          {/* </Box> */}
         </Grid>
         {/* ------------------------------------------------------------------------------- */}
         <Grid
@@ -270,7 +274,7 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={clsx(classes.contentContainer,"area")}
+          className={clsx(classes.contentContainer, "area")}
           ref={gridRef2}
         >
           <ul class="circles">
@@ -342,18 +346,9 @@ export default function LandingPageHome(props) {
           </Grid>
         </Grid>
         {/* --------------------------------------------------------------------------- */}
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.section}>
-          <Box pt={3}>
-            <Typography
-              variant="h4"
-              className={classes.bold}
-              align="center"
-              color="secondary"
-              gutterBottom
-              style={{ color: "white" }}
-            >
-              Data that matters
-            </Typography>
+        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.section} style={{position: 'relative'}}>
+          <Box width="100%" position="absolute" bottom="-13%" left="0%" zIndex="1">
+            <img src={CornerBGImage} width="100%" />
           </Box>
           <NumberCounts />
         </Grid>
@@ -361,7 +356,7 @@ export default function LandingPageHome(props) {
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Box pt={8} pb={4}>
             <Typography
-              variant="h4"
+              variant="h3"
               className={classes.bold}
               align="center"
               color="secondary"

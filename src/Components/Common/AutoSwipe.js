@@ -12,7 +12,7 @@ const CustomDot = ({ onMove, index, onClick, active }) => {
 };
 
 export default function AutoSwipe(props) {
-  const { showDots, showArrows, xl, lg, md, sm } = props;
+  const { infinite, showDots, showArrows, xl, lg, md, sm } = props;
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -21,12 +21,12 @@ export default function AutoSwipe(props) {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: lg,
-      paritialVisibilityGutter: 160
+      paritialVisibilityGutter: 160,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: md,
-      paritialVisibilityGutter: 160
+      paritialVisibilityGutter: 160,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -37,11 +37,12 @@ export default function AutoSwipe(props) {
     <Box width="100%">
       <Carousel
         responsive={responsive}
-        infinite
         showDots={showDots}
         arrows={showArrows}
         customDot={<CustomDot />}
         itemClass="image-class"
+        // {...infinite && {infinite : "true"}}
+        infinite
       >
         {props.children}
       </Carousel>

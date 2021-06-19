@@ -30,32 +30,12 @@ body::-webkit-scrollbar-thumb {
 .react-multi-carousel-list {
   /* padding-bottom: 15%; */
   padding: 4%;
+  padding-left: 0;
+  padding-right: 0;
 }
+
 /* carasoule dot position css responsive*/
-/* @media only screen and (min-width: 768px) {
-  .react-multi-carousel-list {
-    padding-bottom: 5%;
-  }
-} */
-
-/* <div class="area">
-<ul class="circles">
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-</ul>
-</div> */
-
 .area {
-  /* background: #4e54c8;  
-  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);   */
   width: 100%;
   position: relative;
   background-repeat: repeat;

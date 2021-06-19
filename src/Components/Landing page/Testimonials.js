@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "12%",
     textAlign: "justify",
     height: 200,
-    maxWidth: 300,
+    maxWidth: 370,
     boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
     "&:hover": {
       boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
@@ -81,7 +81,7 @@ export default function Testimonials(props) {
 
   return (
     <>
-      <AutoSwipe showDots={false} showArrows={true} xl={4} lg={2} md={2} sm={1}>
+      <AutoSwipe showDots={false} showArrows={true} xl={4} lg={2} md={2} sm={1} infinite>
         {testimonials.map((testimonial, index) => {
           return (
             <Box  p={2}>

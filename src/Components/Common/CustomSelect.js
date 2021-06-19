@@ -17,17 +17,17 @@ const MenuProps = {
 };
 
 const CustomSelect = (props) => {
-  const { items, getSelectedClass } = props;
+  const { items, getSelected } = props;
   const [val, setVal] = useState("default");
 
   const handleChange = (event) => {
     setVal(event.target.value);
-    getSelectedClass(event.target.value);
+    getSelected(event.target.value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setVal(0);
-  },[])
+  }, []);
 
   const minimalSelectClasses = useMinimalSelectStyles();
 
@@ -69,11 +69,17 @@ const CustomSelect = (props) => {
         onChange={handleChange}
         MenuProps={MenuProps}
       >
-        <MenuItem value={"default"} disabled>Select Class</MenuItem>
+        <MenuItem value={"default"} disabled>
+          Select Class
+        </MenuItem>
         {items.map((each, i) => {
-          return (
+          return typeof each === "string" ? (
             <MenuItem key={i} value={i}>
               {each}
+            </MenuItem>
+          ) : (
+            <MenuItem key={i} value={i}>
+              {each.name + " " + each.code}
             </MenuItem>
           );
         })}

@@ -39,7 +39,7 @@ export default function MyPackages(props) {
                     >
                       {each.subjects.map((subject) => {
                         return (
-                          <Box  display="flex" justifyContent="center">
+                          <Box display="flex" justifyContent="center">
                             <ExamCard subject={subject} />
                           </Box>
                         );
@@ -59,7 +59,7 @@ export default function MyPackages(props) {
 const MOCK_MODEL_MY_PACKAGES = [
   {
     class: "Class X",
-    subjects: ["Biology", "All subjects"],
+    subjects: ["Biology", "All subjects","Chemistry", "Biology", "All subjects"],
   },
   {
     class: "Class IX",

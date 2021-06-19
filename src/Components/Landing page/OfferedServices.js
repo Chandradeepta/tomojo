@@ -1,10 +1,10 @@
 import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
-import RankingSVG from "../../Assets/Ranking.svg";
-import ChapterCoverageSVG from "../../Assets/Chapter_Coverage.svg";
-import PerformanceSVG from "../../Assets/Performance.svg";
-import AnalysisSVG from "../../Assets/Test_Analysis.svg";
-import UnderstandingSVG from "../../Assets/Understanding.svg";
-import QuestionsSVG from "../../Assets/topicQuestions.svg";
+import RankingSVG from "../../Assets/Home/what we offer/National Rank.svg";
+import ChapterCoverageSVG from "../../Assets/Home/what we offer/Chapters Coverage.svg";
+import PerformanceSVG from "../../Assets/Home/what we offer/Performance Report.svg";
+import AnalysisSVG from "../../Assets/Home/what we offer/Test Analysis.svg";
+import InDepthSVG from "../../Assets/Home/what we offer/In-depth.svg";
+import QuestionsSVG from "../../Assets/Home/what we offer/Topic Wise Questions.svg";
 import clsx from "clsx";
 import AutoSwipe from "../Common/AutoSwipe";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
-    background: "transparent",
+    background: 'transparent',
     textAlign: "justify",
     maxWidth: 200,
     transition: "all 0.3s ease-in-out",
@@ -77,9 +77,21 @@ export default function OfferedServices(props) {
 
   return (
     <>
-      <AutoSwipe xl={5} lg={3} md={2} sm={1} showDots={false} showArrows={true}>
+      <AutoSwipe
+        xl={5}
+        lg={3}
+        md={2}
+        sm={1}
+        showDots={false}
+        showArrows={true}
+        infinite
+      >
         {services.map((service, index) => {
-          return <ServicesCard service={service} key={index} />;
+          return (
+            <Box ml={4}>
+              <ServicesCard service={service} key={index} />
+            </Box>
+          );
         })}
       </AutoSwipe>
     </>
@@ -106,7 +118,7 @@ const services = [
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={UnderstandingSVG} width="100%" height="100%" />,
+    logo: <img src={InDepthSVG} width="100%" height="100%" />,
     title: "In-depth Understanding",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",

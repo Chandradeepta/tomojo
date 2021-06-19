@@ -54,13 +54,6 @@ export default function LandingPagePartner(props) {
   const classes = useStyles();
   const [aboutUs, setAboutUs] = useState("");
 
-  useEffect(() => {
-    getAboutUs().then((response) => {
-      console.log(response);
-      setAboutUs(response.data.results.Content);
-    });
-  }, []);
-
   return (
     <>
       <Grid
