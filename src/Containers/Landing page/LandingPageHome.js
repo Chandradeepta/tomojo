@@ -9,7 +9,9 @@ import GPlay from "../../Assets/gplayImage.png";
 import Illustraion1 from "../../Assets/Home/Illustration1_1.svg";
 import Illustraion2 from "../../Assets/Home/Illustration2_1.svg";
 import CustomButton from "../../Components/Common/CustomButton";
-import CornerBGImage from "../../Assets/Home/Data that matters/CornerBGImage.svg";
+import CardBg1 from "../../Assets/Home/cardBg1.svg";
+import CardBg2 from "../../Assets/Home/cardBg2.svg";
+import CardBg3 from "../../Assets/Home/cardBg3.svg";
 
 import Rellax from "rellax";
 
@@ -87,8 +89,6 @@ const mainContainerStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     background: theme.palette.primary.dark,
     borderRadius: 45,
-
-
   },
   servicesTitle: {
     [theme.breakpoints.up("sm")]: {
@@ -242,7 +242,6 @@ export default function LandingPageHome(props) {
             />
           </Grid>
         </Grid>
-        {/* ----------------------------------------------------------------------------------- */}
         <Grid
           item
           lg={12}
@@ -262,11 +261,8 @@ export default function LandingPageHome(props) {
               What you can get
             </Typography>
           </Box>
-          {/* <Box width="100%" > */}
           <OfferedServices />
-          {/* </Box> */}
         </Grid>
-        {/* ------------------------------------------------------------------------------- */}
         <Grid
           container
           item
@@ -345,14 +341,27 @@ export default function LandingPageHome(props) {
             </Box>
           </Grid>
         </Grid>
-        {/* --------------------------------------------------------------------------- */}
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.section} style={{position: 'relative'}}>
-          <Box width="100%" position="absolute" bottom="-13%" left="0%" zIndex="1">
-            <img src={CornerBGImage} width="100%" />
+        <Grid
+          item
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className={classes.section}
+          style={{ position: "relative" }}
+        >
+          {/* Card backgrounds */}
+          <Box width="5%" position="absolute" bottom="1%" left="2%" zIndex="1">
+            <img src={CardBg1} width="100%" />
+          </Box>
+          <Box width="12%" position="absolute" top="0%" left="0%" zIndex="1">
+            <img src={CardBg2} width="100%" />
+          </Box>
+          <Box width="20%" position="absolute" right="0%" top="0%" zIndex="1">
+            <img src={CardBg3} width="100%" />
           </Box>
           <NumberCounts />
         </Grid>
-        {/* -------------------------------------------------------------------------------- */}
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Box pt={8} pb={4}>
             <Typography

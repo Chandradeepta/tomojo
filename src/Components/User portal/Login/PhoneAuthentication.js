@@ -116,7 +116,7 @@ export function PhoneAuthentication(props) {
                   // onClick={() => confirmOtp()}
                   onClick={() => props.setIsPhoneAuthSuccess(true)}
                 >
-                  Next
+                  {props.type === "Sign In" ? props.type : "Next"}
                 </CustomButton>
               </Box>
             </Box>
@@ -124,7 +124,7 @@ export function PhoneAuthentication(props) {
         ) : (
           <>
             <Box width="100%" textAlign="center">
-              <Box p={2}>
+              <Box pb={2} width="100%">
                 <Autocomplete
                   id="grouped-demo"
                   options={options.sort(
@@ -137,8 +137,8 @@ export function PhoneAuthentication(props) {
                     <TextField
                       inputRef={params.InputProps.ref}
                       placeholder="Country code"
-                      className={classes.select}
                       required
+                      fullWidth
                       size="small"
                       variant="outlined"
                       {...params.inputProps}
@@ -153,13 +153,14 @@ export function PhoneAuthentication(props) {
                   variant="outlined"
                   size="small"
                   required
+                  fullWidth
                   value={phoneNumber}
                   inputProps={{ maxLength: 10 }}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </Box>
             </Box>
-            <Box p={3} textAlign="center" width="100%">
+            <Box p={3} pb={1} textAlign="center" width="100%">
               <CustomButton
                 color="primary"
                 size="small"
@@ -167,7 +168,7 @@ export function PhoneAuthentication(props) {
                 onClick={() => shouldShowOtp(true)}
                 // onClick={()=> history.push('/user/dashboard')}
               >
-                {props.type === "Sign In" ? props.type : "Get started"}
+                {props.type === "Sign In" ? "Next" : "Get started"}
               </CustomButton>
             </Box>
             <div id="phone-sign-in-button" />

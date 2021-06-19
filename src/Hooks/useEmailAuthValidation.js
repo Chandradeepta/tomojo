@@ -11,10 +11,10 @@ export const useEmailAuthValidation = () => {
   const [errors, setError] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e;
+    const { name, value } = e.target;
     setAuthData({
       ...authData,
-      name: value,
+      [name]: value,
     });
   };
 
