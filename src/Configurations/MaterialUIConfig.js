@@ -13,7 +13,7 @@ export let theme = createMuiTheme({
     },
     text: {
       primary: "#171959",
-      secondary: "#a7bbc7",
+      secondary: "#BBCAE9",
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
@@ -41,9 +41,6 @@ theme.overrides = {
         backgroundColor: "none",
       },
     },
-  },
-  MuiButtonBase: {
-    disableRipple: true,
   },
 };
 

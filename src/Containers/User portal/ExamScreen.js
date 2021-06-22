@@ -26,71 +26,53 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-export function Examscreen(props) {
+export default function ExamScreen(props) {
   return (
-    <>
-      <Grid container style={{ paddingLeft: "4%", paddingRight: "4%" }}>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box width="100%" display="flex">
-            <Typography variant="h6" color="textPrimary" style={{ flex: 1 }}>
-              MCT Mock Test
-            </Typography>
-            <CustomButton size="small" borderRadius={10} color="primary">
-              Finish test
-            </CustomButton>
-          </Box>
-        </Grid>
-        <>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-evenly"
-            >
-              <BorderLinearProgress variant="determinate" value={50} />
-              <Box p={2}>
-                <Typography variant="subtitle1">50%</Typography>
-              </Box>
-              <Box display="flex" alignItems="center" p={2} pr={0}>
-                <WatchLater color="secondary" />
-                <Box width="100%" ml={1}>
-                  <Typography variant="h6" color="textSecondary">
-                    00.00 Min
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid
-            item
-            lg={12}
-            md={12}
-            sm={12}
-            xs={12}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <QnASection />
-            
+    <Box width="100%" display="flex" flexDirection="column">
+      {/* Conditional between portal and instruction */}
 
-          </Grid>
-          <Box width="100%" display="flex" justifyContent="center">
-            <Box p={2}>
-              <CustomButton size="small" borderRadius={10} color="primary">
-                Previous
-              </CustomButton>
-            </Box>
-            <Box p={2}>
-              <CustomButton size="small" borderRadius={10} color="primary">
-                Next
-              </CustomButton>
-            </Box>
+      <Box width="100%" display="flex">
+        <Typography variant="h6" color="textPrimary" style={{ flex: 1 }}>
+          MCT Mock Test
+        </Typography>
+      </Box>
+      <Box display="flex" alignItems="center" justifyContent="space-evenly">
+        <BorderLinearProgress variant="determinate" value={50} />
+        <Box p={2}>
+          <Typography variant="subtitle1">50%</Typography>
+        </Box>
+        <Box display="flex" alignItems="center" p={2} pr={0}>
+          <WatchLater color="secondary" />
+          <Box width="100%" ml={1}>
+            <Typography variant="h6" color="textSecondary">
+              00.00 Min
+            </Typography>
           </Box>
-        </>
-      </Grid>
-    </>
+        </Box>
+      </Box>
+      <QnASection />
+      <Box width="100%" display="flex" justifyContent="center" flexWrap="wrap">
+        <Box p={2}>
+          <CustomButton size="small" color="primary">
+            Previous
+          </CustomButton>
+        </Box>
+        <Box p={2}>
+          <CustomButton size="small" color="secondary">
+            Clear response
+          </CustomButton>
+        </Box>
+        <Box p={2}>
+          <CustomButton size="small" color="secondary">
+            Mark for review and Next
+          </CustomButton>
+        </Box>
+        <Box p={2}>
+          <CustomButton size="small" color="primary">
+            Save and Next
+          </CustomButton>
+        </Box>
+      </Box>
+    </Box>
   );
 }

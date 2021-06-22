@@ -18,7 +18,7 @@ function* getPricingPackages(action) {
     });
   } else if (error) {
     yield put({
-      type: CommonTypes.SHOW_NOTIFICATION,
+      type: CommonTypes.SHOW_NOTIFICATION_ASYNC,
       message: "Network Error",
       snackType: "error",
     });
