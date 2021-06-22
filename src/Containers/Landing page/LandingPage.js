@@ -17,6 +17,7 @@ import {
 import PropTypes from "prop-types";
 import { KeyboardArrowUp, Widgets } from "@material-ui/icons";
 import Navbar from "../../Components/Landing page/Navbar";
+import clsx from 'clsx'
 
 const Login = lazy(() => import("../Login"));
 const Footer = lazy(() => import("../../Components/Common/Footer"));
@@ -35,12 +36,16 @@ const useStyles = makeStyles((theme) => ({
   },
   initialContainer: {
     padding: "7%",
-    paddingTop: "2%",
+    paddingTop: "0%",
     paddingBottom: "1%",
     minHeight: "70vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    position: 'relative',
+    [theme.breakpoints.down("sm")]: {
+      padding: "2%",
+    },
   },
   list: {
     width: 250,
@@ -100,7 +105,7 @@ export default function LandingPage(props) {
 
   return (
     <>
-      <Container maxWidth="lg" className={classes.landingPageRoot}>
+      <Container maxWidth="lg" className={clsx(classes.landingPageRoot)}>
         <Suspense
           fallback={
             <Box
@@ -124,7 +129,7 @@ export default function LandingPage(props) {
             {list()}
           </Drawer>
 
-          <Grid container className={classes.initialContainer}>
+          <Grid container className={clsx(classes.initialContainer)}>
             <Switch>
               <Route exact path={`/home`}>
                 <LandingPageHome />

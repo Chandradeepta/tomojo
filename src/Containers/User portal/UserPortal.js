@@ -6,32 +6,30 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   makeStyles,
   Container,
   Grid,
   Toolbar,
-  Box,
   Fab,
   useScrollTrigger,
   Zoom,
+  Drawer,
+  Box,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { KeyboardArrowUp } from "@material-ui/icons";
 import clsx from "clsx";
-import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useRef } from "react";
 import UserHeader from "../../Components/User portal/UserHeader";
 import Dashboard from "./Dashboard";
-import ExamCard from "../../Components/User portal/ExamCard";
-import AutoSwipe from "../../Components/Common/AutoSwipe";
 import MyPackages from "./MyPackages";
-import { Examscreen } from "./ExamScreen";
+import ExamScreen from "./ExamScreen";
+import TestContainer from "./TestContainer";
+import { ExamAsidePanel } from "../../Components/User portal/ExamAsidePanel";
+import Solutions from "./Solutions";
+import TestAnalysis from "./TestAnalysis";
 
-const drawerWidth = 240;
+const drawerWidth = 350;
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
@@ -52,8 +50,28 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     paddingTop: theme.spacing(3),
-    flexGrow: 1,
-    width: "100%",
+    // flexGrow: 1,
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  contentShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: drawerWidth,
+  },
+  drawerRight: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaperRight: {
+    width: drawerWidth,
+    [theme.breakpoints.down("xs")]: {
+      width: "100vw",
+    },
   },
 }));
 
@@ -61,6 +79,7 @@ export default function UserPortal(props) {
   const location = useLocation();
   const classes = useStyles();
   let { path } = useRouteMatch();
+  const [openRightDrawer, setOpenRightDrawer] = React.useState(true);
 
   useEffect(() => {
     const anchor = document.querySelector("#back-to-top-anchor");
@@ -68,10 +87,6 @@ export default function UserPortal(props) {
       anchor.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [location]);
-
-  // const shouldShowHeader = () => {
-  //   return !window.location.pathname.includes("/exam-portal");
-  // };
 
   return (
     <>
@@ -81,10 +96,20 @@ export default function UserPortal(props) {
       >
         <Grid container style={{ display: "flex" }}>
           <Grid item lg={2} md={2} sm={2} xs={2}>
-            {<UserHeader />}
+            {
+              <UserHeader
+                openRightDrawer={openRightDrawer}
+                setOpenRightDrawer={setOpenRightDrawer}
+              />
+            }
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
-            <main className={classes.content}>
+            <main
+              className={clsx(classes.content, {
+                [classes.contentShift]:
+                  location.pathname.includes("/exam-portal") && openRightDrawer,
+              })}
+            >
               <Toolbar id="back-to-top-anchor" />
               <Switch>
                 <Route exact path={`${path}/dashboard`}>
@@ -94,16 +119,40 @@ export default function UserPortal(props) {
                   <MyPackages />
                 </Route>
                 <Route exact path={`${path}/exam-portal`}>
-                  <Examscreen />
+                  <ExamScreen />
+                </Route>
+                <Route exact path={`${path}/tests`}>
+                  <TestContainer />
+                </Route>
+                <Route exact path={`${path}/analysis`}>
+                  <TestAnalysis />
+                </Route>
+                <Route exact path={`${path}/solutions`}>
+                  <Solutions />
                 </Route>
               </Switch>
             </main>
           </Grid>
           <ScrollTop {...props}>
-            <Fab color="primary" size="small" aria-label="scroll back to top">
-              <KeyboardArrowUp color="textSecondary" />
+            <Fab size="small" aria-label="scroll back to top">
+              <KeyboardArrowUp color="secondary" />
             </Fab>
           </ScrollTop>
+          {location.pathname.includes("/exam-portal") && (
+            <Drawer
+              className={classes.drawerRight}
+              variant="persistent"
+              anchor="right"
+              open={openRightDrawer}
+              classes={{
+                paper: classes.drawerPaperRight,
+              }}
+            >
+              <Toolbar />
+              <Box height="30px" />
+              <ExamAsidePanel />
+            </Drawer>
+          )}
         </Grid>
       </Container>
     </>

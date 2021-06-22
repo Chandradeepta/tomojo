@@ -17,3 +17,4 @@ export default function useOnScreen(ref) {
 
   return isIntersecting;
 }
+

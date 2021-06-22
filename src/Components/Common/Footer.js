@@ -72,7 +72,7 @@ export default React.memo(function Footer(props) {
   };
 
   return (
-    <Box bgcolor={"background.default"} width={"100%"}>
+    <Box bgcolor={"background.paper"} width={"100%"}>
       <Container>
         <Box pt={10} pb={2}>
           <Row wrap>
@@ -99,13 +99,12 @@ export default React.memo(function Footer(props) {
                       to={nav.link}
                       key={i}
                       active={isActive(nav.link)}
-                      activeClassName="active"
                     >
                       <span>{nav.name}</span>
                     </NavItem>
                   );
                 })}
-                <NavItem active={isActive("/blogs")} as={Link} to="/blogs">
+                <NavItem active={isActive("blogs")} as={Link} to="/blogs">
                   Blogs
                 </NavItem>
               </NavMenu>

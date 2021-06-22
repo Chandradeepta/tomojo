@@ -9,6 +9,7 @@ import PricingInfoCard from "../../Components/Landing page/PricingInfoCard";
 import axios from "axios";
 import rootReducer from "../../Redux/Reducers/rootReducer";
 import { LandingPageTypes } from "../../Redux/Types/landingPageTypes";
+import PaymentCard from "../../Components/Landing page/PaymentCard";
 
 const useStyles = makeStyles((theme) => ({
   bold: {
@@ -42,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function LandingPagePricing(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { classPackages, competitivePackages } = useSelector(
     (state) => state.landingPageState
   );
-  const dispatch = useDispatch();
 
   const [selectedPackage, setSelectedPackage] = useState({});
   const [studentClasses, setClasses] = useState([]);
@@ -80,9 +81,9 @@ export default function LandingPagePricing(props) {
         md={12}
         sm={12}
         xs={12}
-        style={{ display: "flex", alignItems: "center", marginTop: "2%" }}
+        style={{ display: "flex", alignItems: "center", marginTop: "3%" }}
       >
-        <Grid item lg={5} md={5} sm={12} xs={12}>
+        {/* <Grid item lg={5} md={5} sm={12} xs={12}>
           <Typography
             variant="h3"
             className={clsx(
@@ -102,7 +103,7 @@ export default function LandingPagePricing(props) {
             <Box className={classes.mobileResponsive}>
               <CustomSelect
                 items={studentClasses}
-                getSelectedClass={handleSelectedClass}
+                getSelected={handleSelectedClass}
               />
             </Box>
             <SlideTabs />
@@ -123,6 +124,63 @@ export default function LandingPagePricing(props) {
                   selectedPackage={selectedPackage}
                   key={i}
                 />
+                // <PaymentCard />
+              );
+            })}
+          </Box>
+        </Grid> */}
+
+        <Grid item lg={4} md={4} sm={12} xs={12}>
+          <Box
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            alignItems="flex-start"
+            height="100%"
+          >
+            <Box p={2}>
+              <Typography
+                variant="h2"
+                className={clsx(
+                  classes.bold,
+                  classes.headline,
+                  classes.animated,
+                  classes.animatedFade,
+                  classes.fadeInUp
+                )}
+                color="textPrimary"
+              >
+                Let's Get Started
+              </Typography>
+            </Box>
+            <Box p={2}>
+              <SlideTabs />
+            </Box>
+            <Box className={classes.mobileResponsive} p={2}>
+              <CustomSelect
+                items={studentClasses}
+                getSelected={handleSelectedClass}
+              />
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item lg={8} md={8} sm={12} xs={12}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            p={2}
+            flexWrap="wrap"
+          >
+            {PricingModel.map((each, i) => {
+              return (
+                <PricingInfoCard
+                  model={each}
+                  selectedPackage={selectedPackage}
+                  key={i}
+                />
+                // <PaymentCard />
               );
             })}
           </Box>

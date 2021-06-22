@@ -7,6 +7,7 @@ import ContactInfo from "../../Components/Landing page/ContactInfo";
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
     width: "100%",
+    paddingTop: '2%',
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",

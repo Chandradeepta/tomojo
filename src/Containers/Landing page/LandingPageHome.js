@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import React, { useRef, Suspense } from "react";
-import { Grid, makeStyles, Typography, Box } from "@material-ui/core";
+import React, { useRef, Suspense, useEffect } from "react";
+import { Grid, makeStyles, Typography, Box, useTheme } from "@material-ui/core";
 import useOnScreen from "../../Hooks/useOnScreen";
 import Skeleton from "@material-ui/lab/Skeleton";
 import TextTransitions from "../../Components/Common/TextTransitions";
@@ -9,6 +9,11 @@ import GPlay from "../../Assets/gplayImage.png";
 import Illustraion1 from "../../Assets/Home/Illustration1_1.svg";
 import Illustraion2 from "../../Assets/Home/Illustration2_1.svg";
 import CustomButton from "../../Components/Common/CustomButton";
+import CardBg1 from "../../Assets/Home/cardBg1.svg";
+import CardBg2 from "../../Assets/Home/cardBg2.svg";
+import CardBg3 from "../../Assets/Home/cardBg3.svg";
+
+import Rellax from "rellax";
 
 const OfferedServices = React.lazy(() =>
   import("../../Components/Landing page/OfferedServices")
@@ -27,6 +32,7 @@ const mainContainerStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "row",
+    zIndex: 2,
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column-reverse",
     },
@@ -48,6 +54,7 @@ const mainContainerStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "flex-start",
+    paddingTop: theme.spacing(4),
     [theme.breakpoints.down("sm")]: {
       alignItems: "center",
     },
@@ -64,26 +71,46 @@ const mainContainerStyles = makeStyles((theme) => ({
   centerAlign: {
     textAlign: "center",
   },
-  services: {
-    display: "flex",
-    justifyContent: "center",
-    paddingTop: theme.spacing(4),
-  },
   download: {
     textAlign: "left",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
     },
   },
+  section: {
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(4),
+    // [theme.breakpoints.up("sm")]: {
+    background: theme.palette.primary.dark,
+    borderRadius: 45,
+    // },
+  },
+  sectionStat: {
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(4),
+    background: theme.palette.primary.dark,
+    borderRadius: 45,
+  },
+  servicesTitle: {
+    // [theme.breakpoints.up("sm")]: {
+    color: theme.palette.background.default,
+    // },
+  },
   ...AnimationClasses,
 }));
 
 export default function LandingPageHome(props) {
   const classes = mainContainerStyles();
+  const theme = useTheme();
   const gridRef1 = useRef();
   const gridRef2 = useRef();
+
   const isVisibleSection1 = useOnScreen(gridRef1);
   const isVisibleSection2 = useOnScreen(gridRef2);
+
+  useEffect(() => {
+    const rellax = new Rellax(".rellax");
+  }, []);
 
   return (
     <>
@@ -110,7 +137,7 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={classes.contentContainer}
+          className={clsx(classes.contentContainer)}
           ref={gridRef1}
         >
           <Grid
@@ -119,7 +146,7 @@ export default function LandingPageHome(props) {
             md={6}
             sm={12}
             xs={12}
-            className={classes.textContainer}
+            className={clsx(classes.textContainer)}
           >
             <Typography
               variant="h3"
@@ -199,22 +226,30 @@ export default function LandingPageHome(props) {
             md={6}
             sm={12}
             xs={12}
-            className={classes.imageContainer}
+            className={clsx(classes.imageContainer, "slowParallax")}
           >
             <img
               src={Illustraion1}
+              className="slowParallax"
               width="100%"
               height="100%"
               alt={"Let your child lead the academics"}
+              style={{ zIndex: 3 }}
             />
           </Grid>
         </Grid>
-
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box pt={5}>
+        <Grid
+          item
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className={clsx(classes.section, "area")}
+        >
+          <Box pt={3}>
             <Typography
               variant="h4"
-              className={classes.bold}
+              className={clsx(classes.bold, classes.servicesTitle)}
               align="center"
               color="secondary"
               gutterBottom
@@ -222,14 +257,8 @@ export default function LandingPageHome(props) {
               What you can get
             </Typography>
           </Box>
+          <OfferedServices />
         </Grid>
-
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
-          <Box pb={3}>
-            <OfferedServices />
-          </Box>
-        </Grid>
-
         <Grid
           container
           item
@@ -237,7 +266,7 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={classes.contentContainer}
+          className={clsx(classes.contentContainer)}
           ref={gridRef2}
         >
           <Grid
@@ -246,7 +275,7 @@ export default function LandingPageHome(props) {
             md={6}
             sm={12}
             xs={12}
-            className={classes.contentContainer_alt}
+            className={clsx(classes.contentContainer_alt)}
           >
             <img
               src={Illustraion2}
@@ -262,11 +291,12 @@ export default function LandingPageHome(props) {
             sm={12}
             xs={12}
             className={clsx(classes.textContainer, classes.textContainer_alt)}
+            style={{ background: "transparent" }}
           >
             <Box display="flex">
               <Typography
                 variant="h3"
-                className={classes.bold}
+                className={clsx(classes.bold)}
                 gutterBottom
                 align="right"
                 color="textPrimary"
@@ -302,28 +332,31 @@ export default function LandingPageHome(props) {
             </Box>
           </Grid>
         </Grid>
-
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box pt={5}>
-            <Typography
-              variant="h4"
-              className={classes.bold}
-              align="center"
-              color="secondary"
-              gutterBottom
-            >
-              Data that matters
-            </Typography>
+        <Grid
+          item
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className={classes.section}
+          style={{ position: "relative" }}
+        >
+          {/* Card backgrounds */}
+          <Box width="5%" position="absolute" bottom="1%" left="2%" zIndex="1">
+            <img src={CardBg1} width="100%" />
           </Box>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.services}>
+          <Box width="12%" position="absolute" top="0%" left="0%" zIndex="1">
+            <img src={CardBg2} width="100%" />
+          </Box>
+          <Box width="20%" position="absolute" right="0%" top="0%" zIndex="1">
+            <img src={CardBg3} width="100%" />
+          </Box>
           <NumberCounts />
         </Grid>
-
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Box pt={8} pb={4}>
             <Typography
-              variant="h4"
+              variant="h3"
               className={classes.bold}
               align="center"
               color="secondary"
@@ -332,8 +365,6 @@ export default function LandingPageHome(props) {
               Testimonials
             </Typography>
           </Box>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
           <Testimonials />
         </Grid>
       </Suspense>

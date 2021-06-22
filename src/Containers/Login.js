@@ -4,9 +4,13 @@ import { GoogleSignInButton } from "../Components/Utils/GoogleSignInButton";
 import CustomButton from "../Components/Common/CustomButton";
 import clsx from "clsx";
 import { AnimationClasses } from "../Components/Utils/AnimationClasses";
-import { SignupFields } from "../Components/User portal/Login/SignUpFields";
+import { PhoneAuthentication } from "../Components/User portal/Login/PhoneAuthentication";
+import { EmailAuthentication } from "../Components/User portal/Login/EmailAuthentication";
+
 import { useState } from "react";
 import { CommonClasses } from "../Components/Utils/CommonClasses";
+import SignUp from "../Components/User portal/Login/SignUp";
+import SignIn from "../Components/User portal/Login/SignIn";
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -15,18 +19,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column-reverse",
-    },
   },
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "flex-start",
-    [theme.breakpoints.down("sm")]: {
-      alignItems: "center",
-    },
+    width: "100%",
   },
   brand: {
     letterSpacing: theme.spacing(1),
@@ -41,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Login(props) {
   const classes = useStyles();
-  const commonStyle = CommonClasses();
 
-  const [isSignedUpByPhone, setIsSignedUpByPhone] = useState(false);
+  const [isPhoneAuthSuccess, setIsPhoneAuthSuccess] = useState(false);
+
   const [UserAction, setUserAction] = useState({
     signUp: false,
     signIn: false,
@@ -51,26 +50,21 @@ export default function Login(props) {
 
   return (
     <>
-      <Grid
-        container
-        item
-        lg={12}
-        md={12}
-        sm={12}
-        xs={12}
-        className={classes.contentContainer}
-      >
+      <Grid container className={classes.contentContainer}>
         <Grid item lg={8} md={8} sm={12} xs={12}>
-          <img
-            src={LoginGif}
-            alt="image1"
-            className={clsx(
-              classes.illustration1,
-              classes.animated,
-              classes.animatedFade,
-              classes.fadeInLeft
-            )}
-          />
+          <Box width="100%" display="flex" justifyContent="center">
+            <img
+              src={LoginGif}
+              alt="image1"
+              width="80%"
+              className={clsx(
+                classes.illustration1,
+                classes.animated,
+                classes.animatedFade,
+                classes.fadeInLeft
+              )}
+            />
+          </Box>
         </Grid>
         <Grid
           item
@@ -91,6 +85,7 @@ export default function Login(props) {
               classes.animatedFade,
               classes.fadeInDown
             )}
+            pt={3}
           >
             <Typography
               variant="h5"
@@ -106,7 +101,7 @@ export default function Login(props) {
               display="flex"
               justifyContent="space-evenly"
               width="100%"
-              p={5}
+              p={3}
             >
               {!(UserAction.signUp || UserAction.signIn) && (
                 <>
@@ -130,16 +125,17 @@ export default function Login(props) {
                   </CustomButton>
                 </>
               )}
-              {UserAction.signUp ? (
-                !isSignedUpByPhone ? (
-                  <SignupFields setIsSignedUpByPhone={setIsSignedUpByPhone} />
-                ) : (
-                  <GoogleSignInButton buttonText="Sign in with Google" />
-                )
-              ) : (
-                UserAction.signIn && (
-                  <GoogleSignInButton buttonText="Sign in with Google" />
-                )
+              {UserAction.signUp && (
+                <SignUp
+                  setIsPhoneAuthSuccess={setIsPhoneAuthSuccess}
+                  isPhoneAuthSuccess={isPhoneAuthSuccess}
+                />
+              )}
+              {UserAction.signIn && (
+                <SignIn
+                  setIsPhoneAuthSuccess={setIsPhoneAuthSuccess}
+                  isPhoneAuthSuccess={isPhoneAuthSuccess}
+                />
               )}
             </Box>
             <Box>
@@ -148,9 +144,10 @@ export default function Login(props) {
                   Already have an account?{" "}
                   <span
                     className={classes.handCursor}
-                    onClick={() =>
-                      setUserAction({ signUp: false, signIn: true })
-                    }
+                    onClick={() => {
+                      setIsPhoneAuthSuccess(false);
+                      setUserAction({ signUp: false, signIn: true });
+                    }}
                   >
                     Sign in
                   </span>
@@ -161,9 +158,10 @@ export default function Login(props) {
                   Don't have an account ?{" "}
                   <span
                     className={classes.handCursor}
-                    onClick={() =>
-                      setUserAction({ signUp: true, signIn: false })
-                    }
+                    onClick={() => {
+                      setIsPhoneAuthSuccess(false);
+                      setUserAction({ signUp: true, signIn: false });
+                    }}
                   >
                     Sign up
                   </span>

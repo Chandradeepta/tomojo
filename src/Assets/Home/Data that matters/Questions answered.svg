@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86.174" height="86.174" viewBox="0 0 86.174 86.174">
+  <defs>
+    <filter id="Path_1289" x="0" y="0" width="86.174" height="86.174" filterUnits="userSpaceOnUse">
+      <feOffset dx="4" dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_102" data-name="Group 102" transform="translate(5 5)">
+    <g id="_10257477141582779198" data-name="10257477141582779198" transform="translate(0 0)" opacity="0.5">
+      <g transform="matrix(1, 0, 0, 1, -5, -5)" filter="url(#Path_1289)">
+        <path id="Path_1289-2" data-name="Path 1289" d="M63.6,16.977A33.944,33.944,0,0,0,51.2,4.572,33.343,33.343,0,0,0,34.088,0a33.343,33.343,0,0,0-17.11,4.572,33.935,33.935,0,0,0-12.406,12.4A33.342,33.342,0,0,0,0,34.087,33.349,33.349,0,0,0,4.572,51.2,33.944,33.944,0,0,0,16.977,63.6a33.346,33.346,0,0,0,17.11,4.572A33.346,33.346,0,0,0,51.2,63.6,33.935,33.935,0,0,0,63.6,51.2a33.348,33.348,0,0,0,4.571-17.11A33.351,33.351,0,0,0,63.6,16.977Z" transform="translate(5 5)" fill="#1f75fe"/>
+      </g>
+    </g>
+    <path id="Icon_awesome-question" data-name="Icon awesome-question" d="M15.733,0C9.429,0,5.346,2.583,2.141,7.189a1.9,1.9,0,0,0,.409,2.6l3.407,2.583a1.9,1.9,0,0,0,2.626-.328c1.978-2.478,3.446-3.905,6.536-3.905,2.43,0,5.435,1.564,5.435,3.92,0,1.781-1.47,2.7-3.869,4.041-2.8,1.568-6.5,3.52-6.5,8.4v.773a1.9,1.9,0,0,0,1.9,1.9H17.8a1.9,1.9,0,0,0,1.9-1.9v-.456c0-3.385,9.893-3.526,9.893-12.686C29.592,5.233,22.436,0,15.733,0Zm-.791,29.494a5.471,5.471,0,1,0,5.471,5.471A5.477,5.477,0,0,0,14.942,29.494Z" transform="translate(18.327 14.028)" fill="#5cdfff"/>
+  </g>
+</svg>
