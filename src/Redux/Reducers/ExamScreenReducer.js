@@ -1,5 +1,5 @@
-import { CommonTypes } from "../Types/commonTypes";
-import { ExamScreenTypes } from "../Types/examScreenTypes";
+import { commonTypes } from "../types/commonTypes";
+import { ExamScreenTypes } from "../types/examScreenTypes";
 
 const initialState = {
   currentQuestion: 1,

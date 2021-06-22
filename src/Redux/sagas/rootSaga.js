@@ -1,5 +1,5 @@
 import { all, fork } from "redux-saga/effects";
-import * as LandingPageSaga from "../Sagas/landingPageSaga";
+import * as LandingPageSaga from "./landingPageSaga";
 
 export default function* rootSaga() {
   yield all(

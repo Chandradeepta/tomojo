@@ -1,7 +1,7 @@
 import { Slide, Snackbar, Typography } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { connect, useSelector } from "react-redux";
-import { CommonTypes } from "../../Redux/Types/commonTypes";
+import { commonTypes } from "../../Redux/types/commonTypes";
 
 function SnackbarComponent(props) {
   const { snackBarMessage, snackBarOpen, snackBarType } = useSelector(
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearNotification: () =>
       dispatch({
-        type: CommonTypes.CLEAR_SNACKBAR,
+        type: commonTypes.CLEAR_SNACKBAR,
       }),
   };
 };

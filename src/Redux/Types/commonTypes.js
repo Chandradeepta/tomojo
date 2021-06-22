@@ -1,4 +1,4 @@
-export const CommonTypes = {
+export const commonTypes = {
     SHOW_NOTIFICATION_ASYNC: "SHOW_NOTIFICATION_ASYNC",
     CLEAR_SNACKBAR: "CLEAR_SNACKBAR"
 }

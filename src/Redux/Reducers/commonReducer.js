@@ -1,4 +1,4 @@
-import { CommonTypes } from "../Types/commonTypes";
+import { commonTypes } from "../types/commonTypes";
 
 const initialState = {
   snackBarOpen: false,
@@ -8,7 +8,7 @@ const initialState = {
 
 const commonReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CommonTypes.SHOW_NOTIFICATION_ASYNC: {
+    case commonTypes.SHOW_NOTIFICATION_ASYNC: {
       return {
         ...state,
         snackBarOpen: true,
@@ -16,7 +16,7 @@ const commonReducer = (state = initialState, action) => {
         snackBarType: action.snackType,
       };
     }
-    case CommonTypes.CLEAR_SNACKBAR: {
+    case commonTypes.CLEAR_SNACKBAR: {
       return {
         ...state,
         snackBarOpen: false,

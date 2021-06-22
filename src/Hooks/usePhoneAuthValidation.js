@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../Configurations/Firebase";
-import { CommonTypes } from "../Redux/Types/commonTypes";
+import { commonTypes } from "../Redux/types/commonTypes";
 import PhoneAuthValidation from "../Validations/PhoneAuthValidation";
 
 export function UsePhoneAuthValidation(setIsPhoneAuthSuccess) {
@@ -86,7 +86,7 @@ export function UsePhoneAuthValidation(setIsPhoneAuthSuccess) {
       .then((res) => {
         // Dispatching Action for successful authentication
         dispatch({
-          type: CommonTypes.SHOW_NOTIFICATION_ASYNC,
+          type: commonTypes.SHOW_NOTIFICATION_ASYNC,
           message: "Phone number verified successfully",
           snackType: "success",
         });
@@ -95,7 +95,7 @@ export function UsePhoneAuthValidation(setIsPhoneAuthSuccess) {
       .catch((err) => {
         // Dispatching Action for authentication error
         dispatch({
-          type: CommonTypes.SHOW_NOTIFICATION_ASYNC,
+          type: commonTypes.SHOW_NOTIFICATION_ASYNC,
           message: "wrong OTP",
           snackType: "error",
         });

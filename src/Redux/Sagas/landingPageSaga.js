@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { getPackagePricing } from "../../Services/Landing Page API/LandingPageService";
-import { CommonTypes } from "../Types/commonTypes";
-import { LandingPageTypes } from "../Types/landingPageTypes";
+import { commonTypes } from "../types/commonTypes";
+import { LandingPageTypes } from "../types/landingPageTypes";
 
 /*
     Fetching Pricing For Each Module
@@ -18,7 +18,7 @@ function* getPricingPackages(action) {
     });
   } else if (error) {
     yield put({
-      type: CommonTypes.SHOW_NOTIFICATION_ASYNC,
+      type: commonTypes.SHOW_NOTIFICATION_ASYNC,
       message: "Network Error",
       snackType: "error",
     });

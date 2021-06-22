@@ -1,4 +1,4 @@
-import { LandingPageTypes } from "../Types/landingPageTypes";
+import { LandingPageTypes } from "../types/landingPageTypes";
 
 const initialState = {
   classPackages: [],
