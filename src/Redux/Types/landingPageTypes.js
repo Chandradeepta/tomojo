@@ -1,5 +1,4 @@
-export const LandingPageTypes = {
+export const landingPageTypes = {
     GET_PRICING_PACKAGES: "GET_PRICING_PACKAGES",
     GET_PRICING_PACKAGES_ASYNC: "GET_PRICING_PACKAGES_ASYNC",
-
 }

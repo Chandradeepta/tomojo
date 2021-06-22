@@ -2,14 +2,10 @@ import { Box, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import CustomSelect from "../../Components/Common/CustomSelect";
 import SlideTabs from "../../Components/Common/SlideTabs";
 import PricingInfoCard from "../../Components/Landing page/PricingInfoCard";
-import axios from "axios";
-import rootReducer from "../../Redux/Reducers/rootReducer";
-import { LandingPageTypes } from "../../Redux/Types/landingPageTypes";
-import PaymentCard from "../../Components/Landing page/PaymentCard";
+import { landingPageTypes } from "../../Redux/types/landingPageTypes";
 
 const useStyles = makeStyles((theme) => ({
   bold: {
@@ -60,7 +56,7 @@ export default function LandingPagePricing(props) {
   };
 
   useEffect(() => {
-    dispatch({ type: LandingPageTypes.GET_PRICING_PACKAGES });
+    dispatch({ type: landingPageTypes.GET_PRICING_PACKAGES });
   }, []);
 
   useEffect(() => {
@@ -83,53 +79,6 @@ export default function LandingPagePricing(props) {
         xs={12}
         style={{ display: "flex", alignItems: "center", marginTop: "3%" }}
       >
-        {/* <Grid item lg={5} md={5} sm={12} xs={12}>
-          <Typography
-            variant="h3"
-            className={clsx(
-              classes.bold,
-              classes.headline,
-              classes.animated,
-              classes.animatedFade,
-              classes.fadeInUp
-            )}
-            color="textPrimary"
-          >
-            Let's Get Started
-          </Typography>
-        </Grid>
-        <Grid item lg={7} md={7} sm={12} xs={12}>
-          <Box className={classes.selectionContainer}>
-            <Box className={classes.mobileResponsive}>
-              <CustomSelect
-                items={studentClasses}
-                getSelected={handleSelectedClass}
-              />
-            </Box>
-            <SlideTabs />
-          </Box>
-        </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            p={2}
-            flexWrap="wrap"
-          >
-            {PricingModel.map((each, i) => {
-              return (
-                <PricingInfoCard
-                  model={each}
-                  selectedPackage={selectedPackage}
-                  key={i}
-                />
-                // <PaymentCard />
-              );
-            })}
-          </Box>
-        </Grid> */}
-
         <Grid item lg={4} md={4} sm={12} xs={12}>
           <Box
             width="100%"

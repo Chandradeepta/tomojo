@@ -1,4 +1,4 @@
-import { LandingPageTypes } from "../types/landingPageTypes";
+import { landingPageTypes } from "../types/landingPageTypes";
 
 const initialState = {
   classPackages: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 const landingPageReducer = (state = initialState, { type, value }) => {
   switch (type) {
-    case LandingPageTypes.GET_PRICING_PACKAGES_ASYNC: {
+    case landingPageTypes.GET_PRICING_PACKAGES_ASYNC: {
       return {
         ...state,
         classPackages: value.ClassWise,

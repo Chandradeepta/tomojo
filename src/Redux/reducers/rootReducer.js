@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import commonReducer from "./commonReducer";
-import examScreenReducer from "./ExamScreenReducer";
+import examScreenReducer from "./examScreenReducer";
 import landingPageReducer from "./landingPageReducer";
 
 const rootReducer = combineReducers({

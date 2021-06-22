@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { getPackagePricing } from "../../Services/Landing Page API/LandingPageService";
 import { commonTypes } from "../types/commonTypes";
-import { LandingPageTypes } from "../types/landingPageTypes";
+import { landingPageTypes } from "../types/landingPageTypes";
 
 /*
     Fetching Pricing For Each Module
@@ -13,7 +13,7 @@ function* getPricingPackages(action) {
   const { response, error } = yield call(getPackagePricing);
   if (response) {
     yield put({
-      type: LandingPageTypes.GET_PRICING_PACKAGES_ASYNC,
+      type: landingPageTypes.GET_PRICING_PACKAGES_ASYNC,
       value: response.data.results,
     });
   } else if (error) {
@@ -26,5 +26,5 @@ function* getPricingPackages(action) {
 }
 
 export function* watchGetPricingPackages() {
-  yield takeLatest(LandingPageTypes.GET_PRICING_PACKAGES, getPricingPackages);
+  yield takeLatest(landingPageTypes.GET_PRICING_PACKAGES, getPricingPackages);
 }
