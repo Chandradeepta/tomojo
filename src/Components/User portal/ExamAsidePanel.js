@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import CustomButton from "../Common/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
-import { ExamScreenTypes } from "../../Redux/Types/examScreenTypes";
+import { examScreenTypes } from "../../Redux/types/examScreenTypes";
 
 export function ExamAsidePanel(props) {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ export function ExamAsidePanel(props) {
                 m={0.5}
                 onClick={() =>
                   dispatch({
-                    type: ExamScreenTypes.SET_CURRENT_QUESTION,
+                    type: examScreenTypes.SET_CURRENT_QUESTION,
                     questionNumber: each,
                   })
                 }
