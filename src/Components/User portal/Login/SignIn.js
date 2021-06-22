@@ -2,24 +2,10 @@ import React, { useState } from "react";
 import { Typography, Box, Paper, Tabs, Tab } from "@material-ui/core";
 import { PhoneAuthentication } from "./PhoneAuthentication";
 import { EmailAuthentication } from "./EmailAuthentication";
-import { GoogleSignInButton } from "../../Utils/GoogleSignInButton";
-import { auth, googleProvider } from "../../../Configurations/Firebase";
 
 export default function SignIn(props) {
-  const signInWithGoogle = () => {
-    auth()
-      .signInWithPopup(googleProvider)
-      .then((res) => {
-        console.log(res);
-        // handleLogin(res.credential.idToken, res.user.displayName);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
+  const { setIsPhoneAuthSuccess, isPhoneAuthSuccess } = props;
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -27,7 +13,7 @@ export default function SignIn(props) {
   return (
     <>
       <Box display="flex" flexDirection="column" width="100%">
-        <Paper >
+        <Paper>
           <Tabs
             value={value}
             centered
@@ -40,16 +26,21 @@ export default function SignIn(props) {
             <Tab label="Phone" />
           </Tabs>
         </Paper>
-        {[<EmailAuthentication type="Sign In" />, <PhoneAuthentication type="Sign In"/>].map(
-          (auth,i) => {
-            return (
-              <TabPanel value={value} index={i}>
-                {auth}
-              </TabPanel>
-            );
-          }
-        )}
-        <Box width="100%" textAlign="center" >
+        {[
+          <EmailAuthentication type="Sign In" />,
+          <PhoneAuthentication
+            type="Sign In"
+            setIsPhoneAuthSuccess={setIsPhoneAuthSuccess}
+            isPhoneAuthSuccess={isPhoneAuthSuccess}
+          />,
+        ].map((auth, i) => {
+          return (
+            <TabPanel value={value} index={i}>
+              {auth}
+            </TabPanel>
+          );
+        })}
+        {/* <Box width="100%" textAlign="center">
           <Typography variant="subtitle2" gutterBottom>
             Or
           </Typography>
@@ -57,7 +48,7 @@ export default function SignIn(props) {
             buttonText={`Sign In with Google`}
             onClick={signInWithGoogle}
           />
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

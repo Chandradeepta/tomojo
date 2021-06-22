@@ -4,6 +4,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { makeStyles, InputLabel } from "@material-ui/core";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -16,7 +17,16 @@ const MenuProps = {
   },
 };
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    width: '100%'
+  },
+}));
+
 const CustomSelect = (props) => {
+  const classes = useStyles();
   const { items, getSelected } = props;
   const [val, setVal] = useState("default");
 
@@ -58,16 +68,17 @@ const CustomSelect = (props) => {
   };
 
   return (
-    <FormControl>
+    <FormControl variant="outlined" className={classes.formControl} size="small">
+      <InputLabel id="pricingCategory">Select Class</InputLabel>
       <Select
-        disableUnderline
-        classes={{ root: minimalSelectClasses.select }}
-        style={{ maxHeight: 20 }}
-        MenuProps={menuProps}
-        IconComponent={iconComponent}
+        labelId="pricingCategory"
+        id="pricingCategory"
         value={val}
         onChange={handleChange}
+        label="Age"
         MenuProps={MenuProps}
+        fullWidth
+        
       >
         <MenuItem value={"default"} disabled>
           Select Class

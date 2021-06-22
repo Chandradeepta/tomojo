@@ -49,7 +49,7 @@ export default function Testimonials(props) {
         left="0"
         top="0"
       >
-        <img src={TopLeftCorner} width="100%" height="100%" />
+        <img src={TopLeftCorner} width="100%" height="100%" alt="" />
       </Box>
       <Box
         position="absolute"
@@ -57,7 +57,7 @@ export default function Testimonials(props) {
         right="0"
         bottom="-4px"
       >
-        <img src={BottomRightCorner} width="100%" height="100%" />
+        <img src={BottomRightCorner} width="100%" height="100%" alt="" />
       </Box>
       <Typography
         variant="body1"
@@ -84,7 +84,7 @@ export default function Testimonials(props) {
       <AutoSwipe showDots={false} showArrows={true} xl={4} lg={2} md={2} sm={1} infinite>
         {testimonials.map((testimonial, index) => {
           return (
-            <Box  p={2}>
+            <Box  p={2} key={index}>
               <TestimonialCard testimonial={testimonial} key={index} />
             </Box>
           );

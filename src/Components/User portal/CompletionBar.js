@@ -1,14 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({}));
+// const useStyles = makeStyles((theme) => ({}));
 
 function CircularProgressWithLabel(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <Box position="relative" display="inline-flex">
       <CircularProgress
@@ -41,6 +40,5 @@ function CircularProgressWithLabel(props) {
 
 export default function CompletionBar() {
   const [progress, setProgress] = React.useState(73);
-
   return <CircularProgressWithLabel value={progress} />;
 }

@@ -99,13 +99,12 @@ export default React.memo(function Footer(props) {
                       to={nav.link}
                       key={i}
                       active={isActive(nav.link)}
-                      activeClassName="active"
                     >
                       <span>{nav.name}</span>
                     </NavItem>
                   );
                 })}
-                <NavItem active={isActive("/blogs")} as={Link} to="/blogs">
+                <NavItem active={isActive("blogs")} as={Link} to="/blogs">
                   Blogs
                 </NavItem>
               </NavMenu>

@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
   const classes = useStyles();
 
-  const [isSignedUpByPhone, setIsSignedUpByPhone] = useState(false);
+  const [isPhoneAuthSuccess, setIsPhoneAuthSuccess] = useState(false);
+
   const [UserAction, setUserAction] = useState({
     signUp: false,
     signIn: false,
@@ -51,7 +52,7 @@ export default function Login(props) {
     <>
       <Grid container className={classes.contentContainer}>
         <Grid item lg={8} md={8} sm={12} xs={12}>
-          <Box width="100%">
+          <Box width="100%" display="flex" justifyContent="center">
             <img
               src={LoginGif}
               alt="image1"
@@ -124,8 +125,18 @@ export default function Login(props) {
                   </CustomButton>
                 </>
               )}
-              {UserAction.signUp && <SignUp />}
-              {UserAction.signIn && <SignIn />}
+              {UserAction.signUp && (
+                <SignUp
+                  setIsPhoneAuthSuccess={setIsPhoneAuthSuccess}
+                  isPhoneAuthSuccess={isPhoneAuthSuccess}
+                />
+              )}
+              {UserAction.signIn && (
+                <SignIn
+                  setIsPhoneAuthSuccess={setIsPhoneAuthSuccess}
+                  isPhoneAuthSuccess={isPhoneAuthSuccess}
+                />
+              )}
             </Box>
             <Box>
               {UserAction.signUp && (
@@ -133,9 +144,10 @@ export default function Login(props) {
                   Already have an account?{" "}
                   <span
                     className={classes.handCursor}
-                    onClick={() =>
-                      setUserAction({ signUp: false, signIn: true })
-                    }
+                    onClick={() => {
+                      setIsPhoneAuthSuccess(false);
+                      setUserAction({ signUp: false, signIn: true });
+                    }}
                   >
                     Sign in
                   </span>
@@ -147,7 +159,7 @@ export default function Login(props) {
                   <span
                     className={classes.handCursor}
                     onClick={() => {
-                      setIsSignedUpByPhone(false);
+                      setIsPhoneAuthSuccess(false);
                       setUserAction({ signUp: true, signIn: false });
                     }}
                   >

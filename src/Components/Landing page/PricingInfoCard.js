@@ -8,11 +8,9 @@ import CustomButton from "../Common/CustomButton";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Check } from "@material-ui/icons";
-import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import { useLightTopShadowStyles } from "@mui-treasury/styles/shadow/lightTop";
 import { CardActions, useTheme } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
-import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {

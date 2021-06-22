@@ -1,11 +1,8 @@
-import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
-import questionsLogo from "../../Assets/Knowledge _Isometric.svg";
-import studentLogo from "../../Assets/Smiley face_Two Color.svg";
-import clsx from "clsx";
 import useOnScreen from "../../Hooks/useOnScreen";
 import { AnimationClasses } from "../Utils/AnimationClasses";
-import { getStatistics } from "../../Services/Landing Page API/LandingPageService";
+// import { getStatistics } from "../../Services/Landing Page API/LandingPageService";
 import Exams from "../../Assets/Home/Data that matters/Tests attempted.svg";
 import Questions from "../../Assets/Home/Data that matters/Questions answered.svg";
 import Students from "../../Assets/Home/Data that matters/Students Registered.svg";
@@ -19,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: 100,
   },
+  imgContainer: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
   ...AnimationClasses,
 }));
 export default function NumberCounts(props) {
@@ -27,33 +29,27 @@ export default function NumberCounts(props) {
   const isVisible = useOnScreen(counterRef);
   const [statData, setStatData] = React.useState([
     {
-      logo: <img src={Questions} width="15%" />,
+      logo: <img src={Questions} width="15%" alt="" />,
       value: "7000",
       label: "Questions Attempted",
       name: "questionCount",
       align: "center",
     },
     {
-      logo: <img src={Exams} width="15%" style={{zIndex: 4}}/>,
+      logo: <img src={Exams} width="15%" alt=""  />,
       value: "5000",
       label: "Tests Attempted",
       name: "testCount",
       align: "flex-start",
     },
     {
-      logo: <img src={Students} width="15%" />,
+      logo: <img src={Students} width="15%" alt="" />,
       value: "10000",
       label: "Students Registered",
       name: "userCount",
       align: "center",
     },
   ]);
-
-  const counter = (limit) => {
-    for (let i = 0; i < limit; i++) {
-      return i;
-    }
-  };
 
   //---------------------------------------TODO---------------------------------
   // useEffect(() => {
@@ -92,15 +88,16 @@ export default function NumberCounts(props) {
           width="70%"
           pl={4}
         >
-          {statData.map((data) => {
+          {statData.map((data,i) => {
             return (
               <Box
+                key={i}
                 width="100%"
                 display="flex"
                 alignItems="center"
                 justifyContent={data.align}
                 p={3}
-                pl={'35%'}
+                pl={"35%"}
               >
                 {data.logo}
                 <Box
@@ -110,7 +107,7 @@ export default function NumberCounts(props) {
                 >
                   {isVisible && (
                     <Box display="flex">
-                      <CountUp start={0} end={data.value} delay={0}>
+                      <CountUp start={0} end={Number(data.value)} delay={0}>
                         {({ countUpRef }) => (
                           <Typography
                             variant="h3"
@@ -118,8 +115,11 @@ export default function NumberCounts(props) {
                             ref={countUpRef}
                           />
                         )}
-                      </CountUp>&nbsp;
-                      <Typography variant="h3" color="secondary">+</Typography>
+                      </CountUp>
+                      &nbsp;
+                      <Typography variant="h3" color="secondary">
+                        +
+                      </Typography>
                     </Box>
                   )}
 
@@ -130,60 +130,9 @@ export default function NumberCounts(props) {
               </Box>
             );
           })}
-          {/* <Box
-            width="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            p={3}
-          >
-            <img src={Students} width="15%" />
-            <Box display="flex" flexDirection="column" alignItems="flex-start">
-              <Typography variant="h4" style={{ color: "white" }}>
-                6000+
-              </Typography>
-              <Typography variant="body1" style={{ color: "white" }}>
-                Students Registered
-              </Typography>
-            </Box>
-          </Box>
-          <Box
-            width="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="flex-start"
-            p={3}
-          >
-            <img src={Questions} width="15%" />
-            <Box display="flex" flexDirection="column" alignItems="flex-start">
-              <Typography variant="h4" style={{ color: "white" }}>
-                10000+
-              </Typography>
-              <Typography variant="body1" style={{ color: "white" }}>
-                Questions Attempted
-              </Typography>
-            </Box>
-          </Box>
-          <Box
-            width="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            p={3}
-          >
-            <img src={Exams} width="15%" />
-            <Box display="flex" flexDirection="column" alignItems="flex-start">
-              <Typography variant="h4" style={{ color: "white" }}>
-                7000+
-              </Typography>
-              <Typography variant="body1" style={{ color: "white" }}>
-                Tests Attempted
-              </Typography>
-            </Box>
-          </Box> */}
         </Box>
-        <Box width="50%">
-          <img src={BaseImage} width="100%" />
+        <Box width="50%" className={classes.imgContainer}>
+          <img src={BaseImage} width="100%" alt=""/>
         </Box>
       </Box>
     </>

@@ -1,18 +1,18 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
-import { Adjust, ArrowRight } from "@material-ui/icons";
+// import { Adjust, ArrowRight } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 
-const CustomDot = ({ onMove, index, onClick, active }) => {
-  return (
-    <li className={active ? "active" : "inactive"} onClick={() => onClick()}>
-      <Adjust fontSize="small" />
-    </li>
-  );
-};
+// const CustomDot = ({ onMove, index, onClick, active }) => {
+//   return (
+//     <li className={active ? "active" : "inactive"} onClick={() => onClick()}>
+//       <Adjust fontSize="small" />
+//     </li>
+//   );
+// };
 
 export default function AutoSwipe(props) {
-  const { infinite, showDots, showArrows, xl, lg, md, sm } = props;
+  const { showDots, showArrows, xl, lg, md, sm } = props;
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -39,9 +39,8 @@ export default function AutoSwipe(props) {
         responsive={responsive}
         showDots={showDots}
         arrows={showArrows}
-        customDot={<CustomDot />}
+        // customDot={<CustomDot />}
         itemClass="image-class"
-        // {...infinite && {infinite : "true"}}
         infinite
       >
         {props.children}

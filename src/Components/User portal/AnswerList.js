@@ -39,7 +39,7 @@ export default function AnswerList(props) {
           >
             <ListItemIcon>
               <Radio
-                checked={selectedValue == i}
+                checked={selectedValue === i}
                 onChange={() => handleChange(i)}
                 value={i}
                 name="radio-button-demo"

@@ -42,9 +42,6 @@ theme.overrides = {
       },
     },
   },
-  MuiButtonBase: {
-    disableRipple: true,
-  },
 };
 
 export const mainTheme = responsiveFontSizes(theme);

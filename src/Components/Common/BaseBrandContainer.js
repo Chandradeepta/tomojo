@@ -2,7 +2,6 @@ import {
   Box,
   IconButton,
   makeStyles,
-  Toolbar,
   Typography,
 } from "@material-ui/core";
 import { Widgets, Menu } from "@material-ui/icons";
@@ -11,11 +10,7 @@ const useStyles = makeStyles((theme) => ({
   hamburgerButton: {
     marginRight: theme.spacing(1),
     color: theme.palette.primary.main,
-    // [theme.breakpoints.up("lg")]: {
-    //   display: "none",
-    // },
   },
-
   brandSpace: {
     flex: 1,
     display: "flex",

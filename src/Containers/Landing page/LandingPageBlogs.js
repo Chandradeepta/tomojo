@@ -28,9 +28,9 @@ export default function LandingPageBlogs(props) {
             Recommeded Blogs for you{" "}
           </Typography>
         </Grid>
-        {[0, 1, 2, 3, 4, 5].map((x) => {
+        {[0, 1, 2, 3, 4, 5].map((x,i) => {
           return (
-            <Grid item lg={6} md={6} sm={12} xs={12} className={clsx(
+            <Grid item lg={6} md={6} sm={12} xs={12} key={i} className={clsx(
                 classes.bold,
                 classes.animated,
                 classes.animatedFade,

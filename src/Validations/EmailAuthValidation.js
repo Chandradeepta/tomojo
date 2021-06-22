@@ -3,9 +3,12 @@ import { RegExObject } from "../RegularExp/RegEx";
 export default function EmailAuthValidation(values) {
   let errors = {};
 
-  // if (!values.passwordConfirmation.trim()) {
-  //   errors.passwordConfirmation = "Password Confirmation is required";
-  // }
+  if (
+    !values.passwordConfirmation.trim() ||
+    values.passwordConfirmation.trim() !== values.password.trim()
+  ) {
+    errors.passwordConfirmation = "Password doesn't match";
+  }
 
   if (!values.email.trim()) {
     errors.email = "Email address is required";

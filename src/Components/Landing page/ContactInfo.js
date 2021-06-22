@@ -1,5 +1,5 @@
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
-import { Phone, Mail, LocationCity, Facebook } from "@material-ui/icons";
+import { Phone, Mail, LocationCity } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   bold: {

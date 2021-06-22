@@ -54,6 +54,7 @@ const mainContainerStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "flex-start",
+    paddingTop: theme.spacing(4),
     [theme.breakpoints.down("sm")]: {
       alignItems: "center",
     },
@@ -79,10 +80,10 @@ const mainContainerStyles = makeStyles((theme) => ({
   section: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(4),
-    [theme.breakpoints.up("sm")]: {
-      background: theme.palette.primary.dark,
-      borderRadius: 45,
-    },
+    // [theme.breakpoints.up("sm")]: {
+    background: theme.palette.primary.dark,
+    borderRadius: 45,
+    // },
   },
   sectionStat: {
     padding: theme.spacing(3),
@@ -91,9 +92,9 @@ const mainContainerStyles = makeStyles((theme) => ({
     borderRadius: 45,
   },
   servicesTitle: {
-    [theme.breakpoints.up("sm")]: {
-      color: theme.palette.background.default,
-    },
+    // [theme.breakpoints.up("sm")]: {
+    color: theme.palette.background.default,
+    // },
   },
   ...AnimationClasses,
 }));
@@ -136,14 +137,9 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={clsx(classes.contentContainer, "area")}
+          className={clsx(classes.contentContainer)}
           ref={gridRef1}
         >
-          <ul class="circles">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((each) => (
-              <li></li>
-            ))}
-          </ul>
           <Grid
             item
             lg={6}
@@ -270,14 +266,9 @@ export default function LandingPageHome(props) {
           md={12}
           sm={12}
           xs={12}
-          className={clsx(classes.contentContainer, "area")}
+          className={clsx(classes.contentContainer)}
           ref={gridRef2}
         >
-          <ul class="circles">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((each) => (
-              <li></li>
-            ))}
-          </ul>
           <Grid
             item
             lg={6}

@@ -1,74 +1,26 @@
 import { Box, TextField } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import CustomButton from "../../Common/CustomButton";
-import { auth } from "../../../Configurations/Firebase";
-import { CommonTypes } from "../../../Redux/Types/commonTypes";
-import { useDispatch } from "react-redux";
 import { CountryCodes } from "../../Utils/CountryCodes";
-import { makeStyles } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import { UsePhoneAuthValidation } from "../../../Hooks/usePhoneAuthValidation";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
-  },
-}));
 export function PhoneAuthentication(props) {
-  const classes = useStyles();
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [countryCode, setCountryCode] = useState("");
-  const [otp, setOtp] = useState("");
-  const [showOtp, shouldShowOtp] = useState(false);
-  const [serverOtp, setServerOtp] = useState(null);
+  const { setIsPhoneAuthSuccess } = props;
+  const {
+    phoneAuthData,
+    errors,
+    handleChange,
+    handleSelectedCountry,
+    handleSubmit,
+    confirmOtp,
+  } = UsePhoneAuthValidation(setIsPhoneAuthSuccess);
+
+  const { phoneNumber,  otp, showOtp } = phoneAuthData;
+
   // const history = useHistory();
-  const dispatch = useDispatch();
 
-  // Firebase call for Verification code
-  const requestVerificationCode = () => {
-    const appVerifier = new auth.RecaptchaVerifier("phone-sign-in-button", {
-      size: "invisible",
-      callback: (response) => {
-        shouldShowOtp(true);
-      },
-    });
-    auth()
-      .signInWithPhoneNumber(countryCode + phoneNumber, appVerifier)
-      .then((confirmResult) => {
-        setServerOtp(confirmResult); // saving the server otp for future OTP matching
-      })
-      .catch((error) => props.setIsPhoneAuthSuccess(false));
-  };
-
-  // Confirming User input OTP with server OTP
-  const confirmOtp = () => {
-    serverOtp
-      .confirm(otp)
-      .then((res) => {
-        // Dispatching Action for successful authentication
-        dispatch({
-          type: CommonTypes.SHOW_NOTIFICATION_ASYNC,
-          message: "Phone number verified successfully",
-          snackType: "success",
-        });
-        props.setIsPhoneAuthSuccess(true); // Parent is notified about successful authentication
-      })
-      .catch((err) => {
-        // Dispatching Action for authentication error
-        dispatch({
-          type: CommonTypes.SHOW_NOTIFICATION_ASYNC,
-          message: "wrong OTP",
-          snackType: "error",
-        });
-        props.setIsPhoneAuthSuccess(false); // Parent is notified about authentication error
-      });
-  };
-
-  // Saving selected Country code
-  const handleSelectedCountry = (value) => {
-    setCountryCode(value.code);
-  };
-
+  // Retrieving Country Codes from a MOCK file
   const options = CountryCodes.map((option) => {
     const firstLetter = option.name[0].toUpperCase();
     return {
@@ -93,8 +45,10 @@ export function PhoneAuthentication(props) {
                 label="Enter OTP"
                 variant="outlined"
                 size="small"
+                name="otp"
                 value={otp}
-                onChange={(e) => setOtp(e.target.value)}
+                autoFocus
+                onChange={(e) => handleChange(e)}
               />
             </Box>
             <Box display="flex" justifyContent="center" width="100%" p={2}>
@@ -103,7 +57,7 @@ export function PhoneAuthentication(props) {
                   color="primary"
                   size="small"
                   id="phone-sign-in-button"
-                  onClick={() => requestVerificationCode()}
+                  onClick={() => handleSubmit()}
                 >
                   Resend OTP
                 </CustomButton>
@@ -113,8 +67,7 @@ export function PhoneAuthentication(props) {
                   color="primary"
                   size="small"
                   id="phone-sign-in-button"
-                  // onClick={() => confirmOtp()}
-                  onClick={() => props.setIsPhoneAuthSuccess(true)}
+                  onClick={() => confirmOtp()}
                 >
                   {props.type === "Sign In" ? props.type : "Next"}
                 </CustomButton>
@@ -142,6 +95,10 @@ export function PhoneAuthentication(props) {
                       size="small"
                       variant="outlined"
                       {...params.inputProps}
+                      {...(errors?.countryCode && { error: true })}
+                      {...(errors?.countryCode && {
+                        helperText: errors?.countryCode,
+                      })}
                     />
                   )}
                 />
@@ -154,9 +111,14 @@ export function PhoneAuthentication(props) {
                   size="small"
                   required
                   fullWidth
+                  name="phoneNumber"
                   value={phoneNumber}
                   inputProps={{ maxLength: 10 }}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onInput={handleChange}
+                  {...(errors?.phoneNumber && { error: true })}
+                  {...(errors?.phoneNumber && {
+                    helperText: errors?.phoneNumber,
+                  })}
                 />
               </Box>
             </Box>
@@ -164,9 +126,8 @@ export function PhoneAuthentication(props) {
               <CustomButton
                 color="primary"
                 size="small"
-                // onClick={() => requestVerificationCode()}
-                onClick={() => shouldShowOtp(true)}
-                // onClick={()=> history.push('/user/dashboard')}
+                {...phoneAuthData.disableButton && {disabled :true}}
+                onClick={() => handleSubmit()}
               >
                 {props.type === "Sign In" ? "Next" : "Get started"}
               </CustomButton>

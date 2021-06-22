@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
-    background: 'transparent',
+    background: "transparent",
     textAlign: "justify",
     maxWidth: 200,
     transition: "all 0.3s ease-in-out",
@@ -36,17 +36,20 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold,
-    [theme.breakpoints.up("sm")]: {
+    // [theme.breakpoints.up("sm")]: {
       color: theme.palette.background.default,
-    },
+    // },
   },
   logo: {
     width: 100,
   },
   subtitle: {
-    [theme.breakpoints.up("sm")]: {
+    // [theme.breakpoints.up("sm")]: {
       color: theme.palette.background.default,
-    },
+    // },
+  },
+  serviceContainer: {
+    marginLeft: theme.spacing(4),
   },
 }));
 export default function OfferedServices(props) {
@@ -88,8 +91,8 @@ export default function OfferedServices(props) {
       >
         {services.map((service, index) => {
           return (
-            <Box ml={4}>
-              <ServicesCard service={service} key={index} />
+            <Box className={classes.serviceContainer}  key={index}>
+              <ServicesCard service={service} />
             </Box>
           );
         })}
@@ -100,37 +103,37 @@ export default function OfferedServices(props) {
 
 const services = [
   {
-    logo: <img src={QuestionsSVG} width="100%" height="100%" />,
+    logo: <img src={QuestionsSVG} width="100%" height="100%" alt="" />,
     title: "Topic wise Questions",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={RankingSVG} width="100%" height="100%" />,
+    logo: <img src={RankingSVG} width="100%" height="100%" alt="" />,
     title: "National Ranks",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={ChapterCoverageSVG} width="100%" height="100%" />,
+    logo: <img src={ChapterCoverageSVG} width="100%" height="100%" alt="" />,
     title: "Chapters Coverage",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={InDepthSVG} width="100%" height="100%" />,
+    logo: <img src={InDepthSVG} width="100%" height="100%" alt="" />,
     title: "In-depth Understanding",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={AnalysisSVG} width="100%" height="100%" />,
+    logo: <img src={AnalysisSVG} width="100%" height="100%" alt="" />,
     title: "Test Analysis",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",
   },
   {
-    logo: <img src={PerformanceSVG} width="100%" height="100%" />,
+    logo: <img src={PerformanceSVG} width="100%" height="100%" alt="" />,
     title: "Performance Report",
     subtitle:
       "Whether to override a short description if transcluded. Should be unused or 'noreplace'.",

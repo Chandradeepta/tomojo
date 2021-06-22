@@ -3,6 +3,9 @@ import { Box } from "@material-ui/core";
 import React from "react";
 import { useEmailAuthValidation } from "../../../Hooks/useEmailAuthValidation";
 import CustomButton from "../../Common/CustomButton";
+import { GoogleSignInButton } from "../../Utils/GoogleSignInButton";
+import { auth, googleProvider } from "../../../Configurations/Firebase";
+
 
 const useStyles = makeStyles((theme) => ({
   emailSection: {
@@ -19,6 +22,18 @@ export function EmailAuthentication(props) {
   const { type } = props;
   const { authData, handleSubmit, handleChange, errors } =
     useEmailAuthValidation();
+
+    const signInWithGoogle = () => {
+      auth()
+        .signInWithPopup(googleProvider)
+        .then((res) => {
+          console.log(res);
+          // handleLogin(res.credential.idToken, res.user.displayName);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    };
 
   return (
     <>
@@ -89,7 +104,17 @@ export function EmailAuthentication(props) {
             {type}
           </CustomButton>
         </Box>
+        <Box width="100%" textAlign="center" >
+          <Typography variant="subtitle2" gutterBottom>
+            Or
+          </Typography>
+          <GoogleSignInButton
+            buttonText={`Sign In with Google`}
+            onClick={signInWithGoogle}
+          />
+        </Box>
       </Box>
+      
     </>
   );
 }
