@@ -2,10 +2,10 @@ import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import CustomButton from "../../Components/Common/CustomButton";
 import { AnimationClasses } from "../../Components/Utils/AnimationClasses";
 import clsx from "clsx";
-import ReferSVG from "../../Assets/refer.svg";
-import { useEffect, useState } from "react";
-import { getAboutUs } from "../../Services/Landing Page API/LandingPageService";
-import OfferedServices from "../../Components/Landing page/OfferedServices";
+import ReferSVG from "../../Assets/Home/Refer/Refer and Earn page.svg";
+import { Skeleton } from "@material-ui/lab";
+import { useState, Suspense, lazy } from "react";
+
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
-  svg:{
-    width: '75%'
+  svg: {
+    width: "75%",
   },
   ...AnimationClasses,
 }));
@@ -92,8 +92,7 @@ export default function LandingPageReferral(props) {
               classes.fadeInLeft
             )}
           >
-            {
-              `Now refer Tomojo to your friends to have access to best quality questions and you both get rewarded with 100 credits (equivalent to Rs.100) to your account. The reward points can be redeemed on any product or services you purchase at www.tomojo.in with no minimum order value!`}
+            {`Now refer Tomojo to your friends to have access to best quality questions and you both get rewarded with 100 credits (equivalent to Rs.100) to your account. The reward points can be redeemed on any product or services you purchase at www.tomojo.in with no minimum order value!`}
           </Typography>
           <Box pt={3}>
             <CustomButton size="large" color="primary">
@@ -101,25 +100,24 @@ export default function LandingPageReferral(props) {
             </CustomButton>
           </Box>
         </Grid>
-        <Grid
-          item
-          lg={6}
-          md={6}
-          sm={12}
-          xs={12}
-          className={classes.contentContainer}
+        <Suspense
+          fallback={
+            <>
+              <Skeleton variant="rect" width={"100vw"} height={"20vh"} />
+            </>
+          }
         >
-          <img
-            src={ReferSVG}
-            alt="image1"
-            className={clsx(
-              classes.svg,
-              classes.animated,
-              classes.animatedFade,
-              classes.fadeInLeft
-            )}
-          />
-        </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            className={classes.contentContainer}
+          >
+            <img src={ReferSVG} alt="image1" className={clsx(classes.svg)} />
+          </Grid>
+        </Suspense>
       </Grid>
     </>
   );

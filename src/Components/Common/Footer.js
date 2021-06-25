@@ -150,10 +150,18 @@ export default React.memo(function Footer(props) {
             <Item grow ml={-2} shrink={0}>
               <NavMenu useStyles={usePlainNavigationMenuStyles}>
                 <ColumnToRow at={"sm"}>
-                  <NavItem className={cx(classes.legalLink)}>
+                  <NavItem
+                    className={cx(classes.legalLink)}
+                    as={Link}
+                    to={`/terms-and-conditions`}
+                  >
                     Terms & Conditions
                   </NavItem>
-                  <NavItem className={cx(classes.legalLink)}>
+                  <NavItem
+                    className={cx(classes.legalLink)}
+                    as={Link}
+                    to={"/privacy-policy"}
+                  >
                     Privacy Policy
                   </NavItem>
                   <NavItem className={cx(classes.legalLink)}>

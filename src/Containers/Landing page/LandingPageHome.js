@@ -13,8 +13,6 @@ import CardBg1 from "../../Assets/Home/cardBg1.svg";
 import CardBg2 from "../../Assets/Home/cardBg2.svg";
 import CardBg3 from "../../Assets/Home/cardBg3.svg";
 
-import Rellax from "rellax";
-
 const OfferedServices = React.lazy(() =>
   import("../../Components/Landing page/OfferedServices")
 );
@@ -107,10 +105,6 @@ export default function LandingPageHome(props) {
 
   const isVisibleSection1 = useOnScreen(gridRef1);
   const isVisibleSection2 = useOnScreen(gridRef2);
-
-  useEffect(() => {
-    const rellax = new Rellax(".rellax");
-  }, []);
 
   return (
     <>

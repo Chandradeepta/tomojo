@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../Configurations/Firebase";
 import { commonTypes } from "../Redux/types/commonTypes";
+import { checkPhoneExist } from "../Services/Login/LoginService";
 import PhoneAuthValidation from "../Validations/PhoneAuthValidation";
 
 export function UsePhoneAuthValidation(setIsPhoneAuthSuccess) {
@@ -12,7 +13,7 @@ export function UsePhoneAuthValidation(setIsPhoneAuthSuccess) {
     showOtp: false,
     isPhoneNumberSubmitted: false,
     isOtpSubmitted: false,
-    disableButton: false
+    disableButton: false,
   });
 
   const [serverOtp, setServerOtp] = useState(null);
@@ -47,7 +48,23 @@ export function UsePhoneAuthValidation(setIsPhoneAuthSuccess) {
   useEffect(() => {
     phoneAuthData.isPhoneNumberSubmitted &&
       !Object.keys(errors).length &&
-      requestVerificationCode();
+      checkPhoneExist(phoneAuthData.phoneNumber)
+        .then((response) => {
+          response
+            ? requestVerificationCode()
+            : dispatch({
+                type: commonTypes.SHOW_NOTIFICATION_ASYNC,
+                message: "Phone number already exists",
+                snackType: "warning",
+              });
+        })
+        .catch((error) => {
+          dispatch({
+            type: commonTypes.SHOW_NOTIFICATION_ASYNC,
+            message: "Network error",
+            snackType: "error",
+          });
+        });
   }, [errors]);
 
   const requestVerificationCode = () => {

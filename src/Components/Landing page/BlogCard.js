@@ -1,12 +1,20 @@
 import React from "react";
 import cx from "clsx";
-import { makeStyles,Card,CardMedia,CardContent } from "@material-ui/core";
+import {
+  makeStyles,
+  Card,
+  CardMedia,
+  CardContent,
+  Box,
+  ThemeProvider,
+} from "@material-ui/core";
 import TextInfoContent from "@mui-treasury/components/content/textInfo";
 import { useBlogTextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/blog";
 import { useOverShadowStyles } from "@mui-treasury/styles/shadow/over";
 import CustomButton from "../Common/CustomButton";
+import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles(({ breakpoints, spacing }) => ({
+const useStyles = makeStyles(({ breakpoints, spacing, typography }) => ({
   root: {
     margin: "auto",
     borderRadius: spacing(2), // 16px
@@ -21,7 +29,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     flexDirection: "column",
     alignItems: "center",
     paddingBottom: spacing(2),
-    [breakpoints.up("md")]: {
+    [breakpoints.up("lg")]: {
       flexDirection: "row",
       paddingTop: spacing(2),
     },
@@ -36,7 +44,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     borderRadius: spacing(2),
     backgroundColor: "#fff",
     position: "relative",
-    [breakpoints.up("md")]: {
+    [breakpoints.up("lg")]: {
       width: "100%",
       marginLeft: spacing(-3),
       marginTop: 0,
@@ -60,10 +68,15 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     marginTop: 24,
     textTransform: "initial",
   },
+  bold:{
+    fontWeight: typography.fontWeightBold
+  }
 }));
 
-export const BlogCard = React.memo(function BlogCard() {
+export const BlogCard = React.memo(function BlogCard(props) {
   const styles = useStyles();
+  const { blog } = props;
+  blog.blogContent = String(blog.blogContent).slice(0, 100) + "...";
   const { button: buttonStyles, ...contentStyles } =
     useBlogTextInfoContentStyles();
   const shadowStyles = useOverShadowStyles();
@@ -78,13 +91,19 @@ export const BlogCard = React.memo(function BlogCard() {
       <CardContent>
         <TextInfoContent
           classes={contentStyles}
-          overline={"28 MAR 2019"}
-          heading={"What is Git ?"}
-          body={
-            "Git is a distributed version control system. Every dev has a working copy of the code and..."
+          overline={
+            // <Box display="flex" justifyContent="space-between" width="100%">
+            //   <Box pr={2}>{blog.postDate}</Box>
+            //   <Box>{`${blog.blogReadTime} read`}</Box>
+            // </Box>
+            blog.postDate
           }
+          heading={
+            <Typography variant="subtitle1" className={styles.bold}>{blog.blogHeading}</Typography>
+          }
+          body={<div dangerouslySetInnerHTML={{ __html: blog.blogContent }} />}
         />
-        <CustomButton  color="secondary">Read more</CustomButton>
+        <CustomButton color="secondary">Read more</CustomButton>
       </CardContent>
     </Card>
   );

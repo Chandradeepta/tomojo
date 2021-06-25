@@ -17,7 +17,7 @@ import {
 import PropTypes from "prop-types";
 import { KeyboardArrowUp, Widgets } from "@material-ui/icons";
 import Navbar from "../../Components/Landing page/Navbar";
-import clsx from 'clsx'
+import clsx from "clsx";
 
 const Login = lazy(() => import("../Login"));
 const Footer = lazy(() => import("../../Components/Common/Footer"));
@@ -28,6 +28,10 @@ const LandingPagePartner = lazy(() => import("./LandingPagePartner"));
 const LandingPageAbout = lazy(() => import("./LandingPageAbout"));
 const LandingPageBlogs = lazy(() => import("./LandingPageBlogs"));
 const LandingPagePricing = lazy(() => import("./LandingPagePricing"));
+const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
+const TermsAndConditions = lazy(() => import("./TermsAndConditions"));
+
+
 
 const useStyles = makeStyles((theme) => ({
   landingPageRoot: {
@@ -41,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "70vh",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    position: 'relative',
+    alignItems: "flex-start",
+    position: "relative",
     [theme.breakpoints.down("sm")]: {
       padding: "2%",
     },
@@ -152,6 +156,12 @@ export default function LandingPage(props) {
               <Route exact path={`/blogs`}>
                 <LandingPageBlogs />
               </Route>
+              <Route exact path={`/privacy-policy`}>
+                <PrivacyPolicy />
+              </Route>
+              <Route exact path={`/terms-and-conditions`}>
+                <TermsAndConditions />
+              </Route>
               <Route exact path={`/login`}>
                 <Login />
               </Route>
@@ -159,7 +169,7 @@ export default function LandingPage(props) {
           </Grid>
           <ScrollTop {...props}>
             <Fab color="primary" size="small" aria-label="scroll back to top">
-              <KeyboardArrowUp color="primary" />
+              <KeyboardArrowUp color="default" />
             </Fab>
           </ScrollTop>
           <br />

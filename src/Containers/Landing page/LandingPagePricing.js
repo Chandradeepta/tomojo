@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightBold,
   },
   headline: {
+    width: '100%',
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       padding: theme.spacing(2),
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mobileResponsive: {
     padding: theme.spacing(2),
+    width: '100%',
     [theme.breakpoints.down("sm")]: {
       paddingBottom: theme.spacing(2),
       paddingTop: theme.spacing(5),
@@ -59,14 +61,14 @@ export default function LandingPagePricing(props) {
     dispatch({ type: landingPageTypes.GET_PRICING_PACKAGES });
   }, []);
 
-  useEffect(() => {
-    setSelectedPackage(classPackages[0]);
-    setClasses(
-      classPackages.map((each) => {
-        return each.className;
-      })
-    );
-  }, [classPackages]);
+  // useEffect(() => {
+  //   setSelectedPackage(classPackages[0]);
+  //   setClasses(
+  //     classPackages.map((each) => {
+  //       return each.className;
+  //     })
+  //   );
+  // }, [classPackages]);
 
   return (
     <>
@@ -85,12 +87,12 @@ export default function LandingPagePricing(props) {
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
-            alignItems="flex-start"
+            alignItems="center"
             height="100%"
           >
-            <Box p={2}>
+            <Box p={2} width="100%">
               <Typography
-                variant="h2"
+                variant="h4"
                 className={clsx(
                   classes.bold,
                   classes.headline,
@@ -99,11 +101,12 @@ export default function LandingPagePricing(props) {
                   classes.fadeInUp
                 )}
                 color="textPrimary"
+                align="justify"
               >
-                Let's Get Started
+                Switch to Premium to access all contents
               </Typography>
             </Box>
-            <Box p={2}>
+            <Box p={2} width="100%">
               <SlideTabs />
             </Box>
             <Box className={classes.mobileResponsive} p={2}>
@@ -117,9 +120,10 @@ export default function LandingPagePricing(props) {
         <Grid item lg={8} md={8} sm={12} xs={12}>
           <Box
             display="flex"
-            justifyContent="center"
+            justifyContent="flex-end"
             alignItems="center"
             p={2}
+            pr={0}
             flexWrap="wrap"
           >
             {PricingModel.map((each, i) => {

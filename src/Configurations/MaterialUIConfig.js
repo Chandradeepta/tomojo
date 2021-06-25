@@ -35,10 +35,10 @@ theme.overrides = {
       },
     },
   },
-  MuiCardContent: {
+  MuiButton: {
     root: {
       "&:hover": {
-        backgroundColor: "none",
+        backgroundColor: "#111",
       },
     },
   },

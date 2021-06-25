@@ -2,7 +2,7 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 import useOnScreen from "../../Hooks/useOnScreen";
 import { AnimationClasses } from "../Utils/AnimationClasses";
-// import { getStatistics } from "../../Services/Landing Page API/LandingPageService";
+import { getStatistics } from "../../Services/Landing Page API/LandingPageService";
 import Exams from "../../Assets/Home/Data that matters/Tests attempted.svg";
 import Questions from "../../Assets/Home/Data that matters/Questions answered.svg";
 import Students from "../../Assets/Home/Data that matters/Students Registered.svg";
@@ -32,44 +32,49 @@ export default function NumberCounts(props) {
       logo: <img src={Questions} width="15%" alt="" />,
       value: "7000",
       label: "Questions Attempted",
-      name: "questionCount",
+      name: "Total_countQuestion",
       align: "center",
     },
     {
-      logo: <img src={Exams} width="15%" alt=""  />,
+      logo: <img src={Exams} width="15%" alt="" />,
       value: "5000",
       label: "Tests Attempted",
-      name: "testCount",
+      name: "Total_countTest",
       align: "flex-start",
     },
     {
       logo: <img src={Students} width="15%" alt="" />,
       value: "10000",
       label: "Students Registered",
-      name: "userCount",
+      name: "Total_countUser",
       align: "center",
     },
   ]);
 
   //---------------------------------------TODO---------------------------------
-  // useEffect(() => {
-  //   getStatistics()
-  //     .then((response) => {
-  //       const { results } = response.data;
-  //       setStatData({
-  //         ...statData,
-  //         questionCount: {
-  //           ...statData.questionCount,
-  //           value: results.Total_countQuestion,
-  //         },
-  //         testCount: { ...statData.testCount, value: results.Total_countTest },
-  //         userCount: { ...statData.userCount, value: results.Total_countUser },
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getStatistics()
+      .then((response) => {
+        const { results } = response.data;
+        // setStatData({
+        //   ...statData,
+        //   questionCount: {
+        //     ...statData.questionCount,
+        //     value: results.Total_countQuestion,
+        //   },
+        //   testCount: { ...statData.testCount, value: results.Total_countTest },
+        //   userCount: { ...statData.userCount, value: results.Total_countUser },
+        // });
+        let data = [...statData];
+        data.forEach((each) => {
+          each.value = results[each.name];
+        });
+        setStatData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -88,7 +93,7 @@ export default function NumberCounts(props) {
           width="70%"
           pl={4}
         >
-          {statData.map((data,i) => {
+          {statData.map((data, i) => {
             return (
               <Box
                 key={i}
@@ -132,7 +137,7 @@ export default function NumberCounts(props) {
           })}
         </Box>
         <Box width="50%" className={classes.imgContainer}>
-          <img src={BaseImage} width="100%" alt=""/>
+          <img src={BaseImage} width="100%" alt="" />
         </Box>
       </Box>
     </>

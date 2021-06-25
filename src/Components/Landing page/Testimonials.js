@@ -2,6 +2,10 @@ import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import AutoSwipe from "../Common/AutoSwipe";
 import TopLeftCorner from "../../Assets/Home/Corner 1.svg";
 import BottomRightCorner from "../../Assets/Home/Corner 2.svg";
+import { useEffect, useState } from "react";
+import { getTestimonials } from "../../Services/Landing Page API/LandingPageService";
+import { useDispatch } from "react-redux";
+import { commonTypes } from "../../Redux/types/commonTypes";
 
 const useStyles = makeStyles((theme) => ({
   Paper: {
@@ -41,6 +45,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Testimonials(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    getTestimonials()
+      .then((response) => {
+        setTestimonials(response.data.results);
+      })
+      .catch((error) => {
+        dispatch({
+          type: commonTypes.SHOW_NOTIFICATION_ASYNC,
+          message: "Network Error",
+          snackType: "error",
+        });
+      });
+  }, []);
+
   const TestimonialCard = (props) => (
     <Paper className={classes.Paper} elevation={3}>
       <Box
@@ -64,16 +85,18 @@ export default function Testimonials(props) {
         align="center"
         className={classes.bold}
         gutterBottom
+        dangerouslySetInnerHTML={{
+          __html: props.testimonial.testimonialContent,
+        }}
         style={{ zIndex: 2 }}
-      >
-        {`"${props.testimonial.feedback}"`}
-      </Typography>
+      />
       <Box>
         <Typography variant="subtitle1" align="center" color="secondary">
-          {props.testimonial.client}
+          {props.testimonial.nameBy}
         </Typography>
         <Typography variant="body2" align="center" className={classes.bold}>
-          {props.testimonial.class} &nbsp; {props.testimonial.place}
+          {props.testimonial.testimonialFor} &nbsp;{" "}
+          {props.testimonial.locationFrom}
         </Typography>
       </Box>
     </Paper>
@@ -81,10 +104,18 @@ export default function Testimonials(props) {
 
   return (
     <>
-      <AutoSwipe showDots={false} showArrows={true} xl={4} lg={2} md={2} sm={1} infinite>
+      <AutoSwipe
+        showDots={false}
+        showArrows={true}
+        xl={4}
+        lg={2}
+        md={2}
+        sm={1}
+        infinite
+      >
         {testimonials.map((testimonial, index) => {
           return (
-            <Box  p={2} key={index}>
+            <Box p={2} key={index}>
               <TestimonialCard testimonial={testimonial} key={index} />
             </Box>
           );
@@ -94,54 +125,54 @@ export default function Testimonials(props) {
   );
 }
 
-const testimonials = [
-  {
-    client: "Mohit Patra (Parent)",
-    class: "Class IX",
-    place: "Orrisa",
-    feedback:
-      "Tomojo helped my son improving his academics. His score is dramatically improve by practicing daily.",
-  },
-  {
-    client: "Mahi Arora (Parent)",
-    class: "Class X",
-    place: "Delhi",
-    feedback:
-      "My daughter was troubling with physics, now she practice daily on Tomojo and has seen improvement",
-  },
-  {
-    client: "Sandeep Sharma (Parent)",
-    class: "Class XI",
-    place: "Noida",
-    feedback:
-      "Topic specific question really helped my Son. I would say better way to understand the topic.",
-  },
-  {
-    client: "Ankita (Student)",
-    class: "Class X",
-    place: "",
-    feedback:
-      "I really liked the way questions are asked, each topic is thoroughly assessed. Really helped me in improving my biology.",
-  },
-  {
-    client: "Varsha Reddy (Parent)",
-    class: "Class X",
-    place: "Chennai",
-    feedback:
-      "My Son was struggling with Physics, Tomojo really helped him to understand the topic in better way. Daily practicing helped him boosting the confidence. Now he is more confident in Physics. ",
-  },
-  {
-    client: "Vartul Pandey (Student)",
-    class: "Class X",
-    place: "Madhya Pradesh",
-    feedback:
-      "It’s funny. Just a Month ago, I used Tomojo on a daily basis to practise questions and get doubts solved for my  Competative preparations. Today, I’m the one solving my friend's doubts. It feels really motivated.",
-  },
-  {
-    client: "Vipul Kumar (Parent)",
-    class: "Class IX",
-    place: "Delhi",
-    feedback: `I have seen my Daughter going from hating physics to absolutely loving it. Her marks have improved so much from last year. Even her teachers were surprised seeing the exceptional change.
-      Thank You Tomojo for making physics so much fun for my Daughter.`,
-  },
-];
+// const testimonials = [
+//   {
+//     client: "Mohit Patra (Parent)",
+//     class: "Class IX",
+//     place: "Orrisa",
+//     feedback:
+//       "Tomojo helped my son improving his academics. His score is dramatically improve by practicing daily.",
+//   },
+//   {
+//     client: "Mahi Arora (Parent)",
+//     class: "Class X",
+//     place: "Delhi",
+//     feedback:
+//       "My daughter was troubling with physics, now she practice daily on Tomojo and has seen improvement",
+//   },
+//   {
+//     client: "Sandeep Sharma (Parent)",
+//     class: "Class XI",
+//     place: "Noida",
+//     feedback:
+//       "Topic specific question really helped my Son. I would say better way to understand the topic.",
+//   },
+//   {
+//     client: "Ankita (Student)",
+//     class: "Class X",
+//     place: "",
+//     feedback:
+//       "I really liked the way questions are asked, each topic is thoroughly assessed. Really helped me in improving my biology.",
+//   },
+//   {
+//     client: "Varsha Reddy (Parent)",
+//     class: "Class X",
+//     place: "Chennai",
+//     feedback:
+//       "My Son was struggling with Physics, Tomojo really helped him to understand the topic in better way. Daily practicing helped him boosting the confidence. Now he is more confident in Physics. ",
+//   },
+//   {
+//     client: "Vartul Pandey (Student)",
+//     class: "Class X",
+//     place: "Madhya Pradesh",
+//     feedback:
+//       "It’s funny. Just a Month ago, I used Tomojo on a daily basis to practise questions and get doubts solved for my  Competative preparations. Today, I’m the one solving my friend's doubts. It feels really motivated.",
+//   },
+//   {
+//     client: "Vipul Kumar (Parent)",
+//     class: "Class IX",
+//     place: "Delhi",
+//     feedback: `I have seen my Daughter going from hating physics to absolutely loving it. Her marks have improved so much from last year. Even her teachers were surprised seeing the exceptional change.
+//       Thank You Tomojo for making physics so much fun for my Daughter.`,
+//   },
+// ];

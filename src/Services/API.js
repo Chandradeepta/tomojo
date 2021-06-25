@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const http = axios.create({
-  baseURL: "http://tomojo.in/API/",
+  baseURL: "http://gursikhrishtey.com/API/",
 });
 
 export default http;

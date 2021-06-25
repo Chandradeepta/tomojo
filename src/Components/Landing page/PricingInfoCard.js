@@ -11,6 +11,7 @@ import { Check } from "@material-ui/icons";
 import { useLightTopShadowStyles } from "@mui-treasury/styles/shadow/lightTop";
 import { CardActions, useTheme } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     position: "relative",
     overflow: "visible",
-
     margin: "2%",
     maxWidth: 300,
     transition: "all 0.3s ease-in-out",
     boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
     "&:hover": {
       transform: "scale(1.04)",
+      borderRadius: 20,
     },
     [theme.breakpoints.down("sm")]: {
       margin: "4%",
@@ -36,8 +37,10 @@ const useStyles = makeStyles((theme) => ({
     height: 95,
     position: "relative",
     top: -16,
+    right: 20,
     background:
       "linear-gradient(80deg, rgba(0,91,255,1) 0%, rgba(0,158,252,1) 100%)",
+    zIndex: 1,
     marginLeft: "auto",
     borderBottomColor: "#fff",
     fontSize: 22,
@@ -54,13 +57,26 @@ const useStyles = makeStyles((theme) => ({
     "&::after": {
       content: '"/month"',
       display: "block",
+      textAlign: "center",
       whiteSpace: "break-spaces",
       fontSize: 12,
-      color: grey[100],
+      color: theme.palette.background.paper,
+      fontWeight: theme.typography.fontWeightMedium,
+      textDecoration: "none",
     },
   },
   priceTagPremium: {
     background: "#fff",
+    "&::after": {
+      content: '"/month"',
+      display: "block",
+      textAlign: "center",
+      whiteSpace: "break-spaces",
+      fontSize: 12,
+      color: theme.palette.text.primary,
+      fontWeight: theme.typography.fontWeightMedium,
+      textDecoration: "none",
+    },
     "& $triangle": {
       background: theme.palette.primary.main,
       bottom: -1,
@@ -79,13 +95,14 @@ const useStyles = makeStyles((theme) => ({
     "&::before": {
       content: "",
       color: grey[500],
+      fontWeight: theme.typography.fontWeightBold,
     },
   },
   triangle: {
     width: 68,
     height: 25,
     position: "absolute",
-    bottom: 0,
+    bottom: -1,
     background: "white",
     clipPath: "polygon(50% 0%, 0% 102%, 100% 102%);",
     borderBottomColor: "#fff",
@@ -97,6 +114,13 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     paddingTop: "10%",
   },
+  CardActionArea: {
+    borderRadius: 20,
+    "&:hover $focusHighlight": {
+      opacity: 0
+    }
+  },
+  focusHighlight: {},
   content: {
     padding: theme.spacing(4),
     paddingBottom: 0,
@@ -119,10 +143,13 @@ export const PricingInfoCard = (props) => {
     <Card
       className={cx(classes.root, shadowStyles.root)}
       style={{
-        background: model.type === "Free" ? "#fff" : theme.palette.primary.main,
+        background:
+          model.type === "Free"
+            ? theme.palette.background.paper
+            : theme.palette.primary.main,
       }}
     >
-      {/* <div style={{ position: "relative" }}>
+      <div style={{ position: "absolute", right: 0 }}>
         <div
           className={
             model.type === "Free"
@@ -138,7 +165,7 @@ export const PricingInfoCard = (props) => {
             }
           >
             <div className={classes.currency}>
-              <Typography variant="h6">&#36;19</Typography>
+              <Typography variant="h5">&#36;19</Typography>
             </div>
           </div>
           <div
@@ -149,8 +176,8 @@ export const PricingInfoCard = (props) => {
             }
           ></div>
         </div>
-      </div> */}
-      <CardActionArea>
+      </div>
+      <CardActionArea className={classes.CardActionArea}>
         <CardContent className={classes.content}>
           <Box
             display={"flex"}
@@ -168,7 +195,7 @@ export const PricingInfoCard = (props) => {
               <Typography variant="h4" className={classes.title} gutterBottom>
                 {model.type}
               </Typography>
-              {model.type === "Free" ? (
+              {/* {model.type === "Free" ? (
                 <>
                   <Typography
                     variant="h4"
@@ -192,7 +219,7 @@ export const PricingInfoCard = (props) => {
                     </Typography>
                   </Box>
                 </>
-              )}
+              )} */}
             </Box>
             <Box m={"auto"}>
               <Box

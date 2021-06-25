@@ -15,7 +15,6 @@ import SnackbarComponent from "./Components/Common/SnackbarComponent";
 function App() {
   return (
     <Router>
-      
       <Switch>
         <Redirect exact from="/" to="/home" />
         <Route path="/user">

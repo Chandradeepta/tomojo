@@ -8,14 +8,17 @@ import AboutUsSVG from "../../Assets/About_us.svg";
 import { useEffect, useState } from "react";
 import { getAboutUs } from "../../Services/Landing Page API/LandingPageService";
 import OfferedServices from "../../Components/Landing page/OfferedServices";
+import { useDispatch } from "react-redux";
+import { commonTypes } from "../../Redux/types/commonTypes";
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
     width: "100%",
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+    paddingTop: "3%",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column-reverse",
     },
@@ -47,12 +50,20 @@ const useStyles = makeStyles((theme) => ({
 export default function LandingPageAbout(props) {
   const classes = useStyles();
   const [aboutUs, setAboutUs] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getAboutUs().then((response) => {
-      console.log(response);
-      setAboutUs(response.data.results.Content);
-    });
+    getAboutUs()
+      .then((response) => {
+        setAboutUs(response.data.results.Content);
+      })
+      .catch((error) => {
+        dispatch({
+          type: commonTypes.SHOW_NOTIFICATION_ASYNC,
+          message: "Network Error",
+          snackType: "error",
+        });
+      });
   }, []);
 
   return (
@@ -87,20 +98,20 @@ export default function LandingPageAbout(props) {
           >
             About us
           </Typography>
+
           <Typography
             variant="body1"
             align="justify"
             gutterBottom
             color="textPrimary"
+            dangerouslySetInnerHTML={{ __html: aboutUs }}
             className={clsx(
               classes.animated,
               classes.animatedFade,
               classes.fadeInLeft
             )}
-          >
-            {aboutUs }
-          </Typography>
-          <Box pt={3}>
+          ></Typography>
+          <Box pt={1}>
             <CustomButton size="large" color="primary">
               Get started
             </CustomButton>
